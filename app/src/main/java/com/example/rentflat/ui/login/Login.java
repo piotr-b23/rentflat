@@ -47,12 +47,12 @@ public class Login extends AppCompatActivity {
                 String logUsername = username.getText().toString().trim();
                 String logPass = password.getText().toString().trim();
 
-                if (!logUsername.isEmpty() || !logPass.isEmpty()){
+                if (!logUsername.isEmpty() && !logPass.isEmpty()){
                     Login(logUsername,logPass);
                 }
                 else {
-                    username.setError("Podaj nazwę użytkownika");
-                    password.setError("Podaj hasło użytkownika");
+                    if(logUsername.isEmpty()) username.setError("Podaj nazwę użytkownika");
+                    if(logPass.isEmpty()) password.setError("Podaj hasło użytkownika");
                 }
             }
         });

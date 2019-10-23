@@ -2,6 +2,7 @@ package com.example.rentflat.ui.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.rentflat.MainActivity;
 import com.example.rentflat.R;
+import com.example.rentflat.ui.login.Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,20 +47,49 @@ public class Register extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Regist();
+
+                String regName = name.getText().toString().trim();
+                String regUsername = username.getText().toString().trim();
+                String regPassword = password.getText().toString().trim();
+                String regConfirmedPassword = confirmedPassword.getText().toString().trim();
+                String regEmail = email.getText().toString().trim();
+
+                if (!regName.isEmpty() && !regUsername.isEmpty() && !regPassword.isEmpty() && !regConfirmedPassword.isEmpty() && !regEmail.isEmpty()){
+                    if(regPassword.equals(regConfirmedPassword))
+                    {
+                        if(isEmailValid(regEmail))
+                        {
+                            Regist(regName,regUsername,regPassword,regEmail);
+
+                        }
+                        else
+                        {
+                            email.setError("Podaj poprawny email");
+                        }
+
+                    }
+                    else
+                    {
+                        confirmedPassword.setError("Podane hasła różnią się");
+                    }
+
+                }
+                else {
+                    if(regName.isEmpty()) name.setError("Podaj imię użytkownika");
+                    if(regUsername.isEmpty()) username.setError("Podaj nazwę użytkownika");
+                    if(regPassword.isEmpty()) password.setError("Podaj hasło");
+                    if(regConfirmedPassword.isEmpty()) confirmedPassword.setError("Podaj hasło");
+                    if(regEmail.isEmpty()) email.setError("Podaj email użytkownika");
+                }
+
+
 
 
             }
         });
     }
 
-    private void Regist(){
-        final String name = this.name.getText().toString().trim();
-        final String username = this.username.getText().toString().trim();
-        final String password = this.password.getText().toString().trim();
-        final String email = this.email.getText().toString().trim();
-
-
+    private void Regist(final String name,final String username,final String password,final String email){
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
@@ -68,6 +100,8 @@ public class Register extends AppCompatActivity {
                             String succes = jsonObject.getString("success");
                             if (succes.equals("1")){
                                 Toast.makeText(Register.this,"Zarejestrowano",Toast.LENGTH_SHORT).show();
+                                Intent intent = new  Intent(Register.this, MainActivity.class);
+                                startActivity(intent);
                             }
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -100,5 +134,15 @@ public class Register extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
 
+    }
+
+    private boolean isEmailValid(String email)
+    {
+        String emailRegex ="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        if(email.matches(emailRegex))
+        {
+            return true;
+        }
+        return false;
     }
 }
