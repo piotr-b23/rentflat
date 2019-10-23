@@ -3,6 +3,7 @@ package com.example.rentflat;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.rentflat.ui.login.Login;
 import com.example.rentflat.ui.register.Register;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,7 +28,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private Button registerButton;
+    private Button registerButton,loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +57,21 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        registerButton = (Button) findViewById((R.id.registerButton));
+        registerButton = (Button) findViewById(R.id.registerButton);
+        loginButton = (Button) findViewById(R.id.loginButton);
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     Intent intent = new  Intent(MainActivity.this, Register.class);
                     startActivity(intent);
+            }
+        });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new  Intent(MainActivity.this, Login.class);
+                startActivity(intent);
             }
         });
     }
