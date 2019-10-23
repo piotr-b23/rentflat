@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
+import com.example.rentflat.ui.SessionMenager;
 import com.example.rentflat.ui.register.Register;
 
 import org.json.JSONArray;
@@ -30,11 +31,14 @@ public class Login extends AppCompatActivity {
     private EditText username, password;
     private Button loginButton;
     private static String URL_LOGIN = "http://192.168.1.12/login.php";
+    SessionMenager sessionMenager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sessionMenager = new SessionMenager(this);
 
         username = findViewById(R.id.nickname);
         password = findViewById(R.id.password);
@@ -74,7 +78,10 @@ public class Login extends AppCompatActivity {
                                     String name = object.getString("name").trim();
                                     String username = object.getString("username").trim();
                                     Toast.makeText(Login.this,"Zalogowano. \nWitaj "+ name,Toast.LENGTH_SHORT).show();
+
+                                    sessionMenager.createSession(name,username);
                                 }
+                                sessionMenager.checkIfLogged();
 
                             }
                         }catch (JSONException e){
@@ -103,5 +110,9 @@ public class Login extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+
+
+
+
     }
 }

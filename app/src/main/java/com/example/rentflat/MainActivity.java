@@ -3,6 +3,7 @@ package com.example.rentflat;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.rentflat.ui.SessionMenager;
 import com.example.rentflat.ui.login.Login;
 import com.example.rentflat.ui.register.Register;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,16 +25,47 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private Button registerButton,loginButton;
+    private TextView name, username;
+    SessionMenager sessionMenager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sessionMenager = new SessionMenager(this);
+        username =(TextView)findViewById(R.id.navUsername);
+        name =(TextView)findViewById(R.id.navName);
+
+        registerButton = (Button) findViewById(R.id.registerButton);
+        loginButton = (Button) findViewById(R.id.loginButton);
+
+        if(sessionMenager.isLogged()) {
+            boolean test = sessionMenager.isLogged();
+            HashMap<String, String> user = sessionMenager.getUserDetail();
+            String uName = user.get(sessionMenager.NAME);
+            String uUsername = user.get(sessionMenager.USERNAME);
+
+            registerButton.setVisibility(View.GONE);
+            loginButton.setText("wyloguj");
+
+
+
+
+//            username.setText(uUsername);
+//            name.setText(uName);
+//            name.setVisibility(View.VISIBLE);
+        }
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -57,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        registerButton = (Button) findViewById(R.id.registerButton);
-        loginButton = (Button) findViewById(R.id.loginButton);
+
+
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +102,15 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new  Intent(MainActivity.this, Login.class);
-                startActivity(intent);
+                if(sessionMenager.isLogged()) {
+                    sessionMenager.logout();
+                    loginButton.setText("zaloguj");
+                    registerButton.setVisibility(View.VISIBLE);
+                }
+                else {
+                    Intent intent = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent);
+                }
             }
         });
     }
