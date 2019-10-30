@@ -33,9 +33,9 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private Button registerButton,loginButton;
+
     private TextView name, username;
-    SessionMenager sessionMenager;
+    public static SessionMenager sessionMenager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,28 +43,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sessionMenager = new SessionMenager(this);
-        username =(TextView)findViewById(R.id.navUsername);
-        name =(TextView)findViewById(R.id.navName);
+//        username =(TextView)findViewById(R.id.navUsername);
+//        name =(TextView)findViewById(R.id.navName);
+//
+//        registerButton = (Button) findViewById(R.id.registerButton);
+//        loginButton = (Button) findViewById(R.id.loginButton);
 
-        registerButton = (Button) findViewById(R.id.registerButton);
-        loginButton = (Button) findViewById(R.id.loginButton);
-
-        if(sessionMenager.isLogged()) {
-            boolean test = sessionMenager.isLogged();
-            HashMap<String, String> user = sessionMenager.getUserDetail();
-            String uName = user.get(sessionMenager.NAME);
-            String uUsername = user.get(sessionMenager.USERNAME);
-
-            registerButton.setVisibility(View.GONE);
-            loginButton.setText("wyloguj");
-
-
-
-
-//            username.setText(uUsername);
-//            name.setText(uName);
-//            name.setVisibility(View.VISIBLE);
-        }
+//        if(sessionMenager.isLogged()) {
+//            boolean test = sessionMenager.isLogged();
+//            HashMap<String, String> user = sessionMenager.getUserDetail();
+//            String uName = user.get(sessionMenager.NAME);
+//            String uUsername = user.get(sessionMenager.USERNAME);
+//
+//            registerButton.setVisibility(View.GONE);
+//            loginButton.setText("wyloguj");
+//
+//
+//
+//
+////            username.setText(uUsername);
+////            name.setText(uName);
+////            name.setVisibility(View.VISIBLE);
+//        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,30 +89,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
-
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    Intent intent = new  Intent(MainActivity.this, Register.class);
-                    startActivity(intent);
-            }
-        });
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(sessionMenager.isLogged()) {
-                    sessionMenager.logout();
-                    loginButton.setText("zaloguj");
-                    registerButton.setVisibility(View.VISIBLE);
-                }
-                else {
-                    Intent intent = new Intent(MainActivity.this, Login.class);
-                    startActivity(intent);
-                }
-            }
-        });
     }
 
     @Override

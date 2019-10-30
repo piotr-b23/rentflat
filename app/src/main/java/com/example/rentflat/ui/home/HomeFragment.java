@@ -1,9 +1,11 @@
 package com.example.rentflat.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -12,11 +14,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.rentflat.MainActivity;
 import com.example.rentflat.R;
+import com.example.rentflat.ui.SessionMenager;
+import com.example.rentflat.ui.login.Login;
+import com.example.rentflat.ui.register.Register;
+
+import java.util.HashMap;
+
+import static com.example.rentflat.MainActivity.sessionMenager;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private Button registerButton,loginButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -24,6 +35,53 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
+
+
+//        username =(TextView)findViewById(R.id.navUsername);
+//        name =(TextView)findViewById(R.id.navName);
+
+        registerButton = (Button) root.findViewById(R.id.registerButton);
+        loginButton = (Button) root.findViewById(R.id.loginButton);
+
+        if(sessionMenager.isLogged()) {
+            boolean test = sessionMenager.isLogged();
+            HashMap<String, String> user = sessionMenager.getUserDetail();
+            String uName = user.get(sessionMenager.NAME);
+            String uUsername = user.get(sessionMenager.USERNAME);
+
+            registerButton.setVisibility(View.GONE);
+            loginButton.setText("wyloguj");
+
+
+
+
+//            username.setText(uUsername);
+//            name.setText(uName);
+//            name.setVisibility(View.VISIBLE);
+        }
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new  Intent(getActivity(), Register.class);
+                startActivity(intent);
+            }
+        });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(sessionMenager.isLogged()) {
+                    sessionMenager.logout();
+                    loginButton.setText("zaloguj");
+                    registerButton.setVisibility(View.VISIBLE);
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), Login.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
         homeViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
