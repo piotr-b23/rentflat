@@ -1,11 +1,8 @@
 package com.example.rentflat;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.rentflat.ui.SessionMenager;
-import com.example.rentflat.ui.login.Login;
-import com.example.rentflat.ui.register.Register;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -24,11 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -81,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_home, R.id.nav_my_flats, R.id.nav_my_account,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();

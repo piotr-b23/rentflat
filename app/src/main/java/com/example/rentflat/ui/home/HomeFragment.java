@@ -27,6 +27,7 @@ import static com.example.rentflat.MainActivity.sessionMenager;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    public TextView name, username;
     private Button registerButton,loginButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -37,8 +38,8 @@ public class HomeFragment extends Fragment {
         final TextView textView = root.findViewById(R.id.text_home);
 
 
-//        username =(TextView)findViewById(R.id.navUsername);
-//        name =(TextView)findViewById(R.id.navName);
+//        username =(TextView)root.findViewById(R.id.navUsername);
+//        name =(TextView)root.findViewById(R.id.navName);
 
         registerButton = (Button) root.findViewById(R.id.registerButton);
         loginButton = (Button) root.findViewById(R.id.loginButton);

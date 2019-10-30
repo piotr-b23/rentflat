@@ -1,16 +1,16 @@
-package com.example.rentflat.ui.slideshow;
+package com.example.rentflat.ui.myFlats;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class MyFlatsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public MyFlatsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("Przeglądaj swoje ogłoszenia");
     }
 
     public LiveData<String> getText() {
