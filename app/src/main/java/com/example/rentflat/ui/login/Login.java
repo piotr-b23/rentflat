@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
 
     private EditText username, password;
     private Button loginButton;
-    private static String URL_LOGIN = "http://192.168.1.12/login.php";
+    private static String URL_LOGIN = "http://192.168.1.14/login.php";
     SessionMenager sessionMenager;
 
     @Override
@@ -77,9 +77,10 @@ public class Login extends AppCompatActivity {
                                     JSONObject object = jsonArray.getJSONObject(i);
                                     String name = object.getString("name").trim();
                                     String username = object.getString("username").trim();
+                                    String id = object.getString("id").trim();
                                     Toast.makeText(Login.this,"Zalogowano. \nWitaj "+ name,Toast.LENGTH_SHORT).show();
 
-                                    sessionMenager.createSession(name,username);
+                                    sessionMenager.createSession(name,username,id);
                                 }
                                 sessionMenager.checkIfLogged();
 
