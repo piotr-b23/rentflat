@@ -144,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
 //                                    name.setText(strName);
 //                                    username.setText(strUsername);
-                                    Toast.makeText(MainActivity.this,"Błąd" + strUsername,Toast.LENGTH_SHORT).show();
 
                                 }
 

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Zmień email"
+        android:text="Zmień/dodaj numer telefonu"
         android:textAlignment="center"
         android:textSize="20sp" />
 
@@ -21,8 +22,9 @@
         android:gravity="center|bottom"
         android:orientation="vertical" >
 
+
         <EditText
-            android:id="@+id/newUserEmail"
+            android:id="@+id/newPhone"
             android:layout_width="323dp"
             android:layout_height="72dp"
             android:layout_marginStart="99dp"
@@ -30,30 +32,16 @@
             android:layout_marginEnd="99dp"
             android:layout_marginRight="99dp"
             android:ems="10"
-            android:hint="nowy email"
-            android:inputType="textEmailAddress" />
-
-
-        <EditText
-            android:id="@+id/oldPassword"
-            android:layout_width="323dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="99dp"
-            android:layout_marginLeft="99dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginRight="99dp"
-            android:ems="10"
-            android:hint="Podaj hasło"
-            android:inputType="textPassword" />
-
-
+            android:hint="nowy numer telefonu"
+            android:inputType="phone"/>
 
 
         <Button
-            android:id="@+id/confirmEmailChange"
+            android:id="@+id/confirmPhoneChange"
             android:layout_width="301dp"
             android:layout_height="76dp"
-            android:text="Zmień email" />
+            android:text="Zmień hasło" />
+
 
 
     </LinearLayout>

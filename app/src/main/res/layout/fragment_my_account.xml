@@ -12,19 +12,38 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/usernameAccount"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:text="TextView" />
+            android:id="@+id/myAccTextView1"
+            android:layout_width="323dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="99dp"
+            android:layout_marginLeft="99dp"
+            android:layout_marginEnd="99dp"
+            android:layout_marginRight="99dp"
+            android:ems="10"
+            android:text="Zalogowany jako:"/>
 
         <TextView
-            android:id="@+id/nameAccount"
-            android:layout_width="match_parent"
-            android:layout_height="86dp"
-            android:text="TextView" />
+            android:id="@+id/myAccName"
+            android:layout_width="323dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="99dp"
+            android:layout_marginLeft="99dp"
+            android:layout_marginEnd="99dp"
+            android:layout_marginRight="99dp"
+            android:ems="10" />
 
-        <EditText
-            android:id="@+id/newUserEmail"
+        <TextView
+            android:id="@+id/myAccUsername"
+            android:layout_width="323dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="99dp"
+            android:layout_marginLeft="99dp"
+            android:layout_marginEnd="99dp"
+            android:layout_marginRight="99dp"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/myAccTextView2"
             android:layout_width="323dp"
             android:layout_height="72dp"
             android:layout_marginStart="99dp"
@@ -32,63 +51,29 @@
             android:layout_marginEnd="99dp"
             android:layout_marginRight="99dp"
             android:ems="10"
-            android:hint="nowy email"
-            android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/phoneNumber"
-            android:layout_width="323dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="99dp"
-            android:layout_marginLeft="99dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginRight="99dp"
-            android:ems="10"
-            android:hint="dodaj lub zmień numer telefonu"
-            android:inputType="phone" />
-
-        <EditText
-            android:id="@+id/oldPassword"
-            android:layout_width="323dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="99dp"
-            android:layout_marginLeft="99dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginRight="99dp"
-            android:ems="10"
-            android:hint="obecne hasło"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/newPassword"
-            android:layout_width="323dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="99dp"
-            android:layout_marginLeft="99dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginRight="99dp"
-            android:ems="10"
-            android:hint="nowe hasło"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/confirmedNewPassword"
-            android:layout_width="323dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="99dp"
-            android:layout_marginLeft="99dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginRight="99dp"
-            android:ems="10"
-            android:hint="powtórz nowe hasło"
-            android:inputType="textPassword" />
+            android:text="Wybierz, co chcesz zmienić"
+            android:textSize="24sp" />
 
 
         <Button
-            android:id="@+id/confirmAccountUpdateButton"
+            android:id="@+id/updatePhone"
             android:layout_width="301dp"
             android:layout_height="76dp"
-            android:text="Zmień dane" />
+            android:text="Dodaj/zmień numer telefonu" />
+
+        <Button
+            android:id="@+id/updateEmail"
+            android:layout_width="301dp"
+            android:layout_height="76dp"
+            android:text="Zmień adres email" />
+
+        <Button
+            android:id="@+id/changePassword"
+            android:layout_width="301dp"
+            android:layout_height="76dp"
+            android:text="Zmień hasło" />
+
+
 
 
     </LinearLayout>
