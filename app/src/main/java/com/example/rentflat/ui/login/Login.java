@@ -26,11 +26,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.rentflat.MainActivity.serverIp;
+
 public class Login extends AppCompatActivity {
 
     private EditText username, password;
     private Button loginButton;
-    private static String URL_LOGIN = "http://192.168.1.14/login.php";
+    private static String URL_LOGIN = serverIp + "/login.php";
     SessionMenager sessionMenager;
 
     @Override

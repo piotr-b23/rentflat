@@ -50,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView name, username;
     public static SessionMenager sessionMenager;
     private static final String TAG = HomeFragment.class.getSimpleName();
-    String userId;
-    private String URL_READ = "http://192.168.1.14/read_detail.php";
+    public static String userId;
+    public static String serverIp = "http://192.168.1.13/";
+    private String URL_READ = serverIp + "read_detail.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,10 +178,4 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        getUserID();
-    }
 }

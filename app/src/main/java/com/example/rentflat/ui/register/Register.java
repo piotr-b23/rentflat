@@ -26,11 +26,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.rentflat.MainActivity.serverIp;
+
 public class Register extends AppCompatActivity {
 
     private EditText name, username, email, password, confirmedPassword;
     private Button registerButton;
-    private static String URL_REGIST = "http://192.168.1.14/regist.php";
+    private static String URL_REGIST = serverIp + "/regist.php";
 
 
     @Override
@@ -136,7 +138,7 @@ public class Register extends AppCompatActivity {
 
     }
 
-    private boolean isEmailValid(String email)
+    public static boolean isEmailValid(String email)
     {
         String emailRegex ="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         if(email.matches(emailRegex))
