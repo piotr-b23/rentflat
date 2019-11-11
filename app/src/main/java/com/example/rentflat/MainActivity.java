@@ -1,5 +1,6 @@
 package com.example.rentflat;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.AuthFailureError;
@@ -10,9 +11,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.ui.SessionMenager;
+import com.example.rentflat.ui.addFlat.AddFlat;
 import com.example.rentflat.ui.home.HomeFragment;
 import com.example.rentflat.ui.home.HomeViewModel;
 import com.example.rentflat.ui.login.Login;
+import com.example.rentflat.ui.register.Register;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -91,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new  Intent(MainActivity.this, AddFlat.class);
+                startActivity(intent);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.addFlat.AddFlat"
+    tools:showIn="@layout/activity_add_flat">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="195dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cena wynajmu"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/flatPrice"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:ems="10"
+                    android:inputType="numberSigned" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Powierzchnia"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/flatSurface"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:ems="10"
+                    android:inputType="numberSigned" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ilość pokoi"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/flatRooms"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:ems="10"
+                    android:inputType="numberSigned" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Typ budynku"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/buildingTypeSpinner"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Województwo"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/provinceSpinner"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Miejscowość"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/flatLocality"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ulica"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/flatStreet"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Oferta dla studentów"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxForStudents"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp" />
+
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opis"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/flatDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/addFlatButton"
+                android:layout_width="301dp"
+                android:layout_height="76dp"
+                android:text="Dodaj ogłoszenie" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

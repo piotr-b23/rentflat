@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.myAccount.ChangePhone"></activity>
+        <activity
+            android:name=".ui.addFlat.AddFlat"
+            android:label="@string/title_activity_add_flat"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.myAccount.ChangePhone" />
         <activity android:name=".ui.myAccount.ChangePassword" />
         <activity android:name=".ui.myAccount.ChangeEmail" />
         <activity android:name=".ui.login.Login" />
