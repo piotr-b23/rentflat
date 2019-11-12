@@ -1,6 +1,8 @@
 package com.example.rentflat.ui.addFlat;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.android.volley.AuthFailureError;
@@ -11,26 +13,31 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.MainActivity;
-import com.example.rentflat.ui.register.Register;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.rentflat.ui.login.Login;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.rentflat.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,9 +47,11 @@ import static com.example.rentflat.MainActivity.userId;
 public class AddFlat extends AppCompatActivity {
 
     private EditText price, surface, room, locality, street, description;
-    private Button addFlatButton;
+    private Button addFlatButton, addPhoto;
     private CheckBox studentsCheckBox;
-    private static String URL_REGIST = serverIp + "/add_flat.php";
+    private static String URL_ADD_FLAT = serverIp + "/add_flat.php";
+    private Bitmap bitmap;
+    ImageView flatPhoto;
 
 
 
@@ -60,8 +69,10 @@ public class AddFlat extends AppCompatActivity {
         street = findViewById(R.id.flatStreet);
         description = findViewById(R.id.flatDescription);
         studentsCheckBox = findViewById(R.id.checkBoxForStudents);
+        flatPhoto = findViewById(R.id.flatImage1);
 
         addFlatButton = findViewById(R.id.addFlatButton);
+        addPhoto = findViewById(R.id.addPhotoButton);
 
 
         final Spinner buildingType = findViewById(R.id.buildingTypeSpinner);
@@ -73,6 +84,13 @@ public class AddFlat extends AppCompatActivity {
         ArrayAdapter<CharSequence> provinceAdapter = ArrayAdapter.createFromResource(this,R.array.province,android.R.layout.simple_spinner_item);
         provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         province.setAdapter(provinceAdapter);
+
+        addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseFile();
+            }
+        });
 
         addFlatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,11 +113,11 @@ public class AddFlat extends AppCompatActivity {
                 String creProvince = province.getSelectedItem().toString();
                 String id =userId;
 
+
+
                 if (!crePrice.isEmpty() && !creSurface.isEmpty() && !creRoom.isEmpty() && !creLocality.isEmpty() && !creStreet.isEmpty()&& !creDescription.isEmpty()){
 
-                            CreateFlat(id,crePrice,creSurface,creRoom,creLocality,creStreet,creDescription,creStudentsCheckBox,creBuildingType,creProvince);
-
-
+                            CreateFlat(id,crePrice,creSurface,creRoom,creLocality,creStreet,creDescription,creStudentsCheckBox,creBuildingType,creProvince,getStringImage(bitmap));
 
 
                 }
@@ -119,9 +137,9 @@ public class AddFlat extends AppCompatActivity {
         });
     }
 
-    private void CreateFlat(final String id,final String price,final String surface,final String room,final String locality,final String street,final String description,final String students,final String buildingType,final String province){
+    private void CreateFlat(final String id,final String price,final String surface,final String room,final String locality,final String street,final String description,final String students,final String buildingType,final String province, final String photo){
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_FLAT,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -161,6 +179,7 @@ public class AddFlat extends AppCompatActivity {
                 params.put("students",students);
                 params.put("type",buildingType);
                 params.put("province",province);
+                params.put("photo",photo);
 
                 return params;
             }
@@ -171,6 +190,35 @@ public class AddFlat extends AppCompatActivity {
 
 
     }
+    private void chooseFile(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Wybierz zdjęcie"),1);
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri filePath = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                flatPhoto.setImageBitmap(bitmap);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public String getStringImage(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        byte[] imageByteArray = byteArrayOutputStream.toByteArray();
+        String encodedImage = Base64.encodeToString(imageByteArray,Base64.DEFAULT);
+        return encodedImage;
+    }
+}
 
