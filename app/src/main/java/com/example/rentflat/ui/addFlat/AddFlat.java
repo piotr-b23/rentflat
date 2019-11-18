@@ -1,7 +1,10 @@
 package com.example.rentflat.ui.addFlat;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -37,8 +40,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.rentflat.MainActivity.serverIp;
@@ -52,6 +59,7 @@ public class AddFlat extends AppCompatActivity {
     private static String URL_ADD_FLAT = serverIp + "/add_flat.php";
     private Bitmap bitmap;
     ImageView flatPhoto;
+    private List<Bitmap> bitmaps;
 
 
 
@@ -192,22 +200,58 @@ public class AddFlat extends AppCompatActivity {
     }
     private void chooseFile(){
         Intent intent = new Intent();
-        intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Wybierz zdjęcie"),1);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        intent.setType("image/*");
+        startActivityForResult(intent, 1);
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri filePath = data.getData();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                flatPhoto.setImageBitmap(bitmap);
-            }catch (IOException e){
-                e.printStackTrace();
+//        if(requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+//            Uri filePath = data.getData();
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+//                flatPhoto.setImageBitmap(bitmap);
+//            }catch (IOException e){
+//                e.printStackTrace();
+//            }
+//
+//        }
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            bitmaps = new ArrayList<>();
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                ClipData clipData = data.getClipData();
+
+                if (clipData != null){
+                    for(int i=0;i<clipData.getItemCount();i++) {
+                        Uri filePath = clipData.getItemAt(i).getUri();
+                        try {
+                            InputStream is = getContentResolver().openInputStream(filePath);
+                            bitmap = BitmapFactory.decodeStream(is);
+                            bitmaps.add(bitmap);
+                            flatPhoto.setImageBitmap(bitmap);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                } else {
+                    Uri filePath = data.getData();
+                    try {
+                        InputStream is = getContentResolver().openInputStream(filePath);
+                        bitmap = BitmapFactory.decodeStream(is);
+                        bitmaps.add(bitmap);
+                        flatPhoto.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
             }
 
         }
