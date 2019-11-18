@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public static SessionMenager sessionMenager;
     private static final String TAG = HomeFragment.class.getSimpleName();
     public static String userId;
-    public static String serverIp = "http://192.168.1.13/";
+    public static String serverIp = "http://192.168.1.14/";
     private String URL_READ = serverIp + "read_detail.php";
 
     @Override

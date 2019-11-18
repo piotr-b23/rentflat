@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.userId;
@@ -57,9 +58,12 @@ public class AddFlat extends AppCompatActivity {
     private Button addFlatButton, addPhoto;
     private CheckBox studentsCheckBox;
     private static String URL_ADD_FLAT = serverIp + "/add_flat.php";
+    private static String URL_UPLOAD_PHOTO = serverIp + "/upload_photo.php";
+    private static String PHOTO_STORAGE = serverIp + "user_data/";
     private Bitmap bitmap;
     ImageView flatPhoto;
     private List<Bitmap> bitmaps;
+    public static String crePhoto = "";
 
 
 
@@ -125,7 +129,19 @@ public class AddFlat extends AppCompatActivity {
 
                 if (!crePrice.isEmpty() && !creSurface.isEmpty() && !creRoom.isEmpty() && !creLocality.isEmpty() && !creStreet.isEmpty()&& !creDescription.isEmpty()){
 
-                            CreateFlat(id,crePrice,creSurface,creRoom,creLocality,creStreet,creDescription,creStudentsCheckBox,creBuildingType,creProvince,getStringImage(bitmap));
+                    for(Bitmap b: bitmaps){
+                        try {
+                            String filename = createTransactionID() + ".jpeg";
+                            UploadPhoto(getStringImage(b),"user_data/"+filename);
+                            crePhoto = crePhoto + PHOTO_STORAGE + filename +";";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    CreateFlat(id,crePrice,creSurface,creRoom,creLocality,creStreet,creDescription,creStudentsCheckBox,creBuildingType,creProvince, crePhoto);
+
 
 
                 }
@@ -145,7 +161,7 @@ public class AddFlat extends AppCompatActivity {
         });
     }
 
-    private void CreateFlat(final String id,final String price,final String surface,final String room,final String locality,final String street,final String description,final String students,final String buildingType,final String province, final String photo){
+    private void CreateFlat(final String id,final String price,final String surface,final String room,final String locality,final String street,final String description,final String students,final String buildingType,final String province,final String photo){
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_FLAT,
                 new Response.Listener<String>() {
@@ -198,6 +214,47 @@ public class AddFlat extends AppCompatActivity {
 
 
     }
+
+    private void UploadPhoto(final String photo,final String fileName){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPLOAD_PHOTO,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            String succes = jsonObject.getString("success");
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                            Toast.makeText(AddFlat.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AddFlat.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("photo",photo);
+                params.put("filename",fileName);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
+    }
+
     private void chooseFile(){
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -210,17 +267,6 @@ public class AddFlat extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-//            Uri filePath = data.getData();
-//            try {
-//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-//                flatPhoto.setImageBitmap(bitmap);
-//            }catch (IOException e){
-//                e.printStackTrace();
-//            }
-//
-//        }
-
         if (requestCode == 1 && resultCode == RESULT_OK) {
             bitmaps = new ArrayList<>();
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
@@ -263,6 +309,10 @@ public class AddFlat extends AppCompatActivity {
         byte[] imageByteArray = byteArrayOutputStream.toByteArray();
         String encodedImage = Base64.encodeToString(imageByteArray,Base64.DEFAULT);
         return encodedImage;
+    }
+
+    public String createTransactionID() throws Exception{
+        return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
     }
 }
 
