@@ -132,19 +132,24 @@ public class AddFlat extends AppCompatActivity {
 
                 if (!crePrice.isEmpty() && !creSurface.isEmpty() && !creRoom.isEmpty() && !creLocality.isEmpty() && !creStreet.isEmpty()&& !creDescription.isEmpty()){
 
-                    for(Bitmap b: bitmaps){
-                        try {
-                            String filename = createTransactionID() + ".jpeg";
-                            UploadPhoto(getStringImage(b),"user_data/"+filename);
-                            crePhoto = crePhoto + PHOTO_STORAGE + filename +";";
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                    if(chceckIfDataIsCorrect(crePrice,creSurface,creRoom,creDescription)==false){
+                        Toast.makeText(AddFlat.this,"Popraw wprowadzone dane",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+
+                        for (Bitmap b : bitmaps) {
+                            try {
+                                String filename = createTransactionID() + ".jpeg";
+                                UploadPhoto(getStringImage(b), "user_data/" + filename);
+                                crePhoto = crePhoto + PHOTO_STORAGE + filename + ";";
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
 
+
+                        CreateFlat(id, crePrice, creSurface, creRoom, creLocality, creStreet, creDescription, creStudentsCheckBox, creBuildingType, creProvince, crePhoto);
                     }
-
-                    CreateFlat(id,crePrice,creSurface,creRoom,creLocality,creStreet,creDescription,creStudentsCheckBox,creBuildingType,creProvince, crePhoto);
-
 
 
                 }
@@ -325,6 +330,49 @@ public class AddFlat extends AppCompatActivity {
 
     public String createTransactionID() throws Exception{
         return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+    }
+
+    public boolean chceckIfDataIsCorrect(String price, String surface, String room,String description){
+
+        boolean isCorrect = true;
+
+        if(checkPrice(price)==false) isCorrect = false;
+        if(checkSurface(surface)==false) isCorrect = false;
+        if(checkRoom(room)==false) isCorrect = false;
+        if(checkDescription(description)==false) isCorrect = false;
+
+        return isCorrect;
+    }
+    public boolean checkPrice(String inPrice){
+        if(Integer.parseInt(inPrice)>500000 || Integer.parseInt(inPrice)<50){
+            price.setError("Wprowadź poprawną cenę za wynajem.");
+            return false;
+        }
+        else return true;
+    }
+
+    public boolean checkSurface(String inSurface){
+        if(Integer.parseInt(inSurface)>250000 || Integer.parseInt(inSurface)<25){
+            surface.setError("Wprowadź poprawny metraż wynajmowanego obiektu.");
+            return false;
+        }
+        else return true;
+    }
+
+    public boolean checkRoom(String inRoom){
+        if(Integer.parseInt(inRoom)>250 || Integer.parseInt(inRoom)<1){
+            room.setError("Wprowadź poprawną ilość pokoi.");
+            return false;
+        }
+        else return true;
+    }
+
+    public boolean checkDescription(String inDescription){
+        if(inDescription.length()<20){
+            description.setError("Za krótki opis.");
+            return false;
+        }
+        else return true;
     }
 }
 
