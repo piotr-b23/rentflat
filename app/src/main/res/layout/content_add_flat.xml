@@ -19,17 +19,96 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/flatImage0"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+
+                <ImageView
+                    android:id="@+id/flatImage1"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/flatImage2"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+            </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
                 <ImageView
-                    android:id="@+id/flatImage1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/flatImage3"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
                     tools:srcCompat="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/flatImage4"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/flatImage5"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:id="@+id/flatImage6"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/flatImage7"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/flatImage8"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <Button
                     android:id="@+id/addPhotoButton"

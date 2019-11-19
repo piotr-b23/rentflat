@@ -61,7 +61,7 @@ public class AddFlat extends AppCompatActivity {
     private static String URL_UPLOAD_PHOTO = serverIp + "/upload_photo.php";
     private static String PHOTO_STORAGE = serverIp + "user_data/";
     private Bitmap bitmap;
-    ImageView flatPhoto;
+    ImageView[] flatPhotos = new ImageView[9];
     private List<Bitmap> bitmaps;
     public static String crePhoto = "";
 
@@ -81,7 +81,10 @@ public class AddFlat extends AppCompatActivity {
         street = findViewById(R.id.flatStreet);
         description = findViewById(R.id.flatDescription);
         studentsCheckBox = findViewById(R.id.checkBoxForStudents);
-        flatPhoto = findViewById(R.id.flatImage1);
+        for (int i = 0; i < 9; i++) {
+            int res = getResources().getIdentifier("flatImage"+i, "id", getPackageName());
+            flatPhotos[i] = findViewById(res);
+        }
 
         addFlatButton = findViewById(R.id.addFlatButton);
         addPhoto = findViewById(R.id.addPhotoButton);
@@ -273,28 +276,37 @@ public class AddFlat extends AppCompatActivity {
                 ClipData clipData = data.getClipData();
 
                 if (clipData != null){
-                    for(int i=0;i<clipData.getItemCount();i++) {
-                        Uri filePath = clipData.getItemAt(i).getUri();
-                        try {
-                            InputStream is = getContentResolver().openInputStream(filePath);
-                            bitmap = BitmapFactory.decodeStream(is);
-                            bitmaps.add(bitmap);
-                            flatPhoto.setImageBitmap(bitmap);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
+                    if (clipData.getItemCount()>9){
+                        Toast.makeText(AddFlat.this,"Wybierz maksymalnie 9 zdjęć.",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+
+                        for (int i = 0; i < clipData.getItemCount(); i++) {
+                            Uri filePath = clipData.getItemAt(i).getUri();
+                            try {
+                                InputStream is = getContentResolver().openInputStream(filePath);
+                                bitmap = BitmapFactory.decodeStream(is);
+                                bitmaps.add(bitmap);
+                                flatPhotos[i].setImageBitmap(bitmap);
+                                flatPhotos[i].setVisibility(View.VISIBLE);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 
                 } else {
-                    Uri filePath = data.getData();
-                    try {
-                        InputStream is = getContentResolver().openInputStream(filePath);
-                        bitmap = BitmapFactory.decodeStream(is);
-                        bitmaps.add(bitmap);
-                        flatPhoto.setImageBitmap(bitmap);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                        Uri filePath = data.getData();
+                        try {
+                            InputStream is = getContentResolver().openInputStream(filePath);
+                            bitmap = BitmapFactory.decodeStream(is);
+                            bitmaps.add(bitmap);
+                            flatPhotos[0].setImageBitmap(bitmap);
+                            flatPhotos[0].setVisibility(View.VISIBLE);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
 
 
                 }
