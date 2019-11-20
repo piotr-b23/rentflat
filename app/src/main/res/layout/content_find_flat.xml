@@ -237,7 +237,7 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/addFlatButton"
+                android:id="@+id/findFlatButton"
                 android:layout_width="301dp"
                 android:layout_height="76dp"
                 android:text="Szukaj" />
