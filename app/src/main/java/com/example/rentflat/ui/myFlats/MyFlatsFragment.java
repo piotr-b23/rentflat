@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -27,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +40,10 @@ public class MyFlatsFragment extends Fragment {
 
     private MyFlatsViewModel myFlatsViewModel;
     private static String URL_GET_MY_FLATS = serverIp + "/get_my_flats.php";
+    RecyclerView recyclerView;
+    MyFlatsAdapter adapter;
+    ArrayList<String> flats;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +58,17 @@ public class MyFlatsFragment extends Fragment {
             }
         });
         String id =userId;
+        recyclerView = root.findViewById(R.id.myFlatsRecycler);
         getMyFlats(id);
+
+        flats = new ArrayList<>();
+//        flats.add("First card");
+//        flats.add("Second card");
+//        flats.add("Third card");
+//        flats.add("Fifth card");
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        adapter = new MyFlatsAdapter(getActivity(),flats);
+//        recyclerView.setAdapter(adapter);
 
         return root;
     }
@@ -72,10 +89,15 @@ public class MyFlatsFragment extends Fragment {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     String strName = object.getString("description").trim();
-                                    String strUsername = object.getString("students").trim();
+                                    String strUsername = object.getString("locality").trim();
+
+                                    flats.add(strUsername);
 
 
                                 }
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                adapter = new MyFlatsAdapter(getActivity(),flats);
+                                recyclerView.setAdapter(adapter);
 
                             }
 
