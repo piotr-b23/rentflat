@@ -109,7 +109,7 @@ public class FindFlat extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
-                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+                            JSONArray jsonArray = jsonObject.getJSONArray("flat");
 
                             if (success.equals("1")) {
 
