@@ -23,7 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.findFlat.FindFlat;
+import com.example.rentflat.ui.flat.Flat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +42,8 @@ public class MyFlatsFragment extends Fragment {
     private static String URL_GET_MY_FLATS = serverIp + "/get_my_flats.php";
     RecyclerView recyclerView;
     MyFlatsAdapter adapter;
-    ArrayList<String> flats;
+    ArrayList<String> flat;
+    ArrayList<Flat> flats;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -61,14 +62,8 @@ public class MyFlatsFragment extends Fragment {
         recyclerView = root.findViewById(R.id.myFlatsRecycler);
         getMyFlats(id);
 
+        flat = new ArrayList<>();
         flats = new ArrayList<>();
-//        flats.add("First card");
-//        flats.add("Second card");
-//        flats.add("Third card");
-//        flats.add("Fifth card");
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        adapter = new MyFlatsAdapter(getActivity(),flats);
-//        recyclerView.setAdapter(adapter);
 
         return root;
     }
@@ -88,15 +83,25 @@ public class MyFlatsFragment extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
-                                    String strName = object.getString("description").trim();
-                                    String strUsername = object.getString("locality").trim();
+                                    String strFlatId = object.getString("id").trim();
+                                    String strFlatUserId = object.getString("userid").trim();
+                                    String strPrice = object.getString("price").trim();
+                                    String strSurface = object.getString("surface").trim();
+                                    String strRoom= object.getString("room").trim();
+                                    String strProvince = object.getString("province").trim();
+                                    String strType = object.getString("type").trim();
+                                    String strLocality = object.getString("locality").trim();
+                                    String strStreet = object.getString("street").trim();
+                                    String strDescription = object.getString("description").trim();
+                                    String strStudents = object.getString("students").trim();
+                                    String strPhoto = object.getString("photo").trim();
 
-                                    flats.add(strUsername);
+                                    flats.add(new Flat(strFlatId,strFlatUserId,strPrice,strSurface,strRoom,strProvince,strType,strLocality,strStreet,strDescription,strStudents,strPhoto));
 
 
                                 }
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                adapter = new MyFlatsAdapter(getActivity(),flats);
+                                adapter = new MyFlatsAdapter(getActivity(), flats);
                                 recyclerView.setAdapter(adapter);
 
                             }
