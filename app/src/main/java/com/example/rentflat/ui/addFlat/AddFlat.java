@@ -58,7 +58,7 @@ public class AddFlat extends AppCompatActivity {
     private Bitmap bitmap;
     ImageView[] flatPhotos = new ImageView[9];
     private List<Bitmap> bitmaps;
-    public static String crePhoto = "";
+    public String crePhoto = "";
 
 
 
@@ -136,7 +136,7 @@ public class AddFlat extends AppCompatActivity {
                             try {
                                 String filename = createTransactionID() + ".jpeg";
                                 UploadPhoto(getStringImage(b), "user_data/" + filename);
-                                crePhoto = crePhoto + PHOTO_STORAGE + filename + ";";
+                                crePhoto = crePhoto + "user_data/" + filename + " ";
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
