@@ -39,6 +39,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,6 +132,7 @@ public class AddFlat extends AppCompatActivity {
                         Toast.makeText(AddFlat.this,"Popraw wprowadzone dane",Toast.LENGTH_SHORT).show();
                     }
                     else {
+                        Collections.reverse(bitmaps);
 
                         for (Bitmap b : bitmaps) {
                             try {
@@ -259,6 +261,10 @@ public class AddFlat extends AppCompatActivity {
     }
 
     private void chooseFile(){
+        for (int i = 0; i < 9; i++) {
+            flatPhotos[i].setVisibility(View.GONE);
+            flatPhotos[i].setImageBitmap(null);
+        }
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);

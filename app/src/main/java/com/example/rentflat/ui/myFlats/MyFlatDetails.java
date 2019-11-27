@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.rentflat.ui.flat.Flat;
+import com.example.rentflat.ui.myAccount.ChangeEmail;
+import com.example.rentflat.ui.myAccount.ChangePassword;
+import com.example.rentflat.ui.myAccount.ChangePhone;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -21,6 +24,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.example.rentflat.MainActivity.sessionMenager;
+
 public class MyFlatDetails extends AppCompatActivity {
 
     private TextView price, surface, room,type, province, locality, street, students, description;
@@ -36,7 +41,7 @@ public class MyFlatDetails extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
-        Flat selectedFlat = (Flat) intent.getParcelableExtra("selected flat");
+        final Flat selectedFlat = (Flat) intent.getParcelableExtra("selected flat");
 
         price = findViewById(R.id.mySelectedFlatPrice);
         surface = findViewById(R.id.mySelectedFlatSurface);
@@ -72,11 +77,35 @@ public class MyFlatDetails extends AppCompatActivity {
         }
 
 
-
-
         for (int i = 0; i < photos.size(); i++) {
             Picasso.get().load(photos.get(i)).into(flatPhotos[i]);
             flatPhotos[i].setVisibility(View.VISIBLE);
+        }
+
+        if(sessionMenager.isLogged()) {
+
+            editPrice.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new  Intent(v.getContext(), ChangePrice.class);
+                    intent.putExtra("old price", selectedFlat.getPrice());
+                    intent.putExtra("flat id", selectedFlat.getFlatId());
+                    startActivity(intent);
+                }
+            });
+
+            editDescription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new  Intent(v.getContext(), ChangeDescription.class);
+                    intent.putExtra("old description",  selectedFlat.getDescription());
+                    intent.putExtra("flat id", selectedFlat.getFlatId());
+                    startActivity(intent);
+                }
+            });
+
+
+
         }
 
 

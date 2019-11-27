@@ -65,9 +65,9 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(v.getContext(), MyFlatDetails.class);
-                    i.putExtra("selected flat", data.get(getAdapterPosition()));
-                    v.getContext().startActivity(i);
+                    Intent intent = new Intent(v.getContext(), MyFlatDetails.class);
+                    intent.putExtra("selected flat", data.get(getAdapterPosition()));
+                    v.getContext().startActivity(intent);
                 }
             });
 
