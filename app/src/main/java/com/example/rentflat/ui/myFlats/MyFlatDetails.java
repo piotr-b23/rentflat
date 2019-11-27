@@ -13,14 +13,20 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rentflat.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class MyFlatDetails extends AppCompatActivity {
 
     private TextView price, surface, room,type, province, locality, street, students, description;
     private Button editPrice, editDescription;
+    private ArrayList<String> photos;
+    ImageView[] flatPhotos = new ImageView[9];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +35,8 @@ public class MyFlatDetails extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent i = getIntent();
-        Flat selectedFlat = (Flat) i.getParcelableExtra("selected flat");
+        Intent intent = getIntent();
+        Flat selectedFlat = (Flat) intent.getParcelableExtra("selected flat");
 
         price = findViewById(R.id.mySelectedFlatPrice);
         surface = findViewById(R.id.mySelectedFlatSurface);
@@ -56,6 +62,22 @@ public class MyFlatDetails extends AppCompatActivity {
 
         if(selectedFlat.getStudents().equals("1")) students.setText("tak");
         else students.setText("nie");
+
+        photos = new ArrayList<>();
+        photos = selectedFlat.generatePhotos();
+
+        for (int i = 0; i < 9; i++) {
+            int res = getResources().getIdentifier("myFlatPhoto"+i, "id", getPackageName());
+            flatPhotos[i] = findViewById(res);
+        }
+
+
+
+
+        for (int i = 0; i < photos.size(); i++) {
+            Picasso.get().load(photos.get(i)).into(flatPhotos[i]);
+            flatPhotos[i].setVisibility(View.VISIBLE);
+        }
 
 
     }
