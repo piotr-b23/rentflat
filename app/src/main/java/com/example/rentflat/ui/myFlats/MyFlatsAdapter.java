@@ -1,6 +1,7 @@
 package com.example.rentflat.ui.myFlats;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,16 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
         ImageView myFlatImage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), MyFlatDetails.class);
+                    i.putExtra("selected flat", data.get(getAdapterPosition()));
+                    v.getContext().startActivity(i);
+                }
+            });
+
             myFlatTitle = itemView.findViewById(R.id.myFlatTitle);
             myFlatDescription = itemView.findViewById(R.id.myFlatDescription);
             myFlatImage = itemView.findViewById(R.id.flatCardImage);

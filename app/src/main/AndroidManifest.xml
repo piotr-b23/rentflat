@@ -13,9 +13,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.myFlats.MyFlatDetails"
+            android:label="@string/title_activity_my_flat_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ui.findFlat.FindFlat"
             android:label="@string/title_activity_find_flat"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.addFlat.AddFlat"
             android:label="@string/title_activity_add_flat"

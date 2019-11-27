@@ -23,27 +23,30 @@
 
                 <ImageView
                     android:id="@+id/flatImage0"
-                    android:layout_width="139dp"
-                    android:layout_height="139dp"
+                    android:layout_width="137dp"
+                    android:layout_height="137dp"
                     android:scaleType="fitXY"
                     android:visibility="gone"
+                    android:padding="5dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
 
                 <ImageView
                     android:id="@+id/flatImage1"
-                    android:layout_width="139dp"
-                    android:layout_height="139dp"
+                    android:layout_width="137dp"
+                    android:layout_height="137dp"
                     android:scaleType="fitXY"
                     android:visibility="gone"
+                    android:padding="5dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageView
                     android:id="@+id/flatImage2"
-                    android:layout_width="139dp"
-                    android:layout_height="139dp"
+                    android:layout_width="137dp"
+                    android:layout_height="137dp"
                     android:scaleType="fitXY"
                     android:visibility="gone"
+                    android:padding="5dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
             </TableRow>
@@ -54,26 +57,29 @@
 
                 <ImageView
                     android:id="@+id/flatImage3"
-                    android:layout_width="139dp"
-                    android:layout_height="139dp"
+                    android:layout_width="137dp"
+                    android:layout_height="137dp"
                     android:scaleType="fitXY"
                     android:visibility="gone"
+                    android:padding="5dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageView
                     android:id="@+id/flatImage4"
-                    android:layout_width="139dp"
-                    android:layout_height="139dp"
+                    android:layout_width="137dp"
+                    android:layout_height="137dp"
                     android:scaleType="fitXY"
                     android:visibility="gone"
+                    android:padding="5dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageView
                     android:id="@+id/flatImage5"
-                    android:layout_width="139dp"
-                    android:layout_height="139dp"
+                    android:layout_width="137dp"
+                    android:layout_height="137dp"
                     android:scaleType="fitXY"
                     android:visibility="gone"
+                    android:padding="5dp"
                     tools:srcCompat="@tools:sample/avatars" />
             </TableRow>
 
@@ -83,26 +89,29 @@
 
                 <ImageView
                     android:id="@+id/flatImage6"
-                    android:layout_width="139dp"
-                    android:layout_height="139dp"
+                    android:layout_width="137dp"
+                    android:layout_height="137dp"
                     android:scaleType="fitXY"
                     android:visibility="gone"
+                    android:padding="5dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageView
                     android:id="@+id/flatImage7"
-                    android:layout_width="139dp"
-                    android:layout_height="139dp"
+                    android:layout_width="137dp"
+                    android:layout_height="137dp"
                     android:scaleType="fitXY"
                     android:visibility="gone"
+                    android:padding="5dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageView
                     android:id="@+id/flatImage8"
-                    android:layout_width="139dp"
-                    android:layout_height="139dp"
+                    android:layout_width="137dp"
+                    android:layout_height="137dp"
                     android:scaleType="fitXY"
                     android:visibility="gone"
+                    android:padding="5dp"
                     tools:srcCompat="@tools:sample/avatars" />
             </TableRow>
 
@@ -150,7 +159,7 @@
                     android:id="@+id/textView18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Powierzchnia (m³)"
+                    android:text="Powierzchnia (m²)"
                     android:textSize="18sp" />
 
                 <EditText

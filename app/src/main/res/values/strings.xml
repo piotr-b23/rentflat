@@ -38,4 +38,6 @@
         <item>zachodniopomorskie</item>
     </string-array>
     <string name="title_activity_find_flat">Znajdź mieszkanie</string>
+    <string name="title_activity_my_flat_details">Edytuj ogłoszenie</string>
+
 </resources>
