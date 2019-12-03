@@ -41,10 +41,10 @@ import static com.example.rentflat.MainActivity.serverIp;
 
 public class FindFlat extends AppCompatActivity {
 
-    private static String URL_FIND_FLAT = serverIp + "/find_flat.php";
     private EditText priceMin,priceMax, surfaceMin,surfaceMax, roomMin,roomMax, locality, street;
     private Button findFlatButton;
     private CheckBox studentsCheckBox;
+    private FindFlatSearch query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,90 +98,15 @@ public class FindFlat extends AppCompatActivity {
                 String seBuildingType = buildingType.getSelectedItem().toString();
                 String seProvince = province.getSelectedItem().toString();
 
-                getFlats(sePriceMin,sePriceMax,seSurfaceMin,seSurfaceMax,seRoomMin,seRoomMax,seBuildingType,seProvince,seLocality,seStreet,seStudentsCheckBox);
+                query = new FindFlatSearch(sePriceMin,sePriceMax,seSurfaceMin,seSurfaceMax,seRoomMin,seRoomMax,seBuildingType,seProvince,seLocality,seStreet,seStudentsCheckBox);
+
+                Intent intent = new Intent(FindFlat.this, FindFlatResults.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
 
             }
         });
 
     }
 
-    private void getFlats(final String priceMin,final String priceMax, final String surfaceMin,final String surfaceMax, final String roomMin,final String roomMax,final String type, final String province, final String locality, final String street,final String students) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_FIND_FLAT,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        ArrayList<Flat> flats = new ArrayList<>();
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            String success = jsonObject.getString("success");
-                            JSONArray jsonArray = jsonObject.getJSONArray("flat");
-
-                            if (success.equals("1")) {
-
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject object = jsonArray.getJSONObject(i);
-
-                                    String strFlatId = object.getString("id").trim();
-                                    String strFlatUserId = object.getString("userid").trim();
-                                    String strPrice = object.getString("price").trim();
-                                    String strSurface = object.getString("surface").trim();
-                                    String strRoom= object.getString("room").trim();
-                                    String strProvince = object.getString("province").trim();
-                                    String strType = object.getString("type").trim();
-                                    String strLocality = object.getString("locality").trim();
-                                    String strStreet = object.getString("street").trim();
-                                    String strDescription = object.getString("description").trim();
-                                    String strStudents = object.getString("students").trim();
-                                    String strPhoto = object.getString("photo").trim();
-
-                                    flats.add(new Flat(strFlatId,strFlatUserId,strPrice,strSurface,strRoom,strProvince,strType,strLocality,strStreet,strDescription,strStudents,strPhoto));
-
-
-                                }
-
-
-                                Intent intent = new Intent(FindFlat.this, FindFlatResults.class);
-                                intent.putParcelableArrayListExtra("found flats", flats);
-                                startActivity(intent);
-
-
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(FindFlat.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(FindFlat.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
-
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("pricemin",priceMin);
-                params.put("pricemax",priceMax);
-                params.put("surfacemin",surfaceMin);
-                params.put("surfacemax",surfaceMax);
-                params.put("roommin",roomMin);
-                params.put("roommax",roomMax);
-                params.put("type",type);
-                params.put("province",province);
-                params.put("locality",locality);
-                params.put("street",street);
-                params.put("students",students);
-
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
 }

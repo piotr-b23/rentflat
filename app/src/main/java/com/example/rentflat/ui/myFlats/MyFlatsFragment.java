@@ -60,10 +60,10 @@ public class MyFlatsFragment extends Fragment {
         });
         String id =userId;
         recyclerView = root.findViewById(R.id.myFlatsRecycler);
+        flats = new ArrayList<>();
         getMyFlats(id);
 
-        flat = new ArrayList<>();
-        flats = new ArrayList<>();
+
 
         return root;
     }
