@@ -51,7 +51,7 @@ public class MyFlatsFragment extends Fragment {
         myFlatsViewModel =
                 ViewModelProviders.of(this).get(MyFlatsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_my_flats, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
+        final TextView textView = root.findViewById(R.id.text_my_flat);
         myFlatsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

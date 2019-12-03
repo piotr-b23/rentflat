@@ -1,5 +1,6 @@
 package com.example.rentflat.ui.findFlat;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.AuthFailureError;
@@ -10,6 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.MainActivity;
+import com.example.rentflat.ui.flat.Flat;
+import com.example.rentflat.ui.myFlats.MyFlatDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -30,6 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +52,7 @@ public class FindFlat extends AppCompatActivity {
         setContentView(R.layout.activity_find_flat);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         priceMin = findViewById(R.id.priceMin);
         priceMax = findViewById(R.id.priceMax);
@@ -105,7 +110,7 @@ public class FindFlat extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Log.i(TAG, response.toString());
+                        ArrayList<Flat> flats = new ArrayList<>();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
@@ -116,11 +121,29 @@ public class FindFlat extends AppCompatActivity {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
-                                    String strName = object.getString("description").trim();
-                                    String strUsername = object.getString("students").trim();
+                                    String strFlatId = object.getString("id").trim();
+                                    String strFlatUserId = object.getString("userid").trim();
+                                    String strPrice = object.getString("price").trim();
+                                    String strSurface = object.getString("surface").trim();
+                                    String strRoom= object.getString("room").trim();
+                                    String strProvince = object.getString("province").trim();
+                                    String strType = object.getString("type").trim();
+                                    String strLocality = object.getString("locality").trim();
+                                    String strStreet = object.getString("street").trim();
+                                    String strDescription = object.getString("description").trim();
+                                    String strStudents = object.getString("students").trim();
+                                    String strPhoto = object.getString("photo").trim();
+
+                                    flats.add(new Flat(strFlatId,strFlatUserId,strPrice,strSurface,strRoom,strProvince,strType,strLocality,strStreet,strDescription,strStudents,strPhoto));
 
 
                                 }
+
+
+                                Intent intent = new Intent(FindFlat.this, FindFlatResults.class);
+                                intent.putParcelableArrayListExtra("found flats", flats);
+                                startActivity(intent);
+
 
                             }
 

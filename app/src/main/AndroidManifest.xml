@@ -12,7 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.myFlats.ChangeDescription"></activity>
+        <activity
+            android:name=".ui.findFlat.FindFlatDetails"
+            android:label="@string/title_activity_find_flat_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.findFlat.FindFlatResults" />
+        <activity android:name=".ui.myFlats.ChangeDescription" />
         <activity android:name=".ui.myFlats.ChangePrice" />
         <activity
             android:name=".ui.myFlats.MyFlatDetails"
