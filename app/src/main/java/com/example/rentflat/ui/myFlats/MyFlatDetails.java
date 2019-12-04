@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.rentflat.ui.flat.Flat;
+import com.example.rentflat.ui.imageDisplay.ImageAdapter;
 import com.example.rentflat.ui.myAccount.ChangeEmail;
 import com.example.rentflat.ui.myAccount.ChangePassword;
 import com.example.rentflat.ui.myAccount.ChangePhone;
@@ -12,6 +13,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +34,8 @@ public class MyFlatDetails extends AppCompatActivity {
     private TextView price, surface, room,type, province, locality, street, students, description;
     private Button editPrice, editDescription;
     private ArrayList<String> photos;
-    ImageView[] flatPhotos = new ImageView[9];
+    RecyclerView recyclerView;
+    ImageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +75,14 @@ public class MyFlatDetails extends AppCompatActivity {
         photos = new ArrayList<>();
         photos = selectedFlat.generatePhotos();
 
-        for (int i = 0; i < 9; i++) {
-            int res = getResources().getIdentifier("myFlatPhoto"+i, "id", getPackageName());
-            flatPhotos[i] = findViewById(res);
-        }
 
+        ArrayList<String> photos = selectedFlat.generatePhotosToDisplay();
 
-        for (int i = 0; i < photos.size(); i++) {
-            Picasso.get().load(photos.get(i)).into(flatPhotos[i]);
-            flatPhotos[i].setVisibility(View.VISIBLE);
-        }
+        recyclerView = findViewById(R.id.myFlatImageRecycler);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ImageAdapter(this, photos);
+        recyclerView.setAdapter(adapter);
 
         if(sessionMenager.isLogged()) {
 

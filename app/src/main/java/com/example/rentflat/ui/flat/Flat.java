@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import static com.example.rentflat.MainActivity.serverIp;
@@ -105,6 +106,26 @@ public class Flat implements Parcelable {
 
         while (s.hasNext()){
             photos.add(photoLocation + s.next());
+        }
+        return photos;
+    }
+
+    public ArrayList<String> generatePhotosToDisplay(){
+
+        Scanner s = new Scanner(this.photoAdress);
+        String twoPhotos;
+
+        ArrayList<String> photos = new ArrayList<>();
+
+        while (s.hasNext()){
+            twoPhotos = photoLocation + s.next();
+            if (s.hasNext()){
+                twoPhotos += " " + photoLocation + s.next();
+                photos.add(twoPhotos);
+            }
+            else{
+                photos.add(twoPhotos);
+            }
         }
         return photos;
     }

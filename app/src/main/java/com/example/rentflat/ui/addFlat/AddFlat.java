@@ -132,7 +132,7 @@ public class AddFlat extends AppCompatActivity {
                         Toast.makeText(AddFlat.this,"Popraw wprowadzone dane",Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Collections.reverse(bitmaps);
+                        //Collections.reverse(bitmaps);
 
                         for (Bitmap b : bitmaps) {
                             try {
