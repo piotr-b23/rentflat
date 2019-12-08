@@ -103,6 +103,9 @@ public class FindFlatDetails extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
+                    Intent intent = new Intent(FindFlatDetails.this, RateUser.class);
+                    intent.putExtra("rated user", selectedFlat.getUserId());
+                    startActivity(intent);
                 }
             });
 

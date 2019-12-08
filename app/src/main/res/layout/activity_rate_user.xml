@@ -32,7 +32,7 @@
             <RatingBar
                 android:id="@+id/ratingBarContact"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="46dp" />
         </TableRow>
 
         <TableRow
@@ -48,8 +48,8 @@
 
             <RatingBar
                 android:id="@+id/ratingBarDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="198dp"
+                android:layout_height="46dp" />
         </TableRow>
 
     </TableLayout>
@@ -62,7 +62,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/comments"
+        android:id="@+id/rateComment"
         android:layout_width="match_parent"
         android:layout_height="255dp"
         android:ems="10"
@@ -78,7 +78,7 @@
 
 
         <Button
-            android:id="@+id/confirmRate"
+            android:id="@+id/confirmRateButton"
             android:layout_width="301dp"
             android:layout_height="76dp"
             android:text="Wystaw ocenę" />
