@@ -185,6 +185,26 @@
 
                 <TableRow
                     android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <TextView
+                        android:id="@+id/reportFlatClick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Zgłoś ogłoszenie"
+                        android:textColor="#E90D0D"
+                        android:textSize="18sp"
+                        android:clickable="true"/>
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent" >
 
                     <Button

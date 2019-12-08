@@ -1,0 +1,115 @@
+package com.example.rentflat.ui.findFlat;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.rentflat.R;
+import com.example.rentflat.ui.flat.Flat;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.MainActivity.userId;
+
+public class ReportFlat extends AppCompatActivity {
+
+    private EditText reportDescription;
+    private Button confirmReport;
+
+    private static String URL_REPORT= serverIp + "/report.php";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_report_flat);
+
+        reportDescription = findViewById(R.id.reportDescription);
+        confirmReport = findViewById(R.id.confirmReportButton);
+
+
+
+        Intent intent = getIntent();
+        final Flat reportedFlat = (Flat) intent.getParcelableExtra("reported flat");
+
+        confirmReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String date = df.format(Calendar.getInstance().getTime());
+
+
+                String id =userId;
+                String reportText = reportDescription.getText().toString();
+                String flatId = reportedFlat.getFlatId();
+                sendReport(flatId,id,reportText,date);
+
+            }
+        });
+
+    }
+    private void sendReport(final String flatId,final String reportingUserId,final String reportDescription, final String dateTime){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            String succes = jsonObject.getString("success");
+                            if (succes.equals("1")){
+                                Toast.makeText(ReportFlat.this,"Zgłoszono ogłoszenie",Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                            Toast.makeText(ReportFlat.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ReportFlat.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("flatid",flatId);
+                params.put("reportUserId",reportingUserId);
+                params.put("comment",reportDescription);
+                params.put("date",dateTime);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
+    }
+}

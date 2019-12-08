@@ -42,6 +42,7 @@ import static com.example.rentflat.MainActivity.sessionMenager;
 public class FindFlatDetails extends AppCompatActivity {
 
     private TextView price, surface, room, type, province, locality, street, students, description;
+    private TextView reportFlat;
     private Button call, sendSMS, rateUser;
     private static String URL_GET_PHONE = serverIp + "/get_phone.php";
 
@@ -79,6 +80,8 @@ public class FindFlatDetails extends AppCompatActivity {
         sendSMS = findViewById(R.id.smsButton);
         rateUser = findViewById(R.id.rateButton);
 
+        reportFlat = findViewById(R.id.reportFlatClick);
+
         price.setText(selectedFlat.getPrice());
         surface.setText(selectedFlat.getSurface());
         room.setText(selectedFlat.getRoom());
@@ -95,6 +98,7 @@ public class FindFlatDetails extends AppCompatActivity {
         if (sessionMenager.isLogged()) {
 
             rateUser.setVisibility(View.VISIBLE);
+            reportFlat.setVisibility(View.VISIBLE);
             rateUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -102,9 +106,19 @@ public class FindFlatDetails extends AppCompatActivity {
                 }
             });
 
+            reportFlat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(FindFlatDetails.this, ReportFlat.class);
+                    intent.putExtra("reported flat", selectedFlat);
+                    startActivity(intent);
+                }
+            });
+
 
         } else {
             rateUser.setVisibility(View.INVISIBLE);
+            reportFlat.setVisibility(View.INVISIBLE);
         }
 
         call.setOnClickListener(new View.OnClickListener() {
