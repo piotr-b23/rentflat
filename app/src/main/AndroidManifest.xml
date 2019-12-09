@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.findFlat.ReportFlat"></activity>
-        <activity android:name=".ui.findFlat.RateUser" />
+        <activity android:name=".rate.RateResults"></activity>
+        <activity android:name=".ui.findFlat.ReportFlat" />
+        <activity android:name=".rate.RateUser" />
         <activity
             android:name=".ui.findFlat.FindFlatDetails"
             android:label="@string/title_activity_find_flat_details"

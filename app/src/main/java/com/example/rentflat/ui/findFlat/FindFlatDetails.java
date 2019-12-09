@@ -11,10 +11,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.rentflat.rate.Rate;
+import com.example.rentflat.rate.RateResults;
+import com.example.rentflat.rate.RateUser;
 import com.example.rentflat.ui.flat.Flat;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -42,12 +43,14 @@ import static com.example.rentflat.MainActivity.sessionMenager;
 public class FindFlatDetails extends AppCompatActivity {
 
     private TextView price, surface, room, type, province, locality, street, students, description;
-    private TextView reportFlat;
+    private TextView reportFlat, userRates;
     private Button call, sendSMS, rateUser;
     private static String URL_GET_PHONE = serverIp + "/get_phone.php";
+    private static String URL_GET_RATES = serverIp + "/get_rates.php";
 
     RecyclerView recyclerView;
     ImageAdapter adapter;
+    ArrayList<Rate> rates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,7 @@ public class FindFlatDetails extends AppCompatActivity {
         rateUser = findViewById(R.id.rateButton);
 
         reportFlat = findViewById(R.id.reportFlatClick);
+        userRates = findViewById(R.id.viewRates);
 
         price.setText(selectedFlat.getPrice());
         surface.setText(selectedFlat.getSurface());
@@ -90,6 +94,7 @@ public class FindFlatDetails extends AppCompatActivity {
         locality.setText(selectedFlat.getLocality());
         street.setText(selectedFlat.getStreet());
         description.setText(selectedFlat.getDescription());
+
 
         if (selectedFlat.getStudents().equals("1")) students.setText("tak");
         else students.setText("nie");
@@ -143,6 +148,16 @@ public class FindFlatDetails extends AppCompatActivity {
             }
         });
 
+        userRates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rates = new ArrayList<>();
+
+                getUserRates(selectedFlat.getUserId());
+
+            }
+        });
+
 
     }
 
@@ -172,6 +187,68 @@ public class FindFlatDetails extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(FindFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(FindFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userid", userId);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
+    }
+
+    private void getUserRates(final String userId) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_RATES,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("rate");
+
+                            if (success.equals("1")) {
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject object = jsonArray.getJSONObject(i);
+
+                                    String strRateId = object.getString("rateId").trim();
+                                    String strUserId = object.getString("userId").trim();
+                                    String strRaterId = object.getString("raterId").trim();
+                                    String strContactRate = object.getString("contactRate").trim();
+                                    String strDescriptionRate = object.getString("descriptionRate");
+                                    String strDescription = object.getString("comment");
+                                    String strDate = object.getString("date").trim();
+
+                                    rates.add(new Rate(strRateId, strUserId, strRaterId, strDescription, strDate,Float.valueOf(strDescriptionRate), Float.valueOf(strContactRate)));
+
+
+                                }
+                                Intent intent = new Intent(FindFlatDetails.this, RateResults.class);
+                                intent.putParcelableArrayListExtra("found rates", rates);
+                                startActivity(intent);
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(FindFlatDetails.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
                         }
 
                     }

@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.findFlat;
+package com.example.rentflat.rate;
 
 import androidx.appcompat.app.AppCompatActivity;
 

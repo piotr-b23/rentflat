@@ -191,10 +191,24 @@
                         android:id="@+id/reportFlatClick"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
+                        android:clickable="true"
                         android:text="Zgłoś ogłoszenie"
+                        android:layout_marginRight="60dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_gravity="left"
+                        android:layout_column="0"
                         android:textColor="#E90D0D"
-                        android:textSize="18sp"
-                        android:clickable="true"/>
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/viewRates"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+
+                        android:text="Opinie użytkownika"
+                        android:textSize="18sp" />
+
                 </TableRow>
 
             </TableLayout>
