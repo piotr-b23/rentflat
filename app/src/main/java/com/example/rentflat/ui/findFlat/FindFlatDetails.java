@@ -39,6 +39,7 @@ import java.util.Map;
 
 import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.userId;
 
 public class FindFlatDetails extends AppCompatActivity {
 
@@ -47,6 +48,9 @@ public class FindFlatDetails extends AppCompatActivity {
     private Button call, sendSMS, rateUser;
     private static String URL_GET_PHONE = serverIp + "/get_phone.php";
     private static String URL_GET_RATES = serverIp + "/get_rates.php";
+    private static String URL_CHECK_IF_RATED = serverIp + "/check_if_rated.php";
+    private Flat selectedFlat;
+
 
     RecyclerView recyclerView;
     ImageAdapter adapter;
@@ -60,7 +64,7 @@ public class FindFlatDetails extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
-        final Flat selectedFlat = (Flat) intent.getParcelableExtra("selected flat");
+        selectedFlat = (Flat) intent.getParcelableExtra("selected flat");
         ArrayList<String> photos = selectedFlat.generatePhotosToDisplay();
 
         recyclerView = findViewById(R.id.findFlatImagesRecycler);
@@ -108,9 +112,9 @@ public class FindFlatDetails extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = new Intent(FindFlatDetails.this, RateUser.class);
-                    intent.putExtra("rated user", selectedFlat.getUserId());
-                    startActivity(intent);
+                    String id = userId;
+                    checkIfRated(selectedFlat.getUserId(),id);
+
                 }
             });
 
@@ -264,6 +268,52 @@ public class FindFlatDetails extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("userid", userId);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
+    }
+
+    private void checkIfRated(final String userId, final String raterId) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHECK_IF_RATED,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String succes = jsonObject.getString("success");
+                            if (succes.equals("1")) {
+                                Intent intent = new Intent(FindFlatDetails.this, RateUser.class);
+                                intent.putExtra("rated user", selectedFlat.getUserId());
+                                startActivity(intent);
+
+                            }
+                            else if (succes.equals("0")){
+                                Toast.makeText(FindFlatDetails.this, "Już oceniłeś tego użytkownika.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(FindFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(FindFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userid", userId);
+                params.put("raterid", raterId);
 
                 return params;
             }
