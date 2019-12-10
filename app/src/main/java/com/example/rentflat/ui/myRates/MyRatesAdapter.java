@@ -14,12 +14,12 @@ import com.example.rentflat.R;
 
 import java.util.List;
 
-public class RateGivenAdapter extends RecyclerView.Adapter<RateGivenAdapter.ViewHolder> {
+public class MyRatesAdapter extends RecyclerView.Adapter<MyRatesAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
     private List<Rate> data;
 
-    public RateGivenAdapter(Context context, List<Rate> data) {
+    public MyRatesAdapter(Context context, List<Rate> data) {
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data;
 
@@ -28,7 +28,7 @@ public class RateGivenAdapter extends RecyclerView.Adapter<RateGivenAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.rates_given_row, parent, false);
+        View view = layoutInflater.inflate(R.layout.my_rates_row, parent, false);
         return new ViewHolder(view);
     }
 
@@ -56,19 +56,19 @@ public class RateGivenAdapter extends RecyclerView.Adapter<RateGivenAdapter.View
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView rateDate, rateDescription, editRate;
+        TextView rateDate, rateDescription, reportRate;
         RatingBar contactRate, descriptionRate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
 
-            rateDate = itemView.findViewById(R.id.rateDateGiven);
-            rateDescription = itemView.findViewById(R.id.commentsGiven);
-            editRate = itemView.findViewById(R.id.editRate);
+            rateDate = itemView.findViewById(R.id.myRateDate);
+            rateDescription = itemView.findViewById(R.id.myComments);
+            reportRate = itemView.findViewById(R.id.reportRate);
 
-            contactRate = itemView.findViewById(R.id.ratingBarContactGiven);
-            descriptionRate = itemView.findViewById(R.id.ratingBarDescriptionGiven);
+            contactRate = itemView.findViewById(R.id.ratingBarMyContact);
+            descriptionRate = itemView.findViewById(R.id.ratingBarMyDescription);
         }
     }
 }

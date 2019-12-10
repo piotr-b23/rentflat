@@ -13,13 +13,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.rentflat.ui.SessionMenager;
 import com.example.rentflat.ui.addFlat.AddFlat;
 import com.example.rentflat.ui.home.HomeFragment;
-import com.example.rentflat.ui.home.HomeViewModel;
-import com.example.rentflat.ui.login.Login;
-import com.example.rentflat.ui.register.Register;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -35,7 +30,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_my_flats, R.id.nav_my_account,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_my_rates)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

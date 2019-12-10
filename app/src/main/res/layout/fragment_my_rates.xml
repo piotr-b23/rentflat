@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.rate.RateResults">
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_my_rates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Otrzymane oceny"
+        android:textAlignment="center"
+        android:textSize="20sp" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -16,7 +25,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView52"
+                android:id="@+id/textView57"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
@@ -25,7 +34,7 @@
                 android:textSize="18sp" />
 
             <RatingBar
-                android:id="@+id/ratingBarContactAVG"
+                android:id="@+id/ratingBarMyContactAVG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isIndicator="true"
@@ -40,7 +49,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView53"
+                android:id="@+id/textView58"
                 android:layout_width="181dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
@@ -49,7 +58,7 @@
                 android:textSize="18sp" />
 
             <RatingBar
-                android:id="@+id/ratingBarDescriptionAVG"
+                android:id="@+id/ratingBarMyDescriptionAVG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleX=".8"
@@ -63,7 +72,7 @@
     </TableLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ratesRecycler"
+        android:id="@+id/myRatesRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

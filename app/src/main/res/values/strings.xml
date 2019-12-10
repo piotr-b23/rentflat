@@ -10,9 +10,7 @@
     <string name="menu_home">Strona główna</string>
     <string name="menu_my_flats">Moje ogłoszenia</string>
     <string name="menu_my_account">Moje konto</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_tools">Moje oceny</string>
     <string name="title_activity_add_flat">Dodaj ogłoszenie</string>
     <string-array name="building_type">
         <item>Mieszkanie</item>
