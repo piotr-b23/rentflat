@@ -184,13 +184,13 @@
 
             <Button
                 android:id="@+id/changePriceButton"
-                android:layout_width="301dp"
+                android:layout_width="150dp"
                 android:layout_height="76dp"
                 android:text="Zmień cenę" />
 
             <Button
                 android:id="@+id/changeDescriptionButton"
-                android:layout_width="301dp"
+                android:layout_width="150dp"
                 android:layout_height="76dp"
                 android:text="Zmień opis" />
         </LinearLayout>

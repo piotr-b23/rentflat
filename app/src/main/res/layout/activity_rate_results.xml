@@ -5,7 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".rate.RateResults">
+    tools:context=".ui.rate.RateResults">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:padding="5dp"
+                android:text="Kontakt"
+                android:textSize="18sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBarContactAVG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:scaleX=".8"
+                android:scaleY=".8"
+                android:transformPivotX="0dp"
+                android:transformPivotY="0dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:padding="5dp"
+                android:text="Zgodność z opisem"
+                android:textSize="18sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBarDescriptionAVG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX=".8"
+                android:scaleY=".8"
+                android:transformPivotX="0dp"
+                android:transformPivotY="0dp"
+                android:isIndicator="true"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+    </TableLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ratesRecycler"

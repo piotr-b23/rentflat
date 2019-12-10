@@ -1,4 +1,4 @@
-package com.example.rentflat.rate;
+package com.example.rentflat.ui.rate;
 
 import android.os.Parcel;
 import android.os.Parcelable;

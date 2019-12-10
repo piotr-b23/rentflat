@@ -11,9 +11,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.rentflat.rate.Rate;
-import com.example.rentflat.rate.RateResults;
-import com.example.rentflat.rate.RateUser;
+import com.example.rentflat.ui.rate.Rate;
+import com.example.rentflat.ui.rate.RateResults;
+import com.example.rentflat.ui.rate.RateUser;
 import com.example.rentflat.ui.flat.Flat;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
 

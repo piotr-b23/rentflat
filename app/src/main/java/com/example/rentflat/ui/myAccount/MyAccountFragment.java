@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -14,15 +15,37 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
+import com.example.rentflat.ui.rate.Rate;
 import com.example.rentflat.ui.register.Register;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.userId;
 
 public class MyAccountFragment extends Fragment {
 
     private MyAccountViewModel myAccountViewModel;
-    private Button updateEmail,updatePhone,changePassword;
+    private Button updateEmail,updatePhone,changePassword, givenRates;
+
+    private static String URL_GET_GIVEN_RATES = serverIp + "/get_given_rates.php";
+
+    ArrayList<Rate> rates;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +57,7 @@ public class MyAccountFragment extends Fragment {
         updateEmail = (Button) root.findViewById(R.id.updateEmail);
         updatePhone = (Button) root.findViewById(R.id.updatePhone);
         changePassword = (Button) root.findViewById(R.id.changePassword);
+        givenRates = (Button) root.findViewById(R.id.givenRatesButton);
 
         if(sessionMenager.isLogged()) {
 
@@ -61,10 +85,80 @@ public class MyAccountFragment extends Fragment {
                 }
             });
 
+            givenRates.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    rates = new ArrayList<>();
+                    String id = userId;
+                    getGivenRates(id);
+                }
+            });
+
 
         }
 
 
         return root;
+    }
+    private void getGivenRates(final String raterId) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_GIVEN_RATES,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("rate");
+
+                            if (success.equals("1")) {
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject object = jsonArray.getJSONObject(i);
+
+                                    String strRateId = object.getString("rateId").trim();
+                                    String strUserId = object.getString("userId").trim();
+                                    String strRaterId = object.getString("raterId").trim();
+                                    String strContactRate = object.getString("contactRate").trim();
+                                    String strDescriptionRate = object.getString("descriptionRate");
+                                    String strDescription = object.getString("comment");
+                                    String strDate = object.getString("date").trim();
+
+                                    rates.add(new Rate(strRateId, strUserId, strRaterId, strDescription, strDate,Float.valueOf(strDescriptionRate), Float.valueOf(strContactRate)));
+
+
+                                }
+                                Intent intent = new Intent(getActivity(), GivenRates.class);
+                                intent.putParcelableArrayListExtra("given rates", rates);
+                                startActivity(intent);
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(),"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("raterId", raterId);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+
+
     }
 }

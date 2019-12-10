@@ -36,34 +36,22 @@ import java.util.Map;
 import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.userId;
 
-public class MyFlatsFragment extends Fragment {
+public class MyFlatsResults extends Fragment {
 
-    private MyFlatsViewModel myFlatsViewModel;
     private static String URL_GET_MY_FLATS = serverIp + "/get_my_flats.php";
     RecyclerView recyclerView;
     MyFlatsAdapter adapter;
-    ArrayList<String> flat;
     ArrayList<Flat> flats;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        myFlatsViewModel =
-                ViewModelProviders.of(this).get(MyFlatsViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_my_flats, container, false);
-        final TextView textView = root.findViewById(R.id.text_my_flat);
-        myFlatsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         String id =userId;
         recyclerView = root.findViewById(R.id.myFlatsRecycler);
         flats = new ArrayList<>();
         getMyFlats(id);
-
-
 
         return root;
     }
