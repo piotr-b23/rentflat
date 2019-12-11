@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/text_update_rate"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Zaktualizuj ocenę użytkownika"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="133dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView59"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kontakt"
+                android:textSize="18sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBarUpdatedContact"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView60"
+                android:layout_width="169dp"
+                android:layout_height="wrap_content"
+                android:text="Zgodność z opisem"
+                android:textSize="18sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBarUpdatedDescription"
+                android:layout_width="198dp"
+                android:layout_height="46dp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/textView61"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Uwagi"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/rateUpdatedComment"
+        android:layout_width="match_parent"
+        android:layout_height="255dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical" >
+
+
+        <Button
+            android:id="@+id/confirmUpdateRate"
+            android:layout_width="301dp"
+            android:layout_height="76dp"
+            android:text="Zaktualizuj ocenę" />
+
+
+    </LinearLayout>
+</LinearLayout>

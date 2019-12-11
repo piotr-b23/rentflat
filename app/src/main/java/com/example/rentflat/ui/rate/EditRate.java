@@ -29,35 +29,37 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.userId;
 
-public class RateUser extends AppCompatActivity {
+public class EditRate extends AppCompatActivity {
 
     private EditText rateDescription;
-    private Button confirmRate;
+    private Button confirmRateUpdate;
     private RatingBar contactBar, descriptionBar;
 
-    private static String URL_REPORT= serverIp + "/add_rate.php";
+    private static String URL_UPDATE_RATE= serverIp + "/update_rate.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rate_user);
+        setContentView(R.layout.activity_edit_rate);
 
-        rateDescription = findViewById(R.id.rateComment);
-        confirmRate = findViewById(R.id.confirmRateButton);
+        rateDescription = findViewById(R.id.rateUpdatedComment);
+        confirmRateUpdate = findViewById(R.id.confirmUpdateRate);
 
-        contactBar = findViewById(R.id.ratingBarContact);
-        descriptionBar = findViewById(R.id.ratingBarDescription);
+        contactBar = findViewById(R.id.ratingBarUpdatedContact);
+        descriptionBar = findViewById(R.id.ratingBarUpdatedDescription);
 
         Intent intent = getIntent();
-        final String ratedUserId = (String) intent.getStringExtra("rated user");
+        final Rate editedRate = (Rate) intent.getParcelableExtra("edited rate");
 
-        confirmRate.setOnClickListener(new View.OnClickListener() {
+        rateDescription.setText(editedRate.getRateDescription());
+        contactBar.setRating(editedRate.getContactRate());
+        descriptionBar.setRating(editedRate.getDescriptionRate());
+
+        confirmRateUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String raterId =userId;
                 String descriptionRate = rateDescription.getText().toString();
                 String contactRateString =Float.toString(contactBar.getRating());
                 String descriptionRateString =Float.toString(descriptionBar.getRating());
@@ -66,14 +68,14 @@ public class RateUser extends AppCompatActivity {
                 String date = df.format(Calendar.getInstance().getTime());
 
 
-                GiveRate(ratedUserId,raterId,contactRateString,descriptionRateString,descriptionRate,date);
+                UpdateRate(editedRate.getRateId(),contactRateString,descriptionRateString,descriptionRate,date);
             }
         });
-
     }
-    private void GiveRate(final String userId, final String raterId, final String contactRate, final String descriptionRate, final String comment, final String date){
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT,
+    private void UpdateRate(final String rateId,final String contactRate, final String descriptionRate,final String comment, final String date){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_RATE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -81,12 +83,12 @@ public class RateUser extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
                             if (succes.equals("1")){
-                                Toast.makeText(RateUser.this,"Wystawiono ocenę",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditRate.this,"Zaktualizowano ocenę",Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         }catch (JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(RateUser.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditRate.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -94,7 +96,7 @@ public class RateUser extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RateUser.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditRate.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
 
                     }
                 })
@@ -102,8 +104,7 @@ public class RateUser extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("userId",userId);
-                params.put("raterId",raterId);
+                params.put("rateId",rateId);
                 params.put("contactRate",contactRate);
                 params.put("descriptionRate",descriptionRate);
                 params.put("comment",comment);

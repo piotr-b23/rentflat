@@ -1,6 +1,7 @@
 package com.example.rentflat.ui.rate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,15 @@ public class RateGivenAdapter extends RecyclerView.Adapter<RateGivenAdapter.View
 
             contactRate = itemView.findViewById(R.id.ratingBarContactGiven);
             descriptionRate = itemView.findViewById(R.id.ratingBarDescriptionGiven);
+
+            editRate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), EditRate.class);
+                    intent.putExtra("edited rate", data.get(getAdapterPosition()));
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }

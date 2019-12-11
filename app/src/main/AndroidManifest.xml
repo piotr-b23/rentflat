@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.myAccount.GivenRates"></activity>
+        <activity android:name=".ui.rate.EditRate"></activity>
+        <activity android:name=".ui.myAccount.GivenRates" />
         <activity android:name=".ui.rate.RateResults" />
         <activity android:name=".ui.findFlat.ReportFlat" />
         <activity android:name=".ui.rate.RateUser" />
