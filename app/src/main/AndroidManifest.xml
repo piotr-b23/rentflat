@@ -35,6 +35,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.addFlat.AddFlat"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_add_flat"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.myAccount.ChangePhone" />

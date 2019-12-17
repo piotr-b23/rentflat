@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
 //            String uUsername = user.get(sessionMenager.USERNAME);
 
 
-            registerButton.setVisibility(View.GONE);
+            registerButton.setVisibility(View.INVISIBLE);
             loginButton.setText("wyloguj");
 
 

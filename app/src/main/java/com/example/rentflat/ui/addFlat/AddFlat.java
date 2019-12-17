@@ -42,7 +42,10 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -84,6 +87,13 @@ public class AddFlat extends AppCompatActivity {
         street = findViewById(R.id.flatStreet);
         description = findViewById(R.id.flatDescription);
         studentsCheckBox = findViewById(R.id.checkBoxForStudents);
+
+
+        recyclerView = findViewById(R.id.addFlatImageRecycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
 
 
         addFlatButton = findViewById(R.id.addFlatButton);
@@ -149,7 +159,9 @@ public class AddFlat extends AppCompatActivity {
                         }
 
 
-                        CreateFlat(id, crePrice, creSurface, creRoom, creLocality, creStreet, creDescription, creStudentsCheckBox, creBuildingType, creProvince, crePhoto);
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String date = df.format(Calendar.getInstance().getTime());
+                        CreateFlat(id, crePrice, creSurface, creRoom, creLocality, creStreet, creDescription, creStudentsCheckBox, creBuildingType, creProvince, crePhoto,date);
                     }
 
 
@@ -170,7 +182,7 @@ public class AddFlat extends AppCompatActivity {
         });
     }
 
-    private void CreateFlat(final String id,final String price,final String surface,final String room,final String locality,final String street,final String description,final String students,final String buildingType,final String province,final String photo){
+    private void CreateFlat(final String id,final String price,final String surface,final String room,final String locality,final String street,final String description,final String students,final String buildingType,final String province,final String photo,final String date){
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_FLAT,
                 new Response.Listener<String>() {
@@ -213,6 +225,7 @@ public class AddFlat extends AppCompatActivity {
                 params.put("type",buildingType);
                 params.put("province",province);
                 params.put("photo",photo);
+                params.put("date",date);
 
                 return params;
             }
@@ -282,14 +295,13 @@ public class AddFlat extends AppCompatActivity {
             photos = new ArrayList<>();
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                 ClipData clipData = data.getClipData();
-                recyclerView = findViewById(R.id.addFlatImageRecycler);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
                 if (clipData != null){
                     if (clipData.getItemCount()>9){
                         Toast.makeText(AddFlat.this,"Wybierz maksymalnie 9 zdjęć.",Toast.LENGTH_SHORT).show();
                         adapter = new ImageAdapter(this, photos);
                         recyclerView.setAdapter(adapter);
+    //                    recyclerView.setVisibility(View.VISIBLE);
                     }
                     else {
                         int currentElement = 0;
@@ -299,6 +311,7 @@ public class AddFlat extends AppCompatActivity {
                             try {
                                 InputStream is = getContentResolver().openInputStream(filePath);
                                 bitmap = BitmapFactory.decodeStream(is);
+                                bitmap = Bitmap.createScaledBitmap(bitmap,1920,1080,false);
                                 bitmaps.add(bitmap);
 
                                 if (i%2==0){
