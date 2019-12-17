@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.rate;
+package com.example.rentflat.ui.myRates;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentflat.R;
 import com.example.rentflat.ui.myRates.ReportRate;
+import com.example.rentflat.ui.rate.Rate;
 
 import java.util.List;
 

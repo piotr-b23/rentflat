@@ -13,107 +13,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/addFlatImageRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/flatImage0"
-                    android:layout_width="137dp"
-                    android:layout_height="137dp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:padding="5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-
-                <ImageView
-                    android:id="@+id/flatImage1"
-                    android:layout_width="137dp"
-                    android:layout_height="137dp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:padding="5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/flatImage2"
-                    android:layout_width="137dp"
-                    android:layout_height="137dp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:padding="5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <ImageView
-                    android:id="@+id/flatImage3"
-                    android:layout_width="137dp"
-                    android:layout_height="137dp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:padding="5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/flatImage4"
-                    android:layout_width="137dp"
-                    android:layout_height="137dp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:padding="5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/flatImage5"
-                    android:layout_width="137dp"
-                    android:layout_height="137dp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:padding="5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <ImageView
-                    android:id="@+id/flatImage6"
-                    android:layout_width="137dp"
-                    android:layout_height="137dp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:padding="5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/flatImage7"
-                    android:layout_width="137dp"
-                    android:layout_height="137dp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:padding="5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/flatImage8"
-                    android:layout_width="137dp"
-                    android:layout_height="137dp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:padding="5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-            </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"

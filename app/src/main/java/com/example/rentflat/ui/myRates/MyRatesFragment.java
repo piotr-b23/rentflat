@@ -27,7 +27,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
 import com.example.rentflat.ui.flat.Flat;
 import com.example.rentflat.ui.myFlats.MyFlatsAdapter;
-import com.example.rentflat.ui.rate.MyRatesAdapter;
 import com.example.rentflat.ui.rate.Rate;
 
 import org.json.JSONArray;

@@ -19,6 +19,8 @@ import com.example.rentflat.MainActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Base64;
 import android.view.View;
@@ -31,6 +33,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.rentflat.R;
+import com.example.rentflat.ui.imageDisplay.ImageAdapter;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,9 +61,12 @@ public class AddFlat extends AppCompatActivity {
     private static String URL_UPLOAD_PHOTO = serverIp + "/upload_photo.php";
     private static String PHOTO_STORAGE = serverIp + "user_data/";
     private Bitmap bitmap;
-    ImageView[] flatPhotos = new ImageView[9];
     private List<Bitmap> bitmaps;
     public String crePhoto = "";
+    private ArrayList<String> photos;
+
+    RecyclerView recyclerView;
+    ImageAdapter adapter;
 
 
 
@@ -77,10 +84,7 @@ public class AddFlat extends AppCompatActivity {
         street = findViewById(R.id.flatStreet);
         description = findViewById(R.id.flatDescription);
         studentsCheckBox = findViewById(R.id.checkBoxForStudents);
-        for (int i = 0; i < 9; i++) {
-            int res = getResources().getIdentifier("flatImage"+i, "id", getPackageName());
-            flatPhotos[i] = findViewById(res);
-        }
+
 
         addFlatButton = findViewById(R.id.addFlatButton);
         addPhoto = findViewById(R.id.addPhotoButton);
@@ -261,10 +265,7 @@ public class AddFlat extends AppCompatActivity {
     }
 
     private void chooseFile(){
-        for (int i = 0; i < 9; i++) {
-            flatPhotos[i].setVisibility(View.GONE);
-            flatPhotos[i].setImageBitmap(null);
-        }
+
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
@@ -278,26 +279,43 @@ public class AddFlat extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
             bitmaps = new ArrayList<>();
+            photos = new ArrayList<>();
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                 ClipData clipData = data.getClipData();
+                recyclerView = findViewById(R.id.addFlatImageRecycler);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
                 if (clipData != null){
                     if (clipData.getItemCount()>9){
                         Toast.makeText(AddFlat.this,"Wybierz maksymalnie 9 zdjęć.",Toast.LENGTH_SHORT).show();
+                        adapter = new ImageAdapter(this, photos);
+                        recyclerView.setAdapter(adapter);
                     }
                     else {
-
+                        int currentElement = 0;
                         for (int i = 0; i < clipData.getItemCount(); i++) {
                             Uri filePath = clipData.getItemAt(i).getUri();
+
                             try {
                                 InputStream is = getContentResolver().openInputStream(filePath);
                                 bitmap = BitmapFactory.decodeStream(is);
                                 bitmaps.add(bitmap);
-                                flatPhotos[i].setImageBitmap(bitmap);
-                                flatPhotos[i].setVisibility(View.VISIBLE);
+
+                                if (i%2==0){
+                                    photos.add(filePath.toString());
+                                }
+                                else
+                                {
+                                    photos.set(currentElement,photos.get(currentElement) + " " + filePath.toString());
+                                    currentElement+=1;
+                                }
+
+
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
                             }
+                            adapter = new ImageAdapter(this, photos);
+                            recyclerView.setAdapter(adapter);
                         }
                     }
 
@@ -307,8 +325,9 @@ public class AddFlat extends AppCompatActivity {
                             InputStream is = getContentResolver().openInputStream(filePath);
                             bitmap = BitmapFactory.decodeStream(is);
                             bitmaps.add(bitmap);
-                            flatPhotos[0].setImageBitmap(bitmap);
-                            flatPhotos[0].setVisibility(View.VISIBLE);
+                            photos.add(filePath.toString());
+                            adapter = new ImageAdapter(this, photos);
+                            recyclerView.setAdapter(adapter);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }

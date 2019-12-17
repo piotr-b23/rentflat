@@ -44,10 +44,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
         Scanner s = new Scanner(photos.get(position));
 
         if (s.hasNext()){
-            Picasso.get().load(s.next()).into(holder.cardImage1);
+            Picasso.get().load(s.next()).fit().into(holder.cardImage1);
         }
             if (s.hasNext()){
-                Picasso.get().load(s.next()).into(holder.cardImage2);
+                Picasso.get().load(s.next()).fit().into(holder.cardImage2);
             }
 
 
