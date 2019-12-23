@@ -32,7 +32,7 @@ import static com.example.rentflat.MainActivity.sessionMenager;
 public class MyFlatDetails extends AppCompatActivity {
 
     private TextView price, surface, room,type, province, locality, street, students, description;
-    private Button editPrice, editDescription;
+    private Button editPrice, editDescription, closeOffer;
     private ArrayList<String> photos;
     RecyclerView recyclerView;
     ImageAdapter adapter;
@@ -59,6 +59,7 @@ public class MyFlatDetails extends AppCompatActivity {
 
         editPrice = findViewById(R.id.changePriceButton);
         editDescription = findViewById(R.id.changeDescriptionButton);
+        closeOffer.findViewById(R.id.closeOfferButton);
 
         price.setText(selectedFlat.getPrice());
         surface.setText(selectedFlat.getSurface());
@@ -106,7 +107,12 @@ public class MyFlatDetails extends AppCompatActivity {
                 }
             });
 
+            closeOffer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                }
+            });
 
         }
 

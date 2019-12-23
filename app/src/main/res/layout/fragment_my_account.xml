@@ -20,27 +20,8 @@
             android:layout_marginEnd="99dp"
             android:layout_marginRight="99dp"
             android:ems="10"
-            android:text="Zalogowany jako:"/>
-
-        <TextView
-            android:id="@+id/myAccName"
-            android:layout_width="323dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="99dp"
-            android:layout_marginLeft="99dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginRight="99dp"
-            android:ems="10" />
-
-        <TextView
-            android:id="@+id/myAccUsername"
-            android:layout_width="323dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="99dp"
-            android:layout_marginLeft="99dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginRight="99dp"
-            android:ems="10" />
+            android:text="Witaj "
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/myAccTextView2"
@@ -54,6 +35,12 @@
             android:text="Wybierz, co chcesz zrobić"
             android:textSize="24sp" />
 
+
+        <Button
+            android:id="@+id/registerMyAccount"
+            android:layout_width="301dp"
+            android:layout_height="76dp"
+            android:text="Zarejestruj się" />
 
         <Button
             android:id="@+id/givenRatesButton"
@@ -79,7 +66,11 @@
             android:layout_height="76dp"
             android:text="Zmień hasło" />
 
-
+        <Button
+            android:id="@+id/deleteAccount"
+            android:layout_width="301dp"
+            android:layout_height="76dp"
+            android:text="Usuń konto" />
 
 
     </LinearLayout>

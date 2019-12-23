@@ -41,7 +41,7 @@ import static com.example.rentflat.MainActivity.userId;
 public class MyAccountFragment extends Fragment {
 
     private MyAccountViewModel myAccountViewModel;
-    private Button updateEmail,updatePhone,changePassword, givenRates;
+    private Button updateEmail,updatePhone,changePassword, givenRates,register, deleteAccount;
 
     private static String URL_GET_GIVEN_RATES = serverIp + "/get_given_rates.php";
 
@@ -54,12 +54,21 @@ public class MyAccountFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_my_account, container, false);
         final TextView textView = root.findViewById(R.id.text_my_account);
 
-        updateEmail = (Button) root.findViewById(R.id.updateEmail);
-        updatePhone = (Button) root.findViewById(R.id.updatePhone);
-        changePassword = (Button) root.findViewById(R.id.changePassword);
-        givenRates = (Button) root.findViewById(R.id.givenRatesButton);
+        updateEmail = root.findViewById(R.id.updateEmail);
+        updatePhone =  root.findViewById(R.id.updatePhone);
+        changePassword = root.findViewById(R.id.changePassword);
+        givenRates =  root.findViewById(R.id.givenRatesButton);
+        register = root.findViewById(R.id.registerMyAccount);
+        deleteAccount = root.findViewById(R.id.deleteAccount);
 
         if(sessionMenager.isLogged()) {
+
+            updateEmail.setVisibility(View.VISIBLE);
+            updatePhone.setVisibility(View.VISIBLE);
+            changePassword.setVisibility(View.VISIBLE);
+            givenRates.setVisibility(View.VISIBLE);
+            deleteAccount.setVisibility(View.VISIBLE);
+            register.setVisibility(View.GONE);
 
             updateEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,6 +104,24 @@ public class MyAccountFragment extends Fragment {
             });
 
 
+
+
+        }
+        else{
+            updateEmail.setVisibility(View.GONE);
+            updatePhone.setVisibility(View.GONE);
+            changePassword.setVisibility(View.GONE);
+            givenRates.setVisibility(View.GONE);
+            deleteAccount.setVisibility(View.GONE);
+            register.setVisibility(View.VISIBLE);
+
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new  Intent(getActivity(), Register.class);
+                    startActivity(intent);
+                }
+            });
         }
 
 

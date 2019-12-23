@@ -38,12 +38,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.MainActivity.sessionMenager;
 import static com.example.rentflat.MainActivity.userId;
 
 public class MyRatesFragment extends Fragment {
 
     private static String URL_GET_MY_RATES = serverIp + "/get_rates.php";
     private RatingBar contactRateAVG, descriptionRateAVG;
+    private TextView contact,description, myRatesText;
     RecyclerView recyclerView;
     MyRatesAdapter adapter;
     ArrayList<Rate> rates;
@@ -60,7 +62,27 @@ public class MyRatesFragment extends Fragment {
         contactRateAVG = root.findViewById(R.id.ratingBarMyContactAVG);
         descriptionRateAVG = root.findViewById(R.id.ratingBarMyDescriptionAVG);
 
-        getMyRates(id);
+        contact = root.findViewById(R.id.myRatesContact);
+        description = root.findViewById(R.id.myRatesDescription);
+        myRatesText = root.findViewById(R.id.text_my_rates);
+
+
+
+        if(sessionMenager.isLogged()){
+            contactRateAVG.setVisibility(View.VISIBLE);
+            descriptionRateAVG.setVisibility(View.VISIBLE);
+            contact.setVisibility(View.VISIBLE);
+            description.setVisibility(View.VISIBLE);
+            myRatesText.setText("Otrzymane oceny");
+            getMyRates(id);
+        }
+        else{
+            contactRateAVG.setVisibility(View.GONE);
+            descriptionRateAVG.setVisibility(View.GONE);
+            contact.setVisibility(View.GONE);
+            description.setVisibility(View.GONE);
+            myRatesText.setText("Zaloguj się by przeglądać otrzymane oceny");
+        }
         return root;
     }
     private void getMyRates(final String userId) {

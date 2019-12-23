@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/addFlatButton"
+        android:layout_width="301dp"
+        android:layout_height="71dp"
+        android:layout_gravity="center"
+        android:text="Dodaj ogłoszenie" />
+
     <TextView
         android:id="@+id/text_my_flat"
         android:layout_width="match_parent"

@@ -1,9 +1,11 @@
 package com.example.rentflat.ui.myFlats;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
+import com.example.rentflat.ui.addFlat.AddFlat;
 import com.example.rentflat.ui.flat.Flat;
 
 import org.json.JSONArray;
@@ -34,11 +37,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.MainActivity.sessionMenager;
 import static com.example.rentflat.MainActivity.userId;
 
-public class MyFlatsResults extends Fragment {
+public class MyFlatsFragment extends Fragment {
 
     private static String URL_GET_MY_FLATS = serverIp + "/get_my_flats.php";
+    private TextView myFlatsText;
+    private Button addFlat;
     RecyclerView recyclerView;
     MyFlatsAdapter adapter;
     ArrayList<Flat> flats;
@@ -51,7 +57,26 @@ public class MyFlatsResults extends Fragment {
         String id =userId;
         recyclerView = root.findViewById(R.id.myFlatsRecycler);
         flats = new ArrayList<>();
-        getMyFlats(id);
+        myFlatsText = root.findViewById(R.id.text_my_flat);
+        addFlat = root.findViewById(R.id.addFlatButton);
+
+        if(sessionMenager.isLogged()){
+            myFlatsText.setText("Przeglądaj swoje ogłoszenia");
+            addFlat.setVisibility(View.VISIBLE);
+            getMyFlats(id);
+            addFlat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new  Intent(getActivity(), AddFlat.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        else{
+            myFlatsText.setText("Zaloguj się by móc dodawać ogłoszenia");
+            addFlat.setVisibility(View.GONE);
+        }
+
 
         return root;
     }

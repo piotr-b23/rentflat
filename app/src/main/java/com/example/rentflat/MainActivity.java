@@ -58,40 +58,18 @@ public class MainActivity extends AppCompatActivity {
 
         sessionMenager = new SessionMenager(this);
         HashMap<String, String> user = sessionMenager.getUserDetail();
-        userId = user.get(sessionMenager.ID);
-//        username =(TextView)findViewById(R.id.navUsername);
-//        name =(TextView)findViewById(R.id.navName);
-//
-//        registerButton = (Button) findViewById(R.id.registerButton);
-//        loginButton = (Button) findViewById(R.id.loginButton);
 
-//        if(sessionMenager.isLogged()) {
-//            boolean test = sessionMenager.isLogged();
-//            HashMap<String, String> user = sessionMenager.getUserDetail();
-//            String uName = user.get(sessionMenager.NAME);
-//            String uUsername = user.get(sessionMenager.USERNAME);
-//
-//            registerButton.setVisibility(View.GONE);
-//            loginButton.setText("wyloguj");
-//
-//
-//
-//
-////            username.setText(uUsername);
-////            name.setText(uName);
-////            name.setVisibility(View.VISIBLE);
-//        }
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new  Intent(MainActivity.this, AddFlat.class);
-                startActivity(intent);
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new  Intent(MainActivity.this, AddFlat.class);
+//                startActivity(intent);
+//            }
+//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -101,6 +79,14 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_my_rates)
                 .setDrawerLayout(drawer)
                 .build();
+
+                if(sessionMenager.isLogged()) {
+                    userId = user.get(sessionMenager.ID);
+
+        }
+                else{
+                    userId = null;
+                }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
