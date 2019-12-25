@@ -33,7 +33,7 @@ public class ChangePassword extends AppCompatActivity {
 
     private EditText password, newPassword, newConfPassword;
     private Button changePasswordButton;
-    private static String URL_CHANGE_MAIL= serverIp + "/edit_password.php";
+    private static String URL_CHANGE_MAIL = serverIp + "/edit_password.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,26 +50,23 @@ public class ChangePassword extends AppCompatActivity {
                 String upPassword = password.getText().toString().trim();
                 String upNewPassword = newPassword.getText().toString().trim();
                 String upNewConfPassword = newConfPassword.getText().toString().trim();
-                String id =userId;
+                String id = userId;
 
-                if (!upPassword.isEmpty() && !upNewPassword.isEmpty() && !upNewConfPassword.isEmpty()){
-                    if(upNewPassword.equals(upNewConfPassword))
-                    {
+                if (!upPassword.isEmpty() && !upNewPassword.isEmpty() && !upNewConfPassword.isEmpty()) {
+                    if (upNewPassword.equals(upNewConfPassword)) {
 
-                            ChangePass(upPassword,upNewPassword,id);
+                        ChangePass(upPassword, upNewPassword, id);
 
 
-                    }
-                    else
-                    {
+                    } else {
                         newConfPassword.setError("Podane hasła różnią się");
                     }
 
-                }
-                else {
-                    if(upPassword.isEmpty()) password.setError("Podaj hasło użytkownika");
-                    if(upNewPassword.isEmpty()) newPassword.setError("Podaj nowe hasło");
-                    if(upNewConfPassword.isEmpty()) newConfPassword.setError("Potwierdź nowe hasło");
+                } else {
+                    if (upPassword.isEmpty()) password.setError("Podaj hasło użytkownika");
+                    if (upNewPassword.isEmpty()) newPassword.setError("Podaj nowe hasło");
+                    if (upNewConfPassword.isEmpty())
+                        newConfPassword.setError("Potwierdź nowe hasło");
                 }
 
             }
@@ -78,23 +75,23 @@ public class ChangePassword extends AppCompatActivity {
 
     }
 
-    private void ChangePass(final String password,final String newPassword,final String id){
+    private void ChangePass(final String password, final String newPassword, final String id) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_MAIL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(ChangePassword.this,"Zmieniono hasło",Toast.LENGTH_SHORT).show();
-                                Intent intent = new  Intent(ChangePassword.this, MainActivity.class);
+                            if (succes.equals("1")) {
+                                Toast.makeText(ChangePassword.this, "Zmieniono hasło", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ChangePassword.this, MainActivity.class);
                                 startActivity(intent);
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ChangePassword.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangePassword.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -102,17 +99,16 @@ public class ChangePassword extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChangePassword.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePassword.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id",id);
-                params.put("password",password);
-                params.put("newpassword",newPassword);
+                Map<String, String> params = new HashMap<>();
+                params.put("id", id);
+                params.put("password", password);
+                params.put("newpassword", newPassword);
 
                 return params;
             }

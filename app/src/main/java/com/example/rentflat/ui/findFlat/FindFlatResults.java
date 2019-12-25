@@ -51,13 +51,13 @@ public class FindFlatResults extends AppCompatActivity {
         recyclerView = findViewById(R.id.findFlatsRecycler);
 
 
-        getFlats(query.getPriceMin(),query.getPriceMax(),query.getSurfaceMin(),query.getSurfaceMax(),query.getRoomMin(),query.getRoomMax(),query.getBuildingType(), query.getProvince(),query.getLocality(),query.getStreet(),query.getStudentsCheckBox());
+        getFlats(query.getPriceMin(), query.getPriceMax(), query.getSurfaceMin(), query.getSurfaceMax(), query.getRoomMin(), query.getRoomMax(), query.getBuildingType(), query.getProvince(), query.getLocality(), query.getStreet(), query.getStudentsCheckBox());
 
 
     }
 
 
-    private void getFlats(final String priceMin,final String priceMax, final String surfaceMin,final String surfaceMax, final String roomMin,final String roomMax,final String type, final String province, final String locality, final String street,final String students) {
+    private void getFlats(final String priceMin, final String priceMax, final String surfaceMin, final String surfaceMax, final String roomMin, final String roomMax, final String type, final String province, final String locality, final String street, final String students) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_FIND_FLAT,
                 new Response.Listener<String>() {
                     @Override
@@ -78,7 +78,7 @@ public class FindFlatResults extends AppCompatActivity {
                                     String strFlatUserId = object.getString("userid").trim();
                                     String strPrice = object.getString("price").trim();
                                     String strSurface = object.getString("surface").trim();
-                                    String strRoom= object.getString("room").trim();
+                                    String strRoom = object.getString("room").trim();
                                     String strProvince = object.getString("province").trim();
                                     String strType = object.getString("type").trim();
                                     String strLocality = object.getString("locality").trim();
@@ -86,8 +86,9 @@ public class FindFlatResults extends AppCompatActivity {
                                     String strDescription = object.getString("description").trim();
                                     String strStudents = object.getString("students").trim();
                                     String strPhoto = object.getString("photo").trim();
+                                    String strDate = object.getString("date").trim();
 
-                                    flats.add(new Flat(strFlatId,strFlatUserId,strPrice,strSurface,strRoom,strProvince,strType,strLocality,strStreet,strDescription,strStudents,strPhoto));
+                                    flats.add(new Flat(strFlatId, strFlatUserId, strPrice, strSurface, strRoom, strProvince, strType, strLocality, strStreet, strDescription, strStudents, strPhoto,strDate));
 
 
                                 }
@@ -97,14 +98,11 @@ public class FindFlatResults extends AppCompatActivity {
                                 recyclerView.setAdapter(adapter);
 
 
-
-
-
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(FindFlatResults.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FindFlatResults.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -114,24 +112,24 @@ public class FindFlatResults extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(FindFlatResults.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FindFlatResults.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("pricemin",priceMin);
-                params.put("pricemax",priceMax);
-                params.put("surfacemin",surfaceMin);
-                params.put("surfacemax",surfaceMax);
-                params.put("roommin",roomMin);
-                params.put("roommax",roomMax);
-                params.put("type",type);
-                params.put("province",province);
-                params.put("locality",locality);
-                params.put("street",street);
-                params.put("students",students);
+                params.put("pricemin", priceMin);
+                params.put("pricemax", priceMax);
+                params.put("surfacemin", surfaceMin);
+                params.put("surfacemax", surfaceMax);
+                params.put("roommin", roomMin);
+                params.put("roommax", roomMax);
+                params.put("type", type);
+                params.put("province", province);
+                params.put("locality", locality);
+                params.put("street", street);
+                params.put("students", students);
 
                 return params;
             }

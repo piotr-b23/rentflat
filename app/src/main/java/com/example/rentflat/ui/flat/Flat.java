@@ -10,7 +10,7 @@ import java.util.Scanner;
 import static com.example.rentflat.MainActivity.serverIp;
 
 public class Flat implements Parcelable {
-    private String flatId,flatUserId, price, surface, room,province, type, locality, street, description, students, photoAdress;
+    private String flatId, flatUserId, price, surface, room, province, type, locality, street, description, students, photoAdress, date;
     private String photoLocation = serverIp;
 
     @Override
@@ -33,6 +33,7 @@ public class Flat implements Parcelable {
         out.writeString(description);
         out.writeString(students);
         out.writeString(photoAdress);
+        out.writeString(date);
 
     }
 
@@ -61,9 +62,10 @@ public class Flat implements Parcelable {
         this.description = in.readString();
         this.students = in.readString();
         this.photoAdress = in.readString();
+        this.date = in.readString();
     }
 
-    public Flat(String flatId,String flatUserId,String price,String surface,String room,String province,String type,String locality,String street,String description,String students, String photo){
+    public Flat(String flatId, String flatUserId, String price, String surface, String room, String province, String type, String locality, String street, String description, String students, String photo,String date) {
 
         this.flatId = flatId;
         this.flatUserId = flatUserId;
@@ -77,10 +79,11 @@ public class Flat implements Parcelable {
         this.description = description;
         this.students = students;
         this.photoAdress = photo;
+        this.date = date;
 
     }
 
-    public String generateTitle(){
+    public String generateTitle() {
         String title;
 
         title = this.price + "zł " + this.surface + "m2 ";
@@ -88,79 +91,92 @@ public class Flat implements Parcelable {
         return title;
     }
 
-    public String generateDescription(){
+    public String generateDescription() {
         String recyclerDescription;
 
-        recyclerDescription = this.type + "\nIlość pokoi: " + this.room + "\nMiejscowość: " +this.locality +"\nUlica: "+this.street;
-        if(this.students.equals("1")) recyclerDescription +="\nMieszkanie studenckie: tak";
-        else recyclerDescription +="\nMieszkanie studenckie: nie";
+        recyclerDescription = this.type + "\nIlość pokoi: " + this.room + "\nMiejscowość: " + this.locality + "\nUlica: " + this.street;
+        if (this.students.equals("1")) recyclerDescription += "\nMieszkanie studenckie: tak";
+        else recyclerDescription += "\nMieszkanie studenckie: nie";
 
 
         return recyclerDescription;
     }
 
-    public ArrayList<String> generatePhotos(){
+    public ArrayList<String> generatePhotos() {
         Scanner s = new Scanner(this.photoAdress);
 
         ArrayList<String> photos = new ArrayList<>();
 
-        while (s.hasNext()){
+        while (s.hasNext()) {
             photos.add(photoLocation + s.next());
         }
         return photos;
     }
 
-    public ArrayList<String> generatePhotosToDisplay(){
+    public ArrayList<String> generatePhotosToDisplay() {
 
         Scanner s = new Scanner(this.photoAdress);
         String twoPhotos;
 
         ArrayList<String> photos = new ArrayList<>();
 
-        while (s.hasNext()){
+        while (s.hasNext()) {
             twoPhotos = photoLocation + s.next();
-            if (s.hasNext()){
+            if (s.hasNext()) {
                 twoPhotos += " " + photoLocation + s.next();
                 photos.add(twoPhotos);
-            }
-            else{
+            } else {
                 photos.add(twoPhotos);
             }
         }
         return photos;
     }
 
-    public String getFlatId(){
+    public String getFlatId() {
         return this.flatId;
     }
-    public String getUserId(){
+
+    public String getUserId() {
         return this.flatUserId;
     }
-    public String getPrice(){
+
+    public String getPrice() {
         return this.price;
     }
-    public String getSurface(){
+
+    public String getSurface() {
         return this.surface;
     }
-    public String getRoom(){
+
+    public String getRoom() {
         return this.room;
     }
-    public String getType(){
+
+    public String getType() {
         return this.type;
     }
-    public String getProvince(){
+
+    public String getProvince() {
         return this.province;
     }
-    public String getLocality(){
+
+    public String getLocality() {
         return this.locality;
     }
-    public String getStreet(){
+
+    public String getStreet() {
         return this.street;
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return this.description;
     }
-    public String getStudents(){
+
+    public String getStudents() {
         return this.students;
+    }
+
+    public String getDate() {
+        return this.date;
     }
 }

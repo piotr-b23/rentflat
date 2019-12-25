@@ -36,7 +36,7 @@ public class EditRate extends AppCompatActivity {
     private Button confirmRateUpdate;
     private RatingBar contactBar, descriptionBar;
 
-    private static String URL_UPDATE_RATE= serverIp + "/update_rate.php";
+    private static String URL_UPDATE_RATE = serverIp + "/update_rate.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,34 +61,34 @@ public class EditRate extends AppCompatActivity {
             public void onClick(View v) {
 
                 String descriptionRate = rateDescription.getText().toString();
-                String contactRateString =Float.toString(contactBar.getRating());
-                String descriptionRateString =Float.toString(descriptionBar.getRating());
+                String contactRateString = Float.toString(contactBar.getRating());
+                String descriptionRateString = Float.toString(descriptionBar.getRating());
 
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 String date = df.format(Calendar.getInstance().getTime());
 
 
-                UpdateRate(editedRate.getRateId(),contactRateString,descriptionRateString,descriptionRate,date);
+                UpdateRate(editedRate.getRateId(), contactRateString, descriptionRateString, descriptionRate, date);
             }
         });
     }
 
-    private void UpdateRate(final String rateId,final String contactRate, final String descriptionRate,final String comment, final String date){
+    private void UpdateRate(final String rateId, final String contactRate, final String descriptionRate, final String comment, final String date) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_RATE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(EditRate.this,"Zaktualizowano ocenę",Toast.LENGTH_SHORT).show();
+                            if (succes.equals("1")) {
+                                Toast.makeText(EditRate.this, "Zaktualizowano ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(EditRate.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditRate.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -96,19 +96,18 @@ public class EditRate extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EditRate.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditRate.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("rateId",rateId);
-                params.put("contactRate",contactRate);
-                params.put("descriptionRate",descriptionRate);
-                params.put("comment",comment);
-                params.put("date",date);
+                Map<String, String> params = new HashMap<>();
+                params.put("rateId", rateId);
+                params.put("contactRate", contactRate);
+                params.put("descriptionRate", descriptionRate);
+                params.put("comment", comment);
+                params.put("date", date);
 
                 return params;
             }

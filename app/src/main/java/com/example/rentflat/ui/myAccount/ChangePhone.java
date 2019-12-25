@@ -35,7 +35,7 @@ public class ChangePhone extends AppCompatActivity {
 
     private EditText newPhone;
     private Button changePhoneButton;
-    private static String URL_CHANGE_MAIL= serverIp + "/edit_phone.php";
+    private static String URL_CHANGE_MAIL = serverIp + "/edit_phone.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,24 +48,19 @@ public class ChangePhone extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String upPhone = newPhone.getText().toString().trim();
-                String id =userId;
+                String id = userId;
 
-                if (!upPhone.isEmpty()){
-                    if(isPhoneValid(upPhone))
-                    {
-                        UpdatePhone(upPhone,id);
+                if (!upPhone.isEmpty()) {
+                    if (isPhoneValid(upPhone)) {
+                        UpdatePhone(upPhone, id);
 
-                    }
-                    else
-                    {
+                    } else {
                         newPhone.setError("Podaj poprawny numer telefonu");
                     }
 
 
-
-                }
-                else {
-                    if(upPhone.isEmpty()) newPhone.setError("Podaj nowy numer telefonu.");
+                } else {
+                    if (upPhone.isEmpty()) newPhone.setError("Podaj nowy numer telefonu.");
                 }
 
             }
@@ -74,23 +69,23 @@ public class ChangePhone extends AppCompatActivity {
 
     }
 
-    private void UpdatePhone(final String phone,final String id){
+    private void UpdatePhone(final String phone, final String id) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_MAIL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(ChangePhone.this,"Zaktualizowano numer telefonu",Toast.LENGTH_SHORT).show();
-                                Intent intent = new  Intent(ChangePhone.this, MainActivity.class);
+                            if (succes.equals("1")) {
+                                Toast.makeText(ChangePhone.this, "Zaktualizowano numer telefonu", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ChangePhone.this, MainActivity.class);
                                 startActivity(intent);
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ChangePhone.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangePhone.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -98,16 +93,15 @@ public class ChangePhone extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChangePhone.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePhone.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id",id);
-                params.put("phone",phone);
+                Map<String, String> params = new HashMap<>();
+                params.put("id", id);
+                params.put("phone", phone);
 
                 return params;
             }
@@ -119,8 +113,7 @@ public class ChangePhone extends AppCompatActivity {
 
     }
 
-    private boolean isPhoneValid(String phone)
-    {
+    private boolean isPhoneValid(String phone) {
         Pattern p = Pattern.compile("[0-9]{9}");
         Matcher m = p.matcher(phone);
         return (m.find() && m.group().equals(phone));

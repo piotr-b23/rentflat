@@ -3,6 +3,13 @@ package com.example.rentflat.ui.myFlats;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.rentflat.ui.flat.Flat;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
 import com.example.rentflat.ui.myAccount.ChangeEmail;
@@ -21,19 +28,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rentflat.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.sessionMenager;
 
 public class MyFlatDetails extends AppCompatActivity {
 
-    private TextView price, surface, room,type, province, locality, street, students, description;
+    private TextView price, surface, room, type, province, locality, street, students, description;
     private Button editPrice, editDescription, closeOffer;
     private ArrayList<String> photos;
+    private static String URL_CLOSE_OFFER = serverIp + "/close_offer.php";
     RecyclerView recyclerView;
     ImageAdapter adapter;
 
@@ -59,7 +74,7 @@ public class MyFlatDetails extends AppCompatActivity {
 
         editPrice = findViewById(R.id.changePriceButton);
         editDescription = findViewById(R.id.changeDescriptionButton);
-        closeOffer.findViewById(R.id.closeOfferButton);
+        closeOffer = findViewById(R.id.closeOfferButton);
 
         price.setText(selectedFlat.getPrice());
         surface.setText(selectedFlat.getSurface());
@@ -70,7 +85,7 @@ public class MyFlatDetails extends AppCompatActivity {
         street.setText(selectedFlat.getStreet());
         description.setText(selectedFlat.getDescription());
 
-        if(selectedFlat.getStudents().equals("1")) students.setText("tak");
+        if (selectedFlat.getStudents().equals("1")) students.setText("tak");
         else students.setText("nie");
 
         photos = new ArrayList<>();
@@ -85,12 +100,12 @@ public class MyFlatDetails extends AppCompatActivity {
         adapter = new ImageAdapter(this, photos);
         recyclerView.setAdapter(adapter);
 
-        if(sessionMenager.isLogged()) {
+        if (sessionMenager.isLogged()) {
 
             editPrice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new  Intent(v.getContext(), ChangePrice.class);
+                    Intent intent = new Intent(v.getContext(), ChangePrice.class);
                     intent.putExtra("old price", selectedFlat.getPrice());
                     intent.putExtra("flat id", selectedFlat.getFlatId());
                     startActivity(intent);
@@ -100,8 +115,8 @@ public class MyFlatDetails extends AppCompatActivity {
             editDescription.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new  Intent(v.getContext(), ChangeDescription.class);
-                    intent.putExtra("old description",  selectedFlat.getDescription());
+                    Intent intent = new Intent(v.getContext(), ChangeDescription.class);
+                    intent.putExtra("old description", selectedFlat.getDescription());
                     intent.putExtra("flat id", selectedFlat.getFlatId());
                     startActivity(intent);
                 }
@@ -110,11 +125,55 @@ public class MyFlatDetails extends AppCompatActivity {
             closeOffer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    CloseOffer(selectedFlat.getFlatId());
 
                 }
             });
 
         }
+
+
+    }
+
+    private void CloseOffer(final String flatId) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CLOSE_OFFER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String succes = jsonObject.getString("success");
+                            if (succes.equals("1")) {
+                                Toast.makeText(MyFlatDetails.this, "Zakończono ogłoszenie", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new  Intent(MyFlatDetails.this, MainActivity.class);
+//                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MyFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MyFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("flatId", flatId);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
 
 
     }

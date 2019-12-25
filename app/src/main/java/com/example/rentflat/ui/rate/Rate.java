@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class Rate implements Parcelable {
 
-    private String rateId,userId, raterId, rateDescription, date;
+    private String rateId, userId, raterId, rateDescription, date;
     private Float contactRate, descriptionRate;
 
     @Override
@@ -45,8 +45,7 @@ public class Rate implements Parcelable {
         this.descriptionRate = in.readFloat();
     }
 
-    public Rate (String rateId, String userId, String raterId, String rateDescription, String date, float contactRate, float descriptionRate)
-    {
+    public Rate(String rateId, String userId, String raterId, String rateDescription, String date, float contactRate, float descriptionRate) {
         this.rateId = rateId;
         this.userId = userId;
         this.raterId = raterId;
@@ -56,25 +55,31 @@ public class Rate implements Parcelable {
         this.descriptionRate = descriptionRate;
     }
 
-    public String getRateId(){
+    public String getRateId() {
         return this.rateId;
     }
-    public String getUserId(){
+
+    public String getUserId() {
         return this.userId;
     }
-    public String getRaterId(){
+
+    public String getRaterId() {
         return this.raterId;
     }
-    public String getRateDescription(){
+
+    public String getRateDescription() {
         return this.rateDescription;
     }
-    public String getDate(){
+
+    public String getDate() {
         return this.date;
     }
-    public float getContactRate(){
+
+    public float getContactRate() {
         return this.contactRate;
     }
-    public float getDescriptionRate(){
+
+    public float getDescriptionRate() {
         return this.descriptionRate;
     }
 

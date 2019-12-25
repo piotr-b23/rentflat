@@ -72,7 +72,6 @@ public class AddFlat extends AppCompatActivity {
     ImageAdapter adapter;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,20 +92,17 @@ public class AddFlat extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-
-
-
         addFlatButton = findViewById(R.id.addFlatButton);
         addPhoto = findViewById(R.id.addPhotoButton);
 
 
         final Spinner buildingType = findViewById(R.id.buildingTypeSpinner);
-        ArrayAdapter<CharSequence> buildingTypeAdapter = ArrayAdapter.createFromResource(this,R.array.building_type,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> buildingTypeAdapter = ArrayAdapter.createFromResource(this, R.array.building_type, android.R.layout.simple_spinner_item);
         buildingTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         buildingType.setAdapter(buildingTypeAdapter);
 
         final Spinner province = findViewById(R.id.provinceSpinner);
-        ArrayAdapter<CharSequence> provinceAdapter = ArrayAdapter.createFromResource(this,R.array.province,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> provinceAdapter = ArrayAdapter.createFromResource(this, R.array.province, android.R.layout.simple_spinner_item);
         provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         province.setAdapter(provinceAdapter);
 
@@ -128,24 +124,20 @@ public class AddFlat extends AppCompatActivity {
                 String creStreet = street.getText().toString().trim();
                 String creDescription = description.getText().toString().trim();
                 String creStudentsCheckBox;
-                if(studentsCheckBox.isChecked())
-                {
+                if (studentsCheckBox.isChecked()) {
                     creStudentsCheckBox = "1";
-                }
-                else creStudentsCheckBox = "0";
+                } else creStudentsCheckBox = "0";
 
                 String creBuildingType = buildingType.getSelectedItem().toString();
                 String creProvince = province.getSelectedItem().toString();
-                String id =userId;
+                String id = userId;
 
 
+                if (!crePrice.isEmpty() && !creSurface.isEmpty() && !creRoom.isEmpty() && !creLocality.isEmpty() && !creStreet.isEmpty() && !creDescription.isEmpty()) {
 
-                if (!crePrice.isEmpty() && !creSurface.isEmpty() && !creRoom.isEmpty() && !creLocality.isEmpty() && !creStreet.isEmpty()&& !creDescription.isEmpty()){
-
-                    if(chceckIfDataIsCorrect(crePrice,creSurface,creRoom,creDescription)==false){
-                        Toast.makeText(AddFlat.this,"Popraw wprowadzone dane",Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    if (chceckIfDataIsCorrect(crePrice, creSurface, creRoom, creDescription) == false) {
+                        Toast.makeText(AddFlat.this, "Popraw wprowadzone dane", Toast.LENGTH_SHORT).show();
+                    } else {
                         //Collections.reverse(bitmaps);
 
                         for (Bitmap b : bitmaps) {
@@ -161,44 +153,42 @@ public class AddFlat extends AppCompatActivity {
 
                         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         String date = df.format(Calendar.getInstance().getTime());
-                        CreateFlat(id, crePrice, creSurface, creRoom, creLocality, creStreet, creDescription, creStudentsCheckBox, creBuildingType, creProvince, crePhoto,date);
+                        CreateFlat(id, crePrice, creSurface, creRoom, creLocality, creStreet, creDescription, creStudentsCheckBox, creBuildingType, creProvince, crePhoto, date);
                     }
 
 
+                } else {
+                    if (crePrice.isEmpty()) price.setError("Wprowadź cenę za wynajem");
+                    if (creSurface.isEmpty())
+                        surface.setError("Wprowadź metraż wynajmowanego obiektu");
+                    if (creRoom.isEmpty()) room.setError("Podaj ilość pokoi");
+                    if (creLocality.isEmpty()) locality.setError("Podaj miejscowość");
+                    if (creStreet.isEmpty()) street.setError("Podaj ulicę");
+                    if (creDescription.isEmpty()) description.setError("Napisz krótki opis");
                 }
-                else {
-                    if(crePrice.isEmpty()) price.setError("Wprowadź cenę za wynajem");
-                    if(creSurface.isEmpty()) surface.setError("Wprowadź metraż wynajmowanego obiektu");
-                    if(creRoom.isEmpty()) room.setError("Podaj ilość pokoi");
-                    if(creLocality.isEmpty()) locality.setError("Podaj miejscowość");
-                    if(creStreet.isEmpty()) street.setError("Podaj ulicę");
-                    if(creDescription.isEmpty()) description.setError("Napisz krótki opis");
-                }
-
-
 
 
             }
         });
     }
 
-    private void CreateFlat(final String id,final String price,final String surface,final String room,final String locality,final String street,final String description,final String students,final String buildingType,final String province,final String photo,final String date){
+    private void CreateFlat(final String id, final String price, final String surface, final String room, final String locality, final String street, final String description, final String students, final String buildingType, final String province, final String photo, final String date) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_FLAT,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(AddFlat.this,"Utworzono ogłoszenie",Toast.LENGTH_SHORT).show();
-                                Intent intent = new  Intent(AddFlat.this, MainActivity.class);
+                            if (succes.equals("1")) {
+                                Toast.makeText(AddFlat.this, "Utworzono ogłoszenie", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(AddFlat.this, MainActivity.class);
                                 startActivity(intent);
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(AddFlat.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddFlat.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -206,26 +196,25 @@ public class AddFlat extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(AddFlat.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddFlat.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("userid",id);
-                params.put("price",price);
-                params.put("surface",surface);
-                params.put("room",room);
-                params.put("locality",locality);
-                params.put("street",street);
-                params.put("description",description);
-                params.put("students",students);
-                params.put("type",buildingType);
-                params.put("province",province);
-                params.put("photo",photo);
-                params.put("date",date);
+                Map<String, String> params = new HashMap<>();
+                params.put("userid", id);
+                params.put("price", price);
+                params.put("surface", surface);
+                params.put("room", room);
+                params.put("locality", locality);
+                params.put("street", street);
+                params.put("description", description);
+                params.put("students", students);
+                params.put("type", buildingType);
+                params.put("province", province);
+                params.put("photo", photo);
+                params.put("date", date);
 
                 return params;
             }
@@ -237,18 +226,18 @@ public class AddFlat extends AppCompatActivity {
 
     }
 
-    private void UploadPhoto(final String photo,final String fileName){
+    private void UploadPhoto(final String photo, final String fileName) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPLOAD_PHOTO,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(AddFlat.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddFlat.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -256,16 +245,15 @@ public class AddFlat extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(AddFlat.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddFlat.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("photo",photo);
-                params.put("filename",fileName);
+                Map<String, String> params = new HashMap<>();
+                params.put("photo", photo);
+                params.put("filename", fileName);
 
                 return params;
             }
@@ -277,11 +265,11 @@ public class AddFlat extends AppCompatActivity {
 
     }
 
-    private void chooseFile(){
+    private void chooseFile() {
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setType("image/*");
         startActivityForResult(intent, 1);
 
@@ -296,14 +284,13 @@ public class AddFlat extends AppCompatActivity {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                 ClipData clipData = data.getClipData();
 
-                if (clipData != null){
-                    if (clipData.getItemCount()>9){
-                        Toast.makeText(AddFlat.this,"Wybierz maksymalnie 9 zdjęć.",Toast.LENGTH_SHORT).show();
+                if (clipData != null) {
+                    if (clipData.getItemCount() > 9) {
+                        Toast.makeText(AddFlat.this, "Wybierz maksymalnie 9 zdjęć.", Toast.LENGTH_SHORT).show();
                         adapter = new ImageAdapter(this, photos);
                         recyclerView.setAdapter(adapter);
-    //                    recyclerView.setVisibility(View.VISIBLE);
-                    }
-                    else {
+                        //                    recyclerView.setVisibility(View.VISIBLE);
+                    } else {
                         int currentElement = 0;
                         for (int i = 0; i < clipData.getItemCount(); i++) {
                             Uri filePath = clipData.getItemAt(i).getUri();
@@ -311,16 +298,14 @@ public class AddFlat extends AppCompatActivity {
                             try {
                                 InputStream is = getContentResolver().openInputStream(filePath);
                                 bitmap = BitmapFactory.decodeStream(is);
-                                bitmap = Bitmap.createScaledBitmap(bitmap,1920,1080,false);
+                                bitmap = Bitmap.createScaledBitmap(bitmap, 1920, 1080, false);
                                 bitmaps.add(bitmap);
 
-                                if (i%2==0){
+                                if (i % 2 == 0) {
                                     photos.add(filePath.toString());
-                                }
-                                else
-                                {
-                                    photos.set(currentElement,photos.get(currentElement) + " " + filePath.toString());
-                                    currentElement+=1;
+                                } else {
+                                    photos.set(currentElement, photos.get(currentElement) + " " + filePath.toString());
+                                    currentElement += 1;
                                 }
 
 
@@ -333,18 +318,17 @@ public class AddFlat extends AppCompatActivity {
                     }
 
                 } else {
-                        Uri filePath = data.getData();
-                        try {
-                            InputStream is = getContentResolver().openInputStream(filePath);
-                            bitmap = BitmapFactory.decodeStream(is);
-                            bitmaps.add(bitmap);
-                            photos.add(filePath.toString());
-                            adapter = new ImageAdapter(this, photos);
-                            recyclerView.setAdapter(adapter);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-
+                    Uri filePath = data.getData();
+                    try {
+                        InputStream is = getContentResolver().openInputStream(filePath);
+                        bitmap = BitmapFactory.decodeStream(is);
+                        bitmaps.add(bitmap);
+                        photos.add(filePath.toString());
+                        adapter = new ImageAdapter(this, photos);
+                        recyclerView.setAdapter(adapter);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
 
 
                 }
@@ -353,59 +337,56 @@ public class AddFlat extends AppCompatActivity {
         }
     }
 
-    public String getStringImage(Bitmap bitmap){
+    public String getStringImage(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] imageByteArray = byteArrayOutputStream.toByteArray();
-        String encodedImage = Base64.encodeToString(imageByteArray,Base64.DEFAULT);
+        String encodedImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
         return encodedImage;
     }
 
-    public String createTransactionID() throws Exception{
+    public String createTransactionID() throws Exception {
         return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
     }
 
-    public boolean chceckIfDataIsCorrect(String price, String surface, String room,String description){
+    public boolean chceckIfDataIsCorrect(String price, String surface, String room, String description) {
 
         boolean isCorrect = true;
 
-        if(checkPrice(price)==false) isCorrect = false;
-        if(checkSurface(surface)==false) isCorrect = false;
-        if(checkRoom(room)==false) isCorrect = false;
-        if(checkDescription(description)==false) isCorrect = false;
+        if (checkPrice(price) == false) isCorrect = false;
+        if (checkSurface(surface) == false) isCorrect = false;
+        if (checkRoom(room) == false) isCorrect = false;
+        if (checkDescription(description) == false) isCorrect = false;
 
         return isCorrect;
     }
-    public boolean checkPrice(String inPrice){
-        if(Integer.parseInt(inPrice)>500000 || Integer.parseInt(inPrice)<50){
+
+    public boolean checkPrice(String inPrice) {
+        if (Integer.parseInt(inPrice) > 500000 || Integer.parseInt(inPrice) < 50) {
             price.setError("Wprowadź poprawną cenę za wynajem.");
             return false;
-        }
-        else return true;
+        } else return true;
     }
 
-    public boolean checkSurface(String inSurface){
-        if(Integer.parseInt(inSurface)>250000 || Integer.parseInt(inSurface)<25){
+    public boolean checkSurface(String inSurface) {
+        if (Integer.parseInt(inSurface) > 250000 || Integer.parseInt(inSurface) < 25) {
             surface.setError("Wprowadź poprawny metraż wynajmowanego obiektu.");
             return false;
-        }
-        else return true;
+        } else return true;
     }
 
-    public boolean checkRoom(String inRoom){
-        if(Integer.parseInt(inRoom)>250 || Integer.parseInt(inRoom)<1){
+    public boolean checkRoom(String inRoom) {
+        if (Integer.parseInt(inRoom) > 250 || Integer.parseInt(inRoom) < 1) {
             room.setError("Wprowadź poprawną ilość pokoi.");
             return false;
-        }
-        else return true;
+        } else return true;
     }
 
-    public boolean checkDescription(String inDescription){
-        if(inDescription.length()<20){
+    public boolean checkDescription(String inDescription) {
+        if (inDescription.length() < 20) {
             description.setError("Za krótki opis.");
             return false;
-        }
-        else return true;
+        } else return true;
     }
 }
 

@@ -37,7 +37,7 @@ public class RateUser extends AppCompatActivity {
     private Button confirmRate;
     private RatingBar contactBar, descriptionBar;
 
-    private static String URL_REPORT= serverIp + "/add_rate.php";
+    private static String URL_REPORT = serverIp + "/add_rate.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,36 +57,37 @@ public class RateUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String raterId =userId;
+                String raterId = userId;
                 String descriptionRate = rateDescription.getText().toString();
-                String contactRateString =Float.toString(contactBar.getRating());
-                String descriptionRateString =Float.toString(descriptionBar.getRating());
+                String contactRateString = Float.toString(contactBar.getRating());
+                String descriptionRateString = Float.toString(descriptionBar.getRating());
 
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 String date = df.format(Calendar.getInstance().getTime());
 
 
-                GiveRate(ratedUserId,raterId,contactRateString,descriptionRateString,descriptionRate,date);
+                GiveRate(ratedUserId, raterId, contactRateString, descriptionRateString, descriptionRate, date);
             }
         });
 
     }
-    private void GiveRate(final String userId, final String raterId, final String contactRate, final String descriptionRate, final String comment, final String date){
+
+    private void GiveRate(final String userId, final String raterId, final String contactRate, final String descriptionRate, final String comment, final String date) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(RateUser.this,"Wystawiono ocenę",Toast.LENGTH_SHORT).show();
+                            if (succes.equals("1")) {
+                                Toast.makeText(RateUser.this, "Wystawiono ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(RateUser.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RateUser.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -94,20 +95,19 @@ public class RateUser extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RateUser.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RateUser.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("userId",userId);
-                params.put("raterId",raterId);
-                params.put("contactRate",contactRate);
-                params.put("descriptionRate",descriptionRate);
-                params.put("comment",comment);
-                params.put("date",date);
+                Map<String, String> params = new HashMap<>();
+                params.put("userId", userId);
+                params.put("raterId", raterId);
+                params.put("contactRate", contactRate);
+                params.put("descriptionRate", descriptionRate);
+                params.put("comment", comment);
+                params.put("date", date);
 
                 return params;
             }

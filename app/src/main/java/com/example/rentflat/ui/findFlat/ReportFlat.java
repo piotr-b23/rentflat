@@ -36,7 +36,7 @@ public class ReportFlat extends AppCompatActivity {
     private EditText reportDescription;
     private Button confirmReport;
 
-    private static String URL_REPORT= serverIp + "/report_flat.php";
+    private static String URL_REPORT = serverIp + "/report_flat.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,6 @@ public class ReportFlat extends AppCompatActivity {
 
         reportDescription = findViewById(R.id.reportDescription);
         confirmReport = findViewById(R.id.confirmReportButton);
-
 
 
         Intent intent = getIntent();
@@ -58,31 +57,32 @@ public class ReportFlat extends AppCompatActivity {
                 String date = df.format(Calendar.getInstance().getTime());
 
 
-                String id =userId;
+                String id = userId;
                 String reportText = reportDescription.getText().toString();
                 String flatId = reportedFlat.getFlatId();
-                sendReport(flatId,id,reportText,date);
+                sendReport(flatId, id, reportText, date);
 
             }
         });
 
     }
-    private void sendReport(final String flatId,final String reportingUserId,final String reportDescription, final String dateTime){
+
+    private void sendReport(final String flatId, final String reportingUserId, final String reportDescription, final String dateTime) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(ReportFlat.this,"Zgłoszono ogłoszenie",Toast.LENGTH_SHORT).show();
+                            if (succes.equals("1")) {
+                                Toast.makeText(ReportFlat.this, "Zgłoszono ogłoszenie", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ReportFlat.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ReportFlat.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -90,18 +90,17 @@ public class ReportFlat extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ReportFlat.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReportFlat.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("flatid",flatId);
-                params.put("reportUserId",reportingUserId);
-                params.put("comment",reportDescription);
-                params.put("date",dateTime);
+                Map<String, String> params = new HashMap<>();
+                params.put("flatid", flatId);
+                params.put("reportUserId", reportingUserId);
+                params.put("comment", reportDescription);
+                params.put("date", dateTime);
 
                 return params;
             }

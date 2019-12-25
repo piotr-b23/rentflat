@@ -34,7 +34,7 @@ import static com.example.rentflat.ui.register.Register.isEmailValid;
 public class ChangeEmail extends AppCompatActivity {
     private EditText newEmail, password;
     private Button changeMailButton;
-    private static String URL_CHANGE_MAIL= serverIp + "/edit_mail.php";
+    private static String URL_CHANGE_MAIL = serverIp + "/edit_mail.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,25 +49,20 @@ public class ChangeEmail extends AppCompatActivity {
             public void onClick(View v) {
                 String upPassword = password.getText().toString().trim();
                 String upEmail = newEmail.getText().toString().trim();
-                String id =userId;
+                String id = userId;
 
-                if (!upPassword.isEmpty() && !upEmail.isEmpty()){
-                        if(isEmailValid(upEmail))
-                        {
-                            UpdateMail(upPassword,upEmail,id);
+                if (!upPassword.isEmpty() && !upEmail.isEmpty()) {
+                    if (isEmailValid(upEmail)) {
+                        UpdateMail(upPassword, upEmail, id);
 
-                        }
-                        else
-                        {
-                            newEmail.setError("Podaj poprawny email");
-                        }
+                    } else {
+                        newEmail.setError("Podaj poprawny email");
+                    }
 
 
-
-                }
-                else {
-                    if(upPassword.isEmpty()) password.setError("Podaj hasło");
-                    if(upEmail.isEmpty()) newEmail.setError("Podaj email użytkownika");
+                } else {
+                    if (upPassword.isEmpty()) password.setError("Podaj hasło");
+                    if (upEmail.isEmpty()) newEmail.setError("Podaj email użytkownika");
                 }
 
             }
@@ -76,23 +71,23 @@ public class ChangeEmail extends AppCompatActivity {
 
     }
 
-    private void UpdateMail(final String password,final String email,final String id){
+    private void UpdateMail(final String password, final String email, final String id) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_MAIL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(ChangeEmail.this,"Zaktualizowano email",Toast.LENGTH_SHORT).show();
-                                Intent intent = new  Intent(ChangeEmail.this, MainActivity.class);
+                            if (succes.equals("1")) {
+                                Toast.makeText(ChangeEmail.this, "Zaktualizowano email", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ChangeEmail.this, MainActivity.class);
                                 startActivity(intent);
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ChangeEmail.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangeEmail.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -100,17 +95,16 @@ public class ChangeEmail extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChangeEmail.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangeEmail.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id",id);
-                params.put("password",password);
-                params.put("email",email);
+                Map<String, String> params = new HashMap<>();
+                params.put("id", id);
+                params.put("password", password);
+                params.put("email", email);
 
                 return params;
             }

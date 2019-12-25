@@ -23,7 +23,7 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
     private LayoutInflater layoutInflater;
     private List<Flat> data;
 
-    MyFlatsAdapter(Context context, List<Flat> data){
+    MyFlatsAdapter(Context context, List<Flat> data) {
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data;
 
@@ -32,7 +32,7 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.my_flat_row,parent,false);
+        View view = layoutInflater.inflate(R.layout.my_flat_row, parent, false);
         return new ViewHolder(view);
     }
 
@@ -46,6 +46,8 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
         ArrayList<String> photos = new ArrayList<>();
         photos = data.get(position).generatePhotos();
         Picasso.get().load(photos.get(0)).into(holder.myFlatImage);
+        String date = data.get(position).getDate();
+        holder.myFlatDate.setText(date);
 
     }
 
@@ -55,8 +57,9 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView myFlatTitle,myFlatDescription;
+        TextView myFlatTitle, myFlatDescription,myFlatDate;
         ImageView myFlatImage;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -72,6 +75,7 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
             myFlatTitle = itemView.findViewById(R.id.findFlatTitle);
             myFlatDescription = itemView.findViewById(R.id.findFlatDescription);
             myFlatImage = itemView.findViewById(R.id.findFlatCardImage);
+            myFlatDate = itemView.findViewById(R.id.myFlatDate);
         }
     }
 }

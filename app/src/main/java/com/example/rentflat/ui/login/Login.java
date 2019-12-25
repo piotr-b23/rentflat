@@ -53,43 +53,42 @@ public class Login extends AppCompatActivity {
                 String logUsername = username.getText().toString().trim();
                 String logPass = password.getText().toString().trim();
 
-                if (!logUsername.isEmpty() && !logPass.isEmpty()){
-                    Login(logUsername,logPass);
-                }
-                else {
-                    if(logUsername.isEmpty()) username.setError("Podaj nazwę użytkownika");
-                    if(logPass.isEmpty()) password.setError("Podaj hasło użytkownika");
+                if (!logUsername.isEmpty() && !logPass.isEmpty()) {
+                    Login(logUsername, logPass);
+                } else {
+                    if (logUsername.isEmpty()) username.setError("Podaj nazwę użytkownika");
+                    if (logPass.isEmpty()) password.setError("Podaj hasło użytkownika");
                 }
             }
         });
     }
 
-    private void Login(final String username, final String password){
+    private void Login(final String username, final String password) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
-                            if (succes.equals("1")){
+                            if (succes.equals("1")) {
 
-                                for (int i = 0; i<jsonArray.length();i++) {
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
                                     String name = object.getString("name").trim();
                                     String username = object.getString("username").trim();
                                     String id = object.getString("id").trim();
-                                    Toast.makeText(Login.this,"Zalogowano. \nWitaj "+ name,Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, "Zalogowano. \nWitaj " + name, Toast.LENGTH_SHORT).show();
 
-                                    sessionMenager.createSession(name,username,id);
+                                    sessionMenager.createSession(name, username, id);
                                 }
                                 sessionMenager.checkIfLogged();
 
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(Login.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -97,24 +96,21 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Login.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("username",username);
-                params.put("password",password);
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("password", password);
 
                 return params;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-
-
 
 
     }

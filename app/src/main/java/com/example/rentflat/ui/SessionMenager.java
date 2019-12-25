@@ -28,35 +28,35 @@ public class SessionMenager {
         editor = sharedPreferences.edit();
     }
 
-    public void createSession(String name, String username, String id){
-        editor.putBoolean(LOGIN,true);
-        editor.putString(NAME,name);
-        editor.putString(USERNAME,username);
-        editor.putString(ID,id);
+    public void createSession(String name, String username, String id) {
+        editor.putBoolean(LOGIN, true);
+        editor.putString(NAME, name);
+        editor.putString(USERNAME, username);
+        editor.putString(ID, id);
         editor.apply();
     }
 
-    public boolean isLogged(){
+    public boolean isLogged() {
         return sharedPreferences.getBoolean(LOGIN, false);
     }
 
-    public void checkIfLogged(){
-        if(this.isLogged()){
+    public void checkIfLogged() {
+        if (this.isLogged()) {
             Intent intent = new Intent(context, MainActivity.class);
             context.startActivity(intent);
         }
     }
 
-    public HashMap<String, String> getUserDetail(){
+    public HashMap<String, String> getUserDetail() {
         HashMap<String, String> user = new HashMap<>();
-        user.put(NAME,sharedPreferences.getString(NAME,null));
-        user.put(USERNAME, sharedPreferences.getString(USERNAME,null));
-        user.put(ID,sharedPreferences.getString(ID,null));
+        user.put(NAME, sharedPreferences.getString(NAME, null));
+        user.put(USERNAME, sharedPreferences.getString(USERNAME, null));
+        user.put(ID, sharedPreferences.getString(ID, null));
 
         return user;
     }
 
-    public void logout(){
+    public void logout() {
         editor.clear();
         editor.commit();
     }

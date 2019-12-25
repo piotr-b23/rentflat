@@ -39,12 +39,12 @@ public class RateResults extends AppCompatActivity {
         float avgContactRate = 0.0f;
         float avgDescriptionRate = 0.0f;
 
-        for (int i=0;i<rates.size();i++){
+        for (int i = 0; i < rates.size(); i++) {
             avgContactRate += rates.get(i).getContactRate();
             avgDescriptionRate += rates.get(i).getDescriptionRate();
         }
-        avgContactRate /=rates.size();
-        avgDescriptionRate /=rates.size();
+        avgContactRate /= rates.size();
+        avgDescriptionRate /= rates.size();
 
         contactRateAVG.setRating(avgContactRate);
         descriptionRateAVG.setRating(avgDescriptionRate);

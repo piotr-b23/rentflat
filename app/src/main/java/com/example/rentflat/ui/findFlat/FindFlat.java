@@ -41,7 +41,7 @@ import static com.example.rentflat.MainActivity.serverIp;
 
 public class FindFlat extends AppCompatActivity {
 
-    private EditText priceMin,priceMax, surfaceMin,surfaceMax, roomMin,roomMax, locality, street;
+    private EditText priceMin, priceMax, surfaceMin, surfaceMax, roomMin, roomMax, locality, street;
     private Button findFlatButton;
     private CheckBox studentsCheckBox;
     private FindFlatSearch query;
@@ -68,12 +68,12 @@ public class FindFlat extends AppCompatActivity {
 
 
         final Spinner buildingType = findViewById(R.id.buildingTypeSearchSpinner);
-        ArrayAdapter<CharSequence> buildingTypeAdapter = ArrayAdapter.createFromResource(this,R.array.building_type,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> buildingTypeAdapter = ArrayAdapter.createFromResource(this, R.array.building_type, android.R.layout.simple_spinner_item);
         buildingTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         buildingType.setAdapter(buildingTypeAdapter);
 
         final Spinner province = findViewById(R.id.provinceSearchSpinner);
-        ArrayAdapter<CharSequence> provinceAdapter = ArrayAdapter.createFromResource(this,R.array.province,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> provinceAdapter = ArrayAdapter.createFromResource(this, R.array.province, android.R.layout.simple_spinner_item);
         provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         province.setAdapter(provinceAdapter);
 
@@ -89,16 +89,14 @@ public class FindFlat extends AppCompatActivity {
                 String seLocality = locality.getText().toString().trim();
                 String seStreet = street.getText().toString().trim();
                 String seStudentsCheckBox;
-                if(studentsCheckBox.isChecked())
-                {
+                if (studentsCheckBox.isChecked()) {
                     seStudentsCheckBox = "1";
-                }
-                else seStudentsCheckBox = "0";
+                } else seStudentsCheckBox = "0";
 
                 String seBuildingType = buildingType.getSelectedItem().toString();
                 String seProvince = province.getSelectedItem().toString();
 
-                query = new FindFlatSearch(sePriceMin,sePriceMax,seSurfaceMin,seSurfaceMax,seRoomMin,seRoomMax,seBuildingType,seProvince,seLocality,seStreet,seStudentsCheckBox);
+                query = new FindFlatSearch(sePriceMin, sePriceMax, seSurfaceMin, seSurfaceMax, seRoomMin, seRoomMax, seBuildingType, seProvince, seLocality, seStreet, seStudentsCheckBox);
 
                 Intent intent = new Intent(FindFlat.this, FindFlatResults.class);
                 intent.putExtra("query", query);

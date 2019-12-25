@@ -46,6 +46,8 @@ public class FindFlatAdapter extends RecyclerView.Adapter<FindFlatAdapter.ViewHo
         ArrayList<String> photos = new ArrayList<>();
         photos = data.get(position).generatePhotos();
         Picasso.get().load(photos.get(0)).into(holder.findFlatImage);
+        String date = data.get(position).getDate();
+        holder.findFlatDate.setText(date);
 
     }
 
@@ -55,7 +57,7 @@ public class FindFlatAdapter extends RecyclerView.Adapter<FindFlatAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView findFlatTitle, findFlatDescription;
+        TextView findFlatTitle, findFlatDescription,findFlatDate;
         ImageView findFlatImage;
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,6 +75,7 @@ public class FindFlatAdapter extends RecyclerView.Adapter<FindFlatAdapter.ViewHo
             findFlatTitle = itemView.findViewById(R.id.findFlatTitle);
             findFlatDescription = itemView.findViewById(R.id.findFlatDescription);
             findFlatImage = itemView.findViewById(R.id.findFlatCardImage);
+            findFlatDate = itemView.findViewById(R.id.findFlatDate);
         }
     }
 }

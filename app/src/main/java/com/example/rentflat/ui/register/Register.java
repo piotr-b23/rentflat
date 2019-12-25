@@ -56,58 +56,49 @@ public class Register extends AppCompatActivity {
                 String regConfirmedPassword = confirmedPassword.getText().toString().trim();
                 String regEmail = email.getText().toString().trim();
 
-                if (!regName.isEmpty() && !regUsername.isEmpty() && !regPassword.isEmpty() && !regConfirmedPassword.isEmpty() && !regEmail.isEmpty()){
-                    if(regPassword.equals(regConfirmedPassword))
-                    {
-                        if(isEmailValid(regEmail))
-                        {
-                            Regist(regName,regUsername,regPassword,regEmail);
+                if (!regName.isEmpty() && !regUsername.isEmpty() && !regPassword.isEmpty() && !regConfirmedPassword.isEmpty() && !regEmail.isEmpty()) {
+                    if (regPassword.equals(regConfirmedPassword)) {
+                        if (isEmailValid(regEmail)) {
+                            Regist(regName, regUsername, regPassword, regEmail);
 
-                        }
-                        else
-                        {
+                        } else {
                             email.setError("Podaj poprawny email");
                         }
 
-                    }
-                    else
-                    {
+                    } else {
                         confirmedPassword.setError("Podane hasła różnią się");
                     }
 
+                } else {
+                    if (regName.isEmpty()) name.setError("Podaj imię użytkownika");
+                    if (regUsername.isEmpty()) username.setError("Podaj nazwę użytkownika");
+                    if (regPassword.isEmpty()) password.setError("Podaj hasło");
+                    if (regConfirmedPassword.isEmpty()) confirmedPassword.setError("Podaj hasło");
+                    if (regEmail.isEmpty()) email.setError("Podaj email użytkownika");
                 }
-                else {
-                    if(regName.isEmpty()) name.setError("Podaj imię użytkownika");
-                    if(regUsername.isEmpty()) username.setError("Podaj nazwę użytkownika");
-                    if(regPassword.isEmpty()) password.setError("Podaj hasło");
-                    if(regConfirmedPassword.isEmpty()) confirmedPassword.setError("Podaj hasło");
-                    if(regEmail.isEmpty()) email.setError("Podaj email użytkownika");
-                }
-
-
 
 
             }
         });
     }
 
-    private void Regist(final String name,final String username,final String password,final String email){
+    private void Regist(final String name, final String username, final String password, final String email) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(Register.this,"Zarejestrowano",Toast.LENGTH_SHORT).show();
-                                Intent intent = new  Intent(Register.this, MainActivity.class);
+                            if (succes.equals("1")) {
+                                Toast.makeText(Register.this, "Zarejestrowano", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Register.this, MainActivity.class);
                                 startActivity(intent);
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(Register.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Register.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -115,18 +106,17 @@ public class Register extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Register.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("name",name);
-                params.put("username",username);
-                params.put("password",password);
-                params.put("email",email);
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                params.put("username", username);
+                params.put("password", password);
+                params.put("email", email);
 
                 return params;
             }
@@ -138,11 +128,9 @@ public class Register extends AppCompatActivity {
 
     }
 
-    public static boolean isEmailValid(String email)
-    {
-        String emailRegex ="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-        if(email.matches(emailRegex))
-        {
+    public static boolean isEmailValid(String email) {
+        String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        if (email.matches(emailRegex)) {
             return true;
         }
         return false;

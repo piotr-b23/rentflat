@@ -17,12 +17,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
     private ArrayList<String> data;
 
-    public ImageAdapter(Context context, ArrayList<String> data){
+    public ImageAdapter(Context context, ArrayList<String> data) {
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data;
 
@@ -32,7 +32,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.image_display_row,parent,false);
+        View view = layoutInflater.inflate(R.layout.image_display_row, parent, false);
         return new ViewHolder(view);
     }
 
@@ -43,12 +43,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
         Iterator iterator = photos.iterator();
         Scanner s = new Scanner(photos.get(position));
 
-        if (s.hasNext()){
+        if (s.hasNext()) {
             Picasso.get().load(s.next()).fit().into(holder.cardImage1);
         }
-            if (s.hasNext()){
-                Picasso.get().load(s.next()).fit().into(holder.cardImage2);
-            }
+        if (s.hasNext()) {
+            Picasso.get().load(s.next()).fit().into(holder.cardImage2);
+        }
 
 
     }
@@ -57,6 +57,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
     public int getItemCount() {
         return data.size();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView cardImage1, cardImage2;
 

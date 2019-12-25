@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class FindFlatSearch implements Parcelable {
-    String priceMin,priceMax,surfaceMin,surfaceMax,roomMin,roomMax,buildingType,province,locality,street,studentsCheckBox;
+    String priceMin, priceMax, surfaceMin, surfaceMax, roomMin, roomMax, buildingType, province, locality, street, studentsCheckBox;
 
 
     @Override
@@ -52,7 +52,7 @@ public class FindFlatSearch implements Parcelable {
         this.studentsCheckBox = in.readString();
     }
 
-    public FindFlatSearch(String priceMin,String priceMax,String surfaceMin,String surfaceMax,String roomMin,String roomMax,String buildingType,String province,String locality,String street,String studentsCheckBox){
+    public FindFlatSearch(String priceMin, String priceMax, String surfaceMin, String surfaceMax, String roomMin, String roomMax, String buildingType, String province, String locality, String street, String studentsCheckBox) {
 
         this.priceMin = priceMin;
         this.priceMax = priceMax;
@@ -68,35 +68,47 @@ public class FindFlatSearch implements Parcelable {
 
     }
 
-    public String getPriceMin(){
+    public String getPriceMin() {
         return this.priceMin;
     }
-    public String getPriceMax(){
+
+    public String getPriceMax() {
         return this.priceMax;
     }
-    public String getSurfaceMin(){
+
+    public String getSurfaceMin() {
         return this.surfaceMin;
     }
-    public String getSurfaceMax(){
+
+    public String getSurfaceMax() {
         return this.surfaceMax;
     }
-    public String getRoomMin(){
+
+    public String getRoomMin() {
         return this.roomMin;
     }
-    public String getRoomMax(){
+
+    public String getRoomMax() {
         return this.roomMax;
     }
-    public String getBuildingType(){
+
+    public String getBuildingType() {
         return this.buildingType;
     }
-    public String getProvince(){
+
+    public String getProvince() {
         return this.province;
     }
-    public String getLocality(){
+
+    public String getLocality() {
         return this.locality;
     }
-    public String getStreet() { return this.street; }
-    public String getStudentsCheckBox(){
+
+    public String getStreet() {
+        return this.street;
+    }
+
+    public String getStudentsCheckBox() {
         return this.studentsCheckBox;
     }
 }

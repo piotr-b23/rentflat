@@ -45,7 +45,7 @@ public class MyRatesFragment extends Fragment {
 
     private static String URL_GET_MY_RATES = serverIp + "/get_rates.php";
     private RatingBar contactRateAVG, descriptionRateAVG;
-    private TextView contact,description, myRatesText;
+    private TextView contact, description, myRatesText;
     RecyclerView recyclerView;
     MyRatesAdapter adapter;
     ArrayList<Rate> rates;
@@ -55,7 +55,7 @@ public class MyRatesFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_my_rates, container, false);
 
-        String id =userId;
+        String id = userId;
         recyclerView = root.findViewById(R.id.myRatesRecycler);
         rates = new ArrayList<>();
 
@@ -67,16 +67,14 @@ public class MyRatesFragment extends Fragment {
         myRatesText = root.findViewById(R.id.text_my_rates);
 
 
-
-        if(sessionMenager.isLogged()){
+        if (sessionMenager.isLogged()) {
             contactRateAVG.setVisibility(View.VISIBLE);
             descriptionRateAVG.setVisibility(View.VISIBLE);
             contact.setVisibility(View.VISIBLE);
             description.setVisibility(View.VISIBLE);
             myRatesText.setText("Otrzymane oceny");
             getMyRates(id);
-        }
-        else{
+        } else {
             contactRateAVG.setVisibility(View.GONE);
             descriptionRateAVG.setVisibility(View.GONE);
             contact.setVisibility(View.GONE);
@@ -85,6 +83,7 @@ public class MyRatesFragment extends Fragment {
         }
         return root;
     }
+
     private void getMyRates(final String userId) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_MY_RATES,
                 new Response.Listener<String>() {
@@ -108,7 +107,7 @@ public class MyRatesFragment extends Fragment {
                                     String strDescription = object.getString("comment");
                                     String strDate = object.getString("date").trim();
 
-                                    rates.add(new Rate(strRateId, strUserId, strRaterId, strDescription, strDate,Float.valueOf(strDescriptionRate), Float.valueOf(strContactRate)));
+                                    rates.add(new Rate(strRateId, strUserId, strRaterId, strDescription, strDate, Float.valueOf(strDescriptionRate), Float.valueOf(strContactRate)));
 
 
                                 }
@@ -116,12 +115,12 @@ public class MyRatesFragment extends Fragment {
                                 float avgContactRate = 0.0f;
                                 float avgDescriptionRate = 0.0f;
 
-                                for (int i=0;i<rates.size();i++){
+                                for (int i = 0; i < rates.size(); i++) {
                                     avgContactRate += rates.get(i).getContactRate();
                                     avgDescriptionRate += rates.get(i).getDescriptionRate();
                                 }
-                                avgContactRate /=rates.size();
-                                avgDescriptionRate /=rates.size();
+                                avgContactRate /= rates.size();
+                                avgDescriptionRate /= rates.size();
 
                                 contactRateAVG.setRating(avgContactRate);
                                 descriptionRateAVG.setRating(avgDescriptionRate);
@@ -131,15 +130,11 @@ public class MyRatesFragment extends Fragment {
                                 recyclerView.setAdapter(adapter);
 
 
-
-
-
-
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getActivity(),"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }

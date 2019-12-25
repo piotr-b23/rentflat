@@ -38,7 +38,7 @@ public class ReportRate extends AppCompatActivity {
     private Button confirmReport;
 
 
-    private static String URL_REPORT_RATE= serverIp + "/report_rate.php";
+    private static String URL_REPORT_RATE = serverIp + "/report_rate.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,6 @@ public class ReportRate extends AppCompatActivity {
         final Rate editedRate = (Rate) intent.getParcelableExtra("reported rate");
 
 
-
         confirmReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,27 +63,27 @@ public class ReportRate extends AppCompatActivity {
                 String id = userId;
 
 
-                reportRate(editedRate.getRateId(),id,reportRateComment,date);
+                reportRate(editedRate.getRateId(), id, reportRateComment, date);
             }
         });
     }
 
-    private void reportRate(final String rateId,final String reportingUserId,final String comment, final String dateTime){
+    private void reportRate(final String rateId, final String reportingUserId, final String comment, final String dateTime) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT_RATE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(ReportRate.this,"Zgłoszono ocenę",Toast.LENGTH_SHORT).show();
+                            if (succes.equals("1")) {
+                                Toast.makeText(ReportRate.this, "Zgłoszono ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ReportRate.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ReportRate.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -92,18 +91,17 @@ public class ReportRate extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ReportRate.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReportRate.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("rateId",rateId);
-                params.put("reportingUserId",reportingUserId);
-                params.put("comment",comment);
-                params.put("date",dateTime);
+                Map<String, String> params = new HashMap<>();
+                params.put("rateId", rateId);
+                params.put("reportingUserId", reportingUserId);
+                params.put("comment", comment);
+                params.put("date", dateTime);
 
                 return params;
             }

@@ -54,25 +54,24 @@ public class MyFlatsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_my_flats, container, false);
-        String id =userId;
+        String id = userId;
         recyclerView = root.findViewById(R.id.myFlatsRecycler);
         flats = new ArrayList<>();
         myFlatsText = root.findViewById(R.id.text_my_flat);
         addFlat = root.findViewById(R.id.addFlatButton);
 
-        if(sessionMenager.isLogged()){
+        if (sessionMenager.isLogged()) {
             myFlatsText.setText("Przeglądaj swoje ogłoszenia");
             addFlat.setVisibility(View.VISIBLE);
             getMyFlats(id);
             addFlat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new  Intent(getActivity(), AddFlat.class);
+                    Intent intent = new Intent(getActivity(), AddFlat.class);
                     startActivity(intent);
                 }
             });
-        }
-        else{
+        } else {
             myFlatsText.setText("Zaloguj się by móc dodawać ogłoszenia");
             addFlat.setVisibility(View.GONE);
         }
@@ -100,7 +99,7 @@ public class MyFlatsFragment extends Fragment {
                                     String strFlatUserId = object.getString("userid").trim();
                                     String strPrice = object.getString("price").trim();
                                     String strSurface = object.getString("surface").trim();
-                                    String strRoom= object.getString("room").trim();
+                                    String strRoom = object.getString("room").trim();
                                     String strProvince = object.getString("province").trim();
                                     String strType = object.getString("type").trim();
                                     String strLocality = object.getString("locality").trim();
@@ -108,8 +107,9 @@ public class MyFlatsFragment extends Fragment {
                                     String strDescription = object.getString("description").trim();
                                     String strStudents = object.getString("students").trim();
                                     String strPhoto = object.getString("photo").trim();
+                                    String strDate = object.getString("date").trim();
 
-                                    flats.add(new Flat(strFlatId,strFlatUserId,strPrice,strSurface,strRoom,strProvince,strType,strLocality,strStreet,strDescription,strStudents,strPhoto));
+                                    flats.add(new Flat(strFlatId, strFlatUserId, strPrice, strSurface, strRoom, strProvince, strType, strLocality, strStreet, strDescription, strStudents, strPhoto,strDate));
 
 
                                 }
@@ -121,7 +121,7 @@ public class MyFlatsFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getActivity(),"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -131,14 +131,14 @@ public class MyFlatsFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("userid",userId);
+                params.put("userid", userId);
 
                 return params;
             }

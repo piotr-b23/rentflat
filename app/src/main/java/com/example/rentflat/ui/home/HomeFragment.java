@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     public TextView name, username;
-    private Button registerButton,loginButton,findFlatButton;
+    private Button registerButton, loginButton, findFlatButton;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -47,9 +47,7 @@ public class HomeFragment extends Fragment {
         findFlatButton = (Button) root.findViewById(R.id.addFlatButton);
 
 
-
-
-        if(sessionMenager.isLogged()) {
+        if (sessionMenager.isLogged()) {
             boolean test = sessionMenager.isLogged();
 //            String uName = user.get(sessionMenager.NAME);
 //            String uUsername = user.get(sessionMenager.USERNAME);
@@ -57,8 +55,6 @@ public class HomeFragment extends Fragment {
 
             registerButton.setVisibility(View.INVISIBLE);
             loginButton.setText("wyloguj");
-
-
 
 
 //            username.setText(uUsername);
@@ -69,21 +65,20 @@ public class HomeFragment extends Fragment {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new  Intent(getActivity(), Register.class);
+                Intent intent = new Intent(getActivity(), Register.class);
                 startActivity(intent);
             }
         });
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sessionMenager.isLogged()) {
+                if (sessionMenager.isLogged()) {
                     sessionMenager.logout();
                     loginButton.setText("zaloguj");
                     registerButton.setVisibility(View.VISIBLE);
                     userId = null;
 
-                }
-                else {
+                } else {
                     Intent intent = new Intent(getActivity(), Login.class);
                     startActivity(intent);
                 }
@@ -93,7 +88,7 @@ public class HomeFragment extends Fragment {
         findFlatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new  Intent(getActivity(), FindFlat.class);
+                Intent intent = new Intent(getActivity(), FindFlat.class);
                 startActivity(intent);
             }
         });

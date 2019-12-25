@@ -113,7 +113,7 @@ public class FindFlatDetails extends AppCompatActivity {
                 public void onClick(View v) {
 
                     String id = userId;
-                    checkIfRated(selectedFlat.getUserId(),id);
+                    checkIfRated(selectedFlat.getUserId(), id);
 
                 }
             });
@@ -239,7 +239,7 @@ public class FindFlatDetails extends AppCompatActivity {
                                     String strDescription = object.getString("comment");
                                     String strDate = object.getString("date").trim();
 
-                                    rates.add(new Rate(strRateId, strUserId, strRaterId, strDescription, strDate,Float.valueOf(strDescriptionRate), Float.valueOf(strContactRate)));
+                                    rates.add(new Rate(strRateId, strUserId, strRaterId, strDescription, strDate, Float.valueOf(strDescriptionRate), Float.valueOf(strContactRate)));
 
 
                                 }
@@ -252,7 +252,7 @@ public class FindFlatDetails extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(FindFlatDetails.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FindFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -291,8 +291,7 @@ public class FindFlatDetails extends AppCompatActivity {
                                 intent.putExtra("rated user", selectedFlat.getUserId());
                                 startActivity(intent);
 
-                            }
-                            else if (succes.equals("0")){
+                            } else if (succes.equals("0")) {
                                 Toast.makeText(FindFlatDetails.this, "Już oceniłeś tego użytkownika.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {

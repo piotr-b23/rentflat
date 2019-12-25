@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionMenager.getUserDetail();
 
 
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -80,13 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
 
-                if(sessionMenager.isLogged()) {
-                    userId = user.get(sessionMenager.ID);
+        if (sessionMenager.isLogged()) {
+            userId = user.get(sessionMenager.ID);
 
+        } else {
+            userId = null;
         }
-                else{
-                    userId = null;
-                }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -135,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -145,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

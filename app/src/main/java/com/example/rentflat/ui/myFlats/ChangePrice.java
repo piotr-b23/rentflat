@@ -54,22 +54,18 @@ public class ChangePrice extends AppCompatActivity {
             public void onClick(View v) {
                 String upPrice = price.getText().toString().trim();
 
-                if (!upPrice.isEmpty()){
-                    if (Integer.parseInt(upPrice)>500000 || Integer.parseInt(upPrice)<50){
+                if (!upPrice.isEmpty()) {
+                    if (Integer.parseInt(upPrice) > 500000 || Integer.parseInt(upPrice) < 50) {
 
                         price.setError("Podaj poprawną cenę za wynajem.");
 
-                    }
-                    else
-                    {
-                        UpdatePrice(flatId,upPrice);
+                    } else {
+                        UpdatePrice(flatId, upPrice);
                     }
 
 
-
-                }
-                else {
-                    if(upPrice.isEmpty()) price.setError("Podaj poprawną cenę za wynajem.");
+                } else {
+                    if (upPrice.isEmpty()) price.setError("Podaj poprawną cenę za wynajem.");
                 }
 
             }
@@ -77,23 +73,23 @@ public class ChangePrice extends AppCompatActivity {
 
     }
 
-    private void UpdatePrice(final String flatId,final String updatedPrice){
+    private void UpdatePrice(final String flatId, final String updatedPrice) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_PRICE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String succes = jsonObject.getString("success");
-                            if (succes.equals("1")){
-                                Toast.makeText(ChangePrice.this,"Zaktualizowano cenę oferty.",Toast.LENGTH_SHORT).show();
-                                Intent intent = new  Intent(ChangePrice.this, MainActivity.class);
+                            if (succes.equals("1")) {
+                                Toast.makeText(ChangePrice.this, "Zaktualizowano cenę oferty.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ChangePrice.this, MainActivity.class);
                                 startActivity(intent);
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ChangePrice.this,"Błąd" + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangePrice.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -101,16 +97,15 @@ public class ChangePrice extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChangePrice.this,"Błąd" + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePrice.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("flatid",flatId);
-                params.put("price",updatedPrice);
+                Map<String, String> params = new HashMap<>();
+                params.put("flatid", flatId);
+                params.put("price", updatedPrice);
 
                 return params;
             }

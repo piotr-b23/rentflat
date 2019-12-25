@@ -70,4 +70,4 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.ViewHolder> {
             descriptionRate = itemView.findViewById(R.id.ratingBarCommentDisplay);
         }
     }
-    }
+}
