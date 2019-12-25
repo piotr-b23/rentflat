@@ -6,6 +6,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -15,26 +29,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.MainActivity;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Base64;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.Toast;
-
 import com.example.rentflat.R;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +42,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,26 +52,23 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class AddFlat extends AppCompatActivity {
 
+    private static String URL_ADD_FLAT = serverIp + "/add_flat.php";
+    private static String URL_UPLOAD_PHOTO = serverIp + "/upload_photo.php";
+    public String crePhoto = "";
+    RecyclerView recyclerView;
+    ImageAdapter adapter;
     private EditText price, surface, room, locality, street, description;
     private Button addFlatButton, addPhoto;
     private CheckBox studentsCheckBox;
-    private static String URL_ADD_FLAT = serverIp + "/add_flat.php";
-    private static String URL_UPLOAD_PHOTO = serverIp + "/upload_photo.php";
-    private static String PHOTO_STORAGE = serverIp + "user_data/";
     private Bitmap bitmap;
     private List<Bitmap> bitmaps;
-    public String crePhoto = "";
     private ArrayList<String> photos;
-
-    RecyclerView recyclerView;
-    ImageAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_flat);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         price = findViewById(R.id.flatPrice);
@@ -87,14 +79,13 @@ public class AddFlat extends AppCompatActivity {
         description = findViewById(R.id.flatDescription);
         studentsCheckBox = findViewById(R.id.checkBoxForStudents);
 
-
         recyclerView = findViewById(R.id.addFlatImageRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
         addFlatButton = findViewById(R.id.addFlatButton);
         addPhoto = findViewById(R.id.addPhotoButton);
 
+        bitmaps = new ArrayList<>();
 
         final Spinner buildingType = findViewById(R.id.buildingTypeSpinner);
         ArrayAdapter<CharSequence> buildingTypeAdapter = ArrayAdapter.createFromResource(this, R.array.building_type, android.R.layout.simple_spinner_item);
@@ -133,12 +124,11 @@ public class AddFlat extends AppCompatActivity {
                 String id = userId;
 
 
-                if (!crePrice.isEmpty() && !creSurface.isEmpty() && !creRoom.isEmpty() && !creLocality.isEmpty() && !creStreet.isEmpty() && !creDescription.isEmpty()) {
+                if (!crePrice.isEmpty() && !creSurface.isEmpty() && !creRoom.isEmpty() && !creLocality.isEmpty() && !creStreet.isEmpty() && !creDescription.isEmpty() && !bitmaps.isEmpty()) {
 
                     if (chceckIfDataIsCorrect(crePrice, creSurface, creRoom, creDescription) == false) {
                         Toast.makeText(AddFlat.this, "Popraw wprowadzone dane", Toast.LENGTH_SHORT).show();
                     } else {
-                        //Collections.reverse(bitmaps);
 
                         for (Bitmap b : bitmaps) {
                             try {
@@ -159,12 +149,12 @@ public class AddFlat extends AppCompatActivity {
 
                 } else {
                     if (crePrice.isEmpty()) price.setError("Wprowadź cenę za wynajem");
-                    if (creSurface.isEmpty())
-                        surface.setError("Wprowadź metraż wynajmowanego obiektu");
+                    if (creSurface.isEmpty()) surface.setError("Wprowadź metraż wynajmowanego obiektu");
                     if (creRoom.isEmpty()) room.setError("Podaj ilość pokoi");
                     if (creLocality.isEmpty()) locality.setError("Podaj miejscowość");
                     if (creStreet.isEmpty()) street.setError("Podaj ulicę");
                     if (creDescription.isEmpty()) description.setError("Napisz krótki opis");
+                    if (bitmaps.isEmpty()) Toast.makeText(AddFlat.this, "Dodaj zdjęcia do ogłoszenia", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -289,7 +279,6 @@ public class AddFlat extends AppCompatActivity {
                         Toast.makeText(AddFlat.this, "Wybierz maksymalnie 9 zdjęć.", Toast.LENGTH_SHORT).show();
                         adapter = new ImageAdapter(this, photos);
                         recyclerView.setAdapter(adapter);
-                        //                    recyclerView.setVisibility(View.VISIBLE);
                     } else {
                         int currentElement = 0;
                         for (int i = 0; i < clipData.getItemCount(); i++) {

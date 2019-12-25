@@ -25,201 +25,197 @@
             android:paddingBottom="48dp" />
 
 
-
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+
+            <TableRow android:layout_marginTop="10dp">
 
                 <Button
                     android:id="@+id/addPhotoButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Dodaj zdjęcie" />
             </TableRow>
 
-        </TableLayout>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="195dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Cena wynajmu (zł)"
                     android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/flatPrice"
-                    android:nextFocusDown="@+id/flatSurface"
                     android:layout_width="160dp"
                     android:layout_height="60dp"
                     android:ems="10"
-                    android:inputType="numberSigned" />
+                    android:inputType="number"
+                    android:nextFocusDown="@+id/flatSurface" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/textView18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Powierzchnia (m²)"
                     android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/flatSurface"
-                    android:nextFocusDown="@+id/flatRooms"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:ems="10"
-                    android:inputType="numberSigned" />
+                    android:inputType="number"
+                    android:nextFocusDown="@+id/flatRooms" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/textView17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Ilość pokoi"
                     android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/flatRooms"
-                    android:nextFocusDown="@+id/buildingTypeSpinner"
                     android:layout_width="160dp"
                     android:layout_height="60dp"
                     android:ems="10"
-                    android:inputType="numberSigned" />
+                    android:inputType="number"
+                    android:nextFocusDown="@+id/buildingTypeSpinner" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
                     android:text="Typ budynku"
                     android:textSize="18sp" />
 
                 <Spinner
                     android:id="@+id/buildingTypeSpinner"
-                    android:nextFocusDown="@+id/provinceSpinner"
                     android:layout_width="160dp"
-                    android:layout_height="60dp" />
+                    android:layout_height="60dp"
+                    android:nextFocusDown="@+id/provinceSpinner" />
 
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
                     android:text="Województwo"
                     android:textSize="18sp" />
 
                 <Spinner
                     android:id="@+id/provinceSpinner"
-                    android:nextFocusDown="@+id/flatLocality"
                     android:layout_width="160dp"
-                    android:layout_height="60dp" />
+                    android:layout_height="60dp"
+                    android:nextFocusDown="@+id/flatLocality" />
 
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Miejscowość"
                     android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/flatLocality"
-                    android:nextFocusDown="@+id/flatStreet"
                     android:layout_width="160dp"
                     android:layout_height="60dp"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:nextFocusDown="@+id/flatStreet" />
 
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Ulica"
                     android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/flatStreet"
-                    android:nextFocusDown="@+id/flatDescription"
                     android:layout_width="160dp"
                     android:layout_height="60dp"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:nextFocusDown="@+id/flatDescription" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Mieszkanie studenckie"
                     android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/checkBoxForStudents"
-                    android:nextFocusDown="@+id/flatDescription"
                     android:layout_width="160dp"
-                    android:layout_height="60dp" />
+                    android:layout_height="60dp"
+                    android:nextFocusDown="@+id/flatDescription" />
 
             </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Opis"
+                    android:textSize="18sp" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/flatDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="2"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine" />
+            </TableRow>
+
         </TableLayout>
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Opis"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/flatDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine" />
 
         <LinearLayout
             android:id="@+id/LinearLayout1"
@@ -231,7 +227,7 @@
             <Button
                 android:id="@+id/addFlatButton"
                 android:layout_width="301dp"
-                android:layout_height="76dp"
+                android:layout_height="71dp"
                 android:text="Dodaj ogłoszenie" />
         </LinearLayout>
 
