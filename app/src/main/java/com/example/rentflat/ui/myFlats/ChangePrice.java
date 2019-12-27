@@ -87,6 +87,9 @@ public class ChangePrice extends AppCompatActivity {
                                 Intent intent = new Intent(ChangePrice.this, MainActivity.class);
                                 startActivity(intent);
                             }
+                            else{
+                                Toast.makeText(ChangePrice.this, "Wystąpił błąd w trakcie zmiany ceny oferty.", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(ChangePrice.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();

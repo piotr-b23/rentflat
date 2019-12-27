@@ -126,7 +126,7 @@ public class AddFlat extends AppCompatActivity {
 
                 if (!crePrice.isEmpty() && !creSurface.isEmpty() && !creRoom.isEmpty() && !creLocality.isEmpty() && !creStreet.isEmpty() && !creDescription.isEmpty() && !bitmaps.isEmpty()) {
 
-                    if (chceckIfDataIsCorrect(crePrice, creSurface, creRoom, creDescription) == false) {
+                    if (checkIfDataIsCorrect(crePrice, creSurface, creRoom, creDescription,creStreet,creLocality) == false) {
                         Toast.makeText(AddFlat.this, "Popraw wprowadzone dane", Toast.LENGTH_SHORT).show();
                     } else {
 
@@ -175,6 +175,9 @@ public class AddFlat extends AppCompatActivity {
                                 Toast.makeText(AddFlat.this, "Utworzono ogłoszenie", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(AddFlat.this, MainActivity.class);
                                 startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(AddFlat.this, "Wystąpił problem w trakcie dodawania ogłoszenia.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -338,7 +341,7 @@ public class AddFlat extends AppCompatActivity {
         return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
     }
 
-    public boolean chceckIfDataIsCorrect(String price, String surface, String room, String description) {
+    public boolean checkIfDataIsCorrect(String price, String surface, String room, String description, String street, String locality) {
 
         boolean isCorrect = true;
 
@@ -346,6 +349,8 @@ public class AddFlat extends AppCompatActivity {
         if (checkSurface(surface) == false) isCorrect = false;
         if (checkRoom(room) == false) isCorrect = false;
         if (checkDescription(description) == false) isCorrect = false;
+        if (checkStreet(street) == false) isCorrect = false;
+        if (checkLocality(locality) == false) isCorrect = false;
 
         return isCorrect;
     }
@@ -358,7 +363,7 @@ public class AddFlat extends AppCompatActivity {
     }
 
     public boolean checkSurface(String inSurface) {
-        if (Integer.parseInt(inSurface) > 250000 || Integer.parseInt(inSurface) < 25) {
+        if (Integer.parseInt(inSurface) > 250000 || Integer.parseInt(inSurface) < 5) {
             surface.setError("Wprowadź poprawny metraż wynajmowanego obiektu.");
             return false;
         } else return true;
@@ -374,6 +379,26 @@ public class AddFlat extends AppCompatActivity {
     public boolean checkDescription(String inDescription) {
         if (inDescription.length() < 20) {
             description.setError("Za krótki opis.");
+            return false;
+        }
+        else if(inDescription.length()>15000) {
+            description.setError("Za długi opis.");
+            return false;
+        }
+            else{
+        } return true;
+    }
+
+    public boolean checkStreet(String inStreet) {
+        if (inStreet.length() > 100) {
+            street.setError("Za długa nazwa ulicy.");
+            return false;
+        } else return true;
+    }
+
+    public boolean checkLocality(String inLocality) {
+        if (inLocality.length() > 100) {
+            street.setError("Za długa nazwa miejscowości.");
             return false;
         } else return true;
     }

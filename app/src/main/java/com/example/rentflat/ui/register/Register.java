@@ -32,7 +32,7 @@ public class Register extends AppCompatActivity {
 
     private EditText name, username, email, password, confirmedPassword;
     private Button registerButton;
-    private static String URL_REGIST = serverIp + "/regist.php";
+    private static String URL_REGIST = serverIp + "/register.php";
 
 
     @Override

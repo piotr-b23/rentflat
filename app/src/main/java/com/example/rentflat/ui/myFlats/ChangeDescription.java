@@ -81,11 +81,14 @@ public class ChangeDescription extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
                                 Toast.makeText(ChangeDescription.this, "Zaktualizowano opis oferty.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ChangeDescription.this, MainActivity.class);
                                 startActivity(intent);
+                            }
+                            else{
+                                Toast.makeText(ChangeDescription.this, "Wystąpił błąd w trakcie zmiany opisu oferty.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -101,6 +104,7 @@ public class ChangeDescription extends AppCompatActivity {
 
                     }
                 }) {
+
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();

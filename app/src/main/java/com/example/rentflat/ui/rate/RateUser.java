@@ -85,6 +85,9 @@ public class RateUser extends AppCompatActivity {
                                 Toast.makeText(RateUser.this, "Wystawiono ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
+                            else{
+                                Toast.makeText(RateUser.this, "Wystąpił problem w trakcie dodawania oceny", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(RateUser.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();

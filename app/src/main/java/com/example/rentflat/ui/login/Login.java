@@ -86,6 +86,9 @@ public class Login extends AppCompatActivity {
                                 sessionMenager.checkIfLogged();
 
                             }
+                            else {
+                                Toast.makeText(Login.this, "Podany login lub hasło jest nieprawidłowe.", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(Login.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
