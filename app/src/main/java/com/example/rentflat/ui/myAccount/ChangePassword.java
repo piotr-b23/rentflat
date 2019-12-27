@@ -83,11 +83,24 @@ public class ChangePassword extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            String message = jsonObject.getString("message");
+                            if (success.equals("1")) {
                                 Toast.makeText(ChangePassword.this, "Zmieniono hasło", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(ChangePassword.this, MainActivity.class);
-                                startActivity(intent);
+                                finish();
+                            }
+                            else{
+                                switch (message){
+                                    case "error":
+                                        Toast.makeText(ChangePassword.this, "Problem przy zmianie hasła", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case "password":
+                                        Toast.makeText(ChangePassword.this, "Niepoprawne hasło", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        Toast.makeText(ChangePassword.this, "Błąd", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
