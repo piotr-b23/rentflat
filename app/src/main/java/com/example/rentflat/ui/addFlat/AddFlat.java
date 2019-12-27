@@ -196,7 +196,7 @@ public class AddFlat extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("userid", id);
+                params.put("userId", id);
                 params.put("price", price);
                 params.put("surface", surface);
                 params.put("room", room);

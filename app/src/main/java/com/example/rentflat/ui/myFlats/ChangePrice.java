@@ -107,7 +107,7 @@ public class ChangePrice extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("flatid", flatId);
+                params.put("flatId", flatId);
                 params.put("price", updatedPrice);
 
                 return params;
