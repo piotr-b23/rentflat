@@ -99,6 +99,9 @@ public class FindFlatResults extends AppCompatActivity {
 
 
                             }
+                            else{
+                                Toast.makeText(FindFlatResults.this, "Wystąpił problem przy wyszukiwaniu ogłoszeń", Toast.LENGTH_SHORT).show();
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

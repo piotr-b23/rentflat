@@ -77,11 +77,13 @@ public class ChangePhone extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
                                 Toast.makeText(ChangePhone.this, "Zaktualizowano numer telefonu", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(ChangePhone.this, MainActivity.class);
-                                startActivity(intent);
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(ChangePhone.this, "Wystąpił problem przy zmianie numeru telefonu", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

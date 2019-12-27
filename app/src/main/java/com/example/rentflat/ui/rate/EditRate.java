@@ -81,10 +81,13 @@ public class EditRate extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
                                 Toast.makeText(EditRate.this, "Zaktualizowano ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
+                            }
+                            else{
+                                Toast.makeText(EditRate.this, "Wystąpił problem przy edycji oceny", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -90,11 +90,14 @@ public class Register extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
                                 Toast.makeText(Register.this, "Zarejestrowano", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Register.this, MainActivity.class);
                                 startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(Register.this, "Wystąpił problem z rejestracją", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

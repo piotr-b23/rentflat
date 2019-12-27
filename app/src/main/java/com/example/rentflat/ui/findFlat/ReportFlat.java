@@ -75,10 +75,13 @@ public class ReportFlat extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
                                 Toast.makeText(ReportFlat.this, "Zgłoszono ogłoszenie", Toast.LENGTH_SHORT).show();
                                 finish();
+                            }
+                            else {
+                                Toast.makeText(ReportFlat.this, "Wystąpił problem przy zgłaszaniu", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -97,7 +100,7 @@ public class ReportFlat extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("flatid", flatId);
+                params.put("flatId", flatId);
                 params.put("reportUserId", reportingUserId);
                 params.put("comment", reportDescription);
                 params.put("date", dateTime);

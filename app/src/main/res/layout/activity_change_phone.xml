@@ -33,7 +33,7 @@
             android:layout_marginRight="99dp"
             android:ems="10"
             android:hint="nowy numer telefonu"
-            android:inputType="phone"/>
+            android:inputType="number"/>
 
 
         <Button

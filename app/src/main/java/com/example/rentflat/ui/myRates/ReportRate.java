@@ -76,10 +76,13 @@ public class ReportRate extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
                                 Toast.makeText(ReportRate.this, "Zgłoszono ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
+                            }
+                            else{
+                                Toast.makeText(ReportRate.this, "Wystąpił problem przy zgłaszaniu", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
