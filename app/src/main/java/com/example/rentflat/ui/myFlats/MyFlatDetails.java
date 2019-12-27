@@ -149,6 +149,9 @@ public class MyFlatDetails extends AppCompatActivity {
 //                                Intent intent = new  Intent(MyFlatDetails.this, MainActivity.class);
 //                                startActivity(intent);
                             }
+                            else{
+                                Toast.makeText(MyFlatDetails.this, "Wystąpił błąd przy zamykaniu ogłoszenia", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(MyFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();

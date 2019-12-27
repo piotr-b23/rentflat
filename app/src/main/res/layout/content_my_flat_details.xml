@@ -183,12 +183,6 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/closeOfferButton"
-                android:layout_width="150dp"
-                android:layout_height="76dp"
-                android:text="Zakończ ogłoszenie" />
-
-            <Button
                 android:id="@+id/changePriceButton"
                 android:layout_width="150dp"
                 android:layout_height="76dp"
@@ -199,6 +193,12 @@
                 android:layout_width="150dp"
                 android:layout_height="76dp"
                 android:text="Zmień opis" />
+
+            <Button
+                android:id="@+id/closeOfferButton"
+                android:layout_width="150dp"
+                android:layout_height="76dp"
+                android:text="Zakończ ogłoszenie" />
         </LinearLayout>
 
     </LinearLayout>

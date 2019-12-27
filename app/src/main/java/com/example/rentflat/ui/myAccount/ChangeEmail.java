@@ -79,11 +79,30 @@ public class ChangeEmail extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            String message = jsonObject.getString("message");
+                            if (success.equals("1")) {
                                 Toast.makeText(ChangeEmail.this, "Zaktualizowano email", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(ChangeEmail.this, MainActivity.class);
-                                startActivity(intent);
+                                finish();
+                            }
+                            else{
+                                switch (message){
+                                    case "error":
+                                        Toast.makeText(ChangeEmail.this, "Problem przy zmianie maila", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case "password":
+                                        Toast.makeText(ChangeEmail.this, "Niepoprawne hasło", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case "mail":
+                                        Toast.makeText(ChangeEmail.this, "Podany mail jest już wykorzystywany", Toast.LENGTH_SHORT).show();
+                                        break;
+                                        default:
+                                            Toast.makeText(ChangeEmail.this, "Błąd", Toast.LENGTH_SHORT).show();
+                                            break;
+                                }
+
+
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
