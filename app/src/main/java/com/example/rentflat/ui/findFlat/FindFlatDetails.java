@@ -171,7 +171,8 @@ public class FindFlatDetails extends AppCompatActivity {
     }
 
     private void callOrText(final String userId, final String callOrText) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_PHONE,
+        String url = String.format(URL_GET_PHONE + "?userId=%s",userId);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -193,6 +194,9 @@ public class FindFlatDetails extends AppCompatActivity {
                                 }
 
                             }
+                            else{
+                                Toast.makeText(FindFlatDetails.this, "Wystąpił problem w trakcie próby kontaktu", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(FindFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
@@ -206,15 +210,7 @@ public class FindFlatDetails extends AppCompatActivity {
                         Toast.makeText(FindFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("userid", userId);
-
-                return params;
-            }
-        };
+                });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
@@ -222,7 +218,8 @@ public class FindFlatDetails extends AppCompatActivity {
     }
 
     private void getUserRates(final String userId) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_RATES,
+        String url = String.format(URL_GET_RATES + "?userId=%s",userId);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -254,6 +251,9 @@ public class FindFlatDetails extends AppCompatActivity {
 
 
                             }
+                            else{
+                                Toast.makeText(FindFlatDetails.this, "Użytkownik nie otrzymał ocen", Toast.LENGTH_SHORT).show();
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -268,15 +268,7 @@ public class FindFlatDetails extends AppCompatActivity {
                         Toast.makeText(FindFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("userid", userId);
-
-                return params;
-            }
-        };
+                });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
