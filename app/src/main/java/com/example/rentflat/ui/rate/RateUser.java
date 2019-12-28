@@ -80,13 +80,20 @@ public class RateUser extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            String message = jsonObject.getString("message");
+                            if (success.equals("1")) {
                                 Toast.makeText(RateUser.this, "Wystawiono ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                             else{
-                                Toast.makeText(RateUser.this, "Wystąpił problem w trakcie dodawania oceny", Toast.LENGTH_SHORT).show();
+                                if(message.equals("same user")){
+                                    Toast.makeText(RateUser.this, "Nie możesz ocenić siebie samego", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(RateUser.this, "Wystąpił problem w trakcie dodawania oceny", Toast.LENGTH_SHORT).show();
+                                }
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

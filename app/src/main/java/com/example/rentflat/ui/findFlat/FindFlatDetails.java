@@ -113,7 +113,12 @@ public class FindFlatDetails extends AppCompatActivity {
                 public void onClick(View v) {
 
                     String id = userId;
-                    checkIfRated(selectedFlat.getUserId(), id);
+                    if(id.equals(selectedFlat.getUserId())){
+                        Toast.makeText(FindFlatDetails.this, "Nie możesz ocenić siebie samego.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        checkIfRated(selectedFlat.getUserId(), id);
+                    }
 
                 }
             });
@@ -279,20 +284,27 @@ public class FindFlatDetails extends AppCompatActivity {
     }
 
     private void checkIfRated(final String userId, final String raterId) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHECK_IF_RATED,
+        String url = String.format(URL_CHECK_IF_RATED + "?userId=%s&raterId=%s",userId,raterId);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            String message = jsonObject.getString("message");
+                            if (success.equals("1")) {
                                 Intent intent = new Intent(FindFlatDetails.this, RateUser.class);
                                 intent.putExtra("rated user", selectedFlat.getUserId());
                                 startActivity(intent);
 
-                            } else if (succes.equals("0")) {
-                                Toast.makeText(FindFlatDetails.this, "Już oceniłeś tego użytkownika.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if(message.equals("same user")) {
+                                    Toast.makeText(FindFlatDetails.this, "Nie możesz ocenić siebie samego.", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(FindFlatDetails.this, "Już oceniłeś tego użytkownika.", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -307,16 +319,7 @@ public class FindFlatDetails extends AppCompatActivity {
                         Toast.makeText(FindFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("userid", userId);
-                params.put("raterid", raterId);
-
-                return params;
-            }
-        };
+                });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 

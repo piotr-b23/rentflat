@@ -63,7 +63,7 @@ public class MyFlatsFragment extends Fragment {
         if (sessionMenager.isLogged()) {
             myFlatsText.setText("Przeglądaj swoje ogłoszenia");
             addFlat.setVisibility(View.VISIBLE);
-            getMyFlats(id);
+            getMyFlatsTest(id);
             addFlat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -79,6 +79,73 @@ public class MyFlatsFragment extends Fragment {
 
         return root;
     }
+
+    private void getMyFlatsTest(final String useriD){
+
+        String url = String.format(URL_GET_MY_FLATS+"?userId=%s",useriD);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("flat");
+
+                            if (success.equals("1")) {
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject object = jsonArray.getJSONObject(i);
+
+                                    String strFlatId = object.getString("id").trim();
+                                    String strFlatUserId = object.getString("userid").trim();
+                                    String strPrice = object.getString("price").trim();
+                                    String strSurface = object.getString("surface").trim();
+                                    String strRoom = object.getString("room").trim();
+                                    String strProvince = object.getString("province").trim();
+                                    String strType = object.getString("type").trim();
+                                    String strLocality = object.getString("locality").trim();
+                                    String strStreet = object.getString("street").trim();
+                                    String strDescription = object.getString("description").trim();
+                                    String strStudents = object.getString("students").trim();
+                                    String strPhoto = object.getString("photo").trim();
+                                    String strDate = object.getString("date").trim();
+
+                                    flats.add(new Flat(strFlatId, strFlatUserId, strPrice, strSurface, strRoom, strProvince, strType, strLocality, strStreet, strDescription, strStudents, strPhoto,strDate));
+
+
+                                }
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                adapter = new MyFlatsAdapter(getActivity(), flats);
+                                recyclerView.setAdapter(adapter);
+
+                            }
+                            else{
+                                Toast.makeText(getActivity(), "Nie masz żadnych ogłoszeń.", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
+
+
 
     private void getMyFlats(final String userId) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_MY_FLATS,
