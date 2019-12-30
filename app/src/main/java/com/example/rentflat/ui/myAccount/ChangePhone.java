@@ -2,7 +2,6 @@ package com.example.rentflat.ui.myAccount;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.rentflat.MainActivity;
 import com.example.rentflat.R;
 
 import org.json.JSONException;
@@ -28,8 +26,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.userId;
-import static com.example.rentflat.ui.register.Register.isEmailValid;
 
 public class ChangePhone extends AppCompatActivity {
 
@@ -106,6 +104,14 @@ public class ChangePhone extends AppCompatActivity {
                 params.put("phone", phone);
 
                 return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                headers.put("Authorization-token",TOKEN);
+
+                return headers;
             }
         };
 

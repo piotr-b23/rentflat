@@ -1,6 +1,5 @@
 package com.example.rentflat;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.AuthFailureError;
@@ -11,11 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.ui.SessionMenager;
-import com.example.rentflat.ui.addFlat.AddFlat;
 import com.example.rentflat.ui.home.HomeFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -48,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     public static SessionMenager sessionMenager;
     private static final String TAG = HomeFragment.class.getSimpleName();
     public static String userId;
+    public static String TOKEN;
     public static String serverIp = "http://192.168.1.11/";
     private String URL_READ = serverIp + "read_detail.php";
 
@@ -81,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (sessionMenager.isLogged()) {
             userId = user.get(sessionMenager.ID);
+            TOKEN = user.get(sessionMenager.TOKEN);
 
         } else {
             userId = null;

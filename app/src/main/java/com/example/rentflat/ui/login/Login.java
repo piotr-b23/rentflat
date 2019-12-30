@@ -70,18 +70,18 @@ public class Login extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
+                            String success = jsonObject.getString("success");
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
-                            if (succes.equals("1")) {
+                            if (success.equals("1")) {
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
                                     String name = object.getString("name").trim();
-                                    String username = object.getString("username").trim();
+                                    String token = object.getString("token").trim();
                                     String id = object.getString("id").trim();
                                     Toast.makeText(Login.this, "Zalogowano. \nWitaj " + name, Toast.LENGTH_SHORT).show();
 
-                                    sessionMenager.createSession(name, username, id);
+                                    sessionMenager.createSession(name, token, id);
                                 }
                                 sessionMenager.checkIfLogged();
 
