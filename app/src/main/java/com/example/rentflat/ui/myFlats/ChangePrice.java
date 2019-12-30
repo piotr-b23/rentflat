@@ -26,7 +26,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.MainActivity.userId;
 
 public class ChangePrice extends AppCompatActivity {
 
@@ -60,7 +62,7 @@ public class ChangePrice extends AppCompatActivity {
                         price.setError("Podaj poprawną cenę za wynajem.");
 
                     } else {
-                        UpdatePrice(flatId, upPrice);
+                        UpdatePrice(flatId, upPrice,userId);
                     }
 
 
@@ -73,7 +75,7 @@ public class ChangePrice extends AppCompatActivity {
 
     }
 
-    private void UpdatePrice(final String flatId, final String updatedPrice) {
+    private void UpdatePrice(final String flatId, final String updatedPrice, final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_PRICE,
                 new Response.Listener<String>() {
@@ -109,8 +111,17 @@ public class ChangePrice extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("flatId", flatId);
                 params.put("price", updatedPrice);
+                params.put("userId", userId);
 
                 return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                headers.put("Authorization-token",TOKEN);
+
+                return headers;
             }
         };
 

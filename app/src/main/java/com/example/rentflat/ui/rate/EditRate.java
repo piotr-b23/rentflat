@@ -28,7 +28,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.MainActivity.userId;
 
 public class EditRate extends AppCompatActivity {
 
@@ -68,12 +70,12 @@ public class EditRate extends AppCompatActivity {
                 String date = df.format(Calendar.getInstance().getTime());
 
 
-                UpdateRate(editedRate.getRateId(), contactRateString, descriptionRateString, descriptionRate, date);
+                UpdateRate(editedRate.getRateId(), contactRateString, descriptionRateString, descriptionRate, date,userId);
             }
         });
     }
 
-    private void UpdateRate(final String rateId, final String contactRate, final String descriptionRate, final String comment, final String date) {
+    private void UpdateRate(final String rateId, final String contactRate, final String descriptionRate, final String comment, final String date,final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_RATE,
                 new Response.Listener<String>() {
@@ -111,8 +113,18 @@ public class EditRate extends AppCompatActivity {
                 params.put("descriptionRate", descriptionRate);
                 params.put("comment", comment);
                 params.put("date", date);
+                params.put("userId", userId);
 
                 return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                headers.put("Authorization-token",TOKEN);
+
+                return headers;
             }
         };
 

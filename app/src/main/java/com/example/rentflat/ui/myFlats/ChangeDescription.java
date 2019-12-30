@@ -26,7 +26,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.MainActivity.userId;
 
 public class ChangeDescription extends AppCompatActivity {
 
@@ -60,7 +62,7 @@ public class ChangeDescription extends AppCompatActivity {
                         description.setError("Za krótki opis.");
 
                     } else {
-                        UpdateDescription(flatId, upDescription);
+                        UpdateDescription(flatId, upDescription,userId);
                     }
 
 
@@ -73,7 +75,7 @@ public class ChangeDescription extends AppCompatActivity {
 
     }
 
-    private void UpdateDescription(final String flatId, final String updatedDescription) {
+    private void UpdateDescription(final String flatId, final String updatedDescription,final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_DESCRIPTION,
                 new Response.Listener<String>() {
@@ -110,8 +112,17 @@ public class ChangeDescription extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("flatId", flatId);
                 params.put("description", updatedDescription);
+                params.put("userId", userId);
 
                 return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                headers.put("Authorization-token",TOKEN);
+
+                return headers;
             }
         };
 

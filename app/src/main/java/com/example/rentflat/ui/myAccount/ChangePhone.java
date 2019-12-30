@@ -67,7 +67,7 @@ public class ChangePhone extends AppCompatActivity {
 
     }
 
-    private void UpdatePhone(final String phone, final String id) {
+    private void UpdatePhone(final String phone, final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_MAIL,
                 new Response.Listener<String>() {
@@ -100,7 +100,7 @@ public class ChangePhone extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("id", id);
+                params.put("userId", userId);
                 params.put("phone", phone);
 
                 return params;

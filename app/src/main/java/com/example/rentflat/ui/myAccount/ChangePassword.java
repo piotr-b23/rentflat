@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.userId;
 import static com.example.rentflat.ui.register.Register.isEmailValid;
@@ -75,7 +76,7 @@ public class ChangePassword extends AppCompatActivity {
 
     }
 
-    private void ChangePass(final String password, final String newPassword, final String id) {
+    private void ChangePass(final String password, final String newPassword, final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_MAIL,
                 new Response.Listener<String>() {
@@ -119,11 +120,19 @@ public class ChangePassword extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("id", id);
+                params.put("userId", userId);
                 params.put("password", password);
                 params.put("newpassword", newPassword);
 
                 return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                headers.put("Authorization-token",TOKEN);
+
+                return headers;
             }
         };
 

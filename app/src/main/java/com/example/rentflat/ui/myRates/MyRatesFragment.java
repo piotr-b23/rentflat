@@ -85,7 +85,8 @@ public class MyRatesFragment extends Fragment {
     }
 
     private void getMyRates(final String userId) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_MY_RATES,
+        String url = String.format(URL_GET_MY_RATES + "?userId=%s",userId);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -145,15 +146,7 @@ public class MyRatesFragment extends Fragment {
                         Toast.makeText(getActivity(), "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("userid", userId);
-
-                return params;
-            }
-        };
+                });
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
 

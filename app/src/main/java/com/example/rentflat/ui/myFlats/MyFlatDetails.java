@@ -40,8 +40,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.userId;
 
 public class MyFlatDetails extends AppCompatActivity {
 
@@ -125,7 +127,7 @@ public class MyFlatDetails extends AppCompatActivity {
             closeOffer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CloseOffer(selectedFlat.getFlatId());
+                    CloseOffer(selectedFlat.getFlatId(),userId);
 
                 }
             });
@@ -135,7 +137,7 @@ public class MyFlatDetails extends AppCompatActivity {
 
     }
 
-    private void CloseOffer(final String flatId) {
+    private void CloseOffer(final String flatId, final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CLOSE_OFFER,
                 new Response.Listener<String>() {
@@ -170,9 +172,20 @@ public class MyFlatDetails extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("flatId", flatId);
+                params.put("userId", userId);
 
                 return params;
             }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                headers.put("Authorization-token",TOKEN);
+
+                return headers;
+            }
+
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
