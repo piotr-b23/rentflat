@@ -104,6 +104,14 @@ public class MyAccountFragment extends Fragment {
                 }
             });
 
+            deleteAccount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), DeleteAccount.class);
+                    startActivity(intent);
+                }
+            });
+
 
         } else {
             updateEmail.setVisibility(View.GONE);

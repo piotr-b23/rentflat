@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.myRates.ReportRate"></activity>
+        <activity android:name=".ui.myAccount.DeleteAccount"></activity>
+        <activity android:name=".ui.myRates.ReportRate" />
         <activity android:name=".ui.rate.EditRate" />
         <activity android:name=".ui.myAccount.GivenRates" />
         <activity android:name=".ui.rate.RateResults" />
@@ -35,9 +36,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.addFlat.AddFlat"
-            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_add_flat"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.myAccount.ChangePhone" />
         <activity android:name=".ui.myAccount.ChangePassword" />
         <activity android:name=".ui.myAccount.ChangeEmail" />
