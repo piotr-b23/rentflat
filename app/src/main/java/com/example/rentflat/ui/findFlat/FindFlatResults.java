@@ -74,11 +74,11 @@ public class FindFlatResults extends AppCompatActivity {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
-                                    String strFlatId = object.getString("id").trim();
-                                    String strFlatUserId = object.getString("userid").trim();
-                                    String strPrice = object.getString("price").trim();
-                                    String strSurface = object.getString("surface").trim();
-                                    String strRoom = object.getString("room").trim();
+                                    int strFlatId = Integer.parseInt(object.getString("id").trim());
+                                    int strFlatUserId = Integer.parseInt(object.getString("userid").trim());
+                                    int strPrice = Integer.parseInt(object.getString("price").trim());
+                                    int strSurface = Integer.parseInt(object.getString("surface").trim());
+                                    int strRoom = Integer.parseInt(object.getString("room").trim());
                                     String strProvince = object.getString("province").trim();
                                     String strType = object.getString("type").trim();
                                     String strLocality = object.getString("locality").trim();

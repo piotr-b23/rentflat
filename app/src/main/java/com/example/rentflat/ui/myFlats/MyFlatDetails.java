@@ -78,9 +78,9 @@ public class MyFlatDetails extends AppCompatActivity {
         editDescription = findViewById(R.id.changeDescriptionButton);
         closeOffer = findViewById(R.id.closeOfferButton);
 
-        price.setText(selectedFlat.getPrice());
-        surface.setText(selectedFlat.getSurface());
-        room.setText(selectedFlat.getRoom());
+        price.setText(Integer.toString(selectedFlat.getPrice()));
+        surface.setText(Integer.toString(selectedFlat.getSurface()));
+        room.setText(Integer.toString(selectedFlat.getRoom()));
         type.setText(selectedFlat.getType());
         province.setText(selectedFlat.getProvince());
         locality.setText(selectedFlat.getLocality());
@@ -127,7 +127,7 @@ public class MyFlatDetails extends AppCompatActivity {
             closeOffer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CloseOffer(selectedFlat.getFlatId(),userId);
+                    CloseOffer(Integer.toString(selectedFlat.getFlatId()),userId);
 
                 }
             });
@@ -145,8 +145,8 @@ public class MyFlatDetails extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
                                 Toast.makeText(MyFlatDetails.this, "Zakończono ogłoszenie", Toast.LENGTH_SHORT).show();
 //                                Intent intent = new  Intent(MyFlatDetails.this, MainActivity.class);
 //                                startActivity(intent);

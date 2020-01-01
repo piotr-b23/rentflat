@@ -4,13 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import static com.example.rentflat.MainActivity.serverIp;
 
 public class Flat implements Parcelable {
-    private String flatId, flatUserId, price, surface, room, province, type, locality, street, description, students, photoAdress, date;
+    private int flatId, flatUserId, price, surface, room;
+    private String province, type, locality, street, description,students, photoAddress, date;
     private String photoLocation = serverIp;
 
     @Override
@@ -21,23 +21,22 @@ public class Flat implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(flatId);
-        out.writeString(flatUserId);
-        out.writeString(price);
-        out.writeString(surface);
-        out.writeString(room);
+        out.writeInt(flatId);
+        out.writeInt(flatUserId);
+        out.writeInt(price);
+        out.writeInt(surface);
+        out.writeInt(room);
         out.writeString(province);
         out.writeString(type);
         out.writeString(locality);
         out.writeString(street);
         out.writeString(description);
         out.writeString(students);
-        out.writeString(photoAdress);
+        out.writeString(photoAddress);
         out.writeString(date);
 
     }
-
-    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    
     public static final Parcelable.Creator<Flat> CREATOR = new Parcelable.Creator<Flat>() {
         public Flat createFromParcel(Parcel in) {
             return new Flat(in);
@@ -48,24 +47,23 @@ public class Flat implements Parcelable {
         }
     };
 
-    // example constructor that takes a Parcel and gives you an object populated with it's values
     private Flat(Parcel in) {
-        this.flatId = in.readString();
-        this.flatUserId = in.readString();
-        this.price = in.readString();
-        this.surface = in.readString();
-        this.room = in.readString();
+        this.flatId = in.readInt();
+        this.flatUserId = in.readInt();
+        this.price = in.readInt();
+        this.surface = in.readInt();
+        this.room = in.readInt();
         this.province = in.readString();
         this.type = in.readString();
         this.locality = in.readString();
         this.street = in.readString();
         this.description = in.readString();
         this.students = in.readString();
-        this.photoAdress = in.readString();
+        this.photoAddress = in.readString();
         this.date = in.readString();
     }
 
-    public Flat(String flatId, String flatUserId, String price, String surface, String room, String province, String type, String locality, String street, String description, String students, String photo,String date) {
+    public Flat(int flatId, int flatUserId, int price, int surface, int room, String province, String type, String locality, String street, String description, String students, String photo,String date) {
 
         this.flatId = flatId;
         this.flatUserId = flatUserId;
@@ -78,7 +76,7 @@ public class Flat implements Parcelable {
         this.street = street;
         this.description = description;
         this.students = students;
-        this.photoAdress = photo;
+        this.photoAddress = photo;
         this.date = date;
 
     }
@@ -103,7 +101,7 @@ public class Flat implements Parcelable {
     }
 
     public ArrayList<String> generatePhotos() {
-        Scanner s = new Scanner(this.photoAdress);
+        Scanner s = new Scanner(this.photoAddress);
 
         ArrayList<String> photos = new ArrayList<>();
 
@@ -115,7 +113,7 @@ public class Flat implements Parcelable {
 
     public ArrayList<String> generatePhotosToDisplay() {
 
-        Scanner s = new Scanner(this.photoAdress);
+        Scanner s = new Scanner(this.photoAddress);
         String twoPhotos;
 
         ArrayList<String> photos = new ArrayList<>();
@@ -132,23 +130,23 @@ public class Flat implements Parcelable {
         return photos;
     }
 
-    public String getFlatId() {
+    public int getFlatId() {
         return this.flatId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return this.flatUserId;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return this.price;
     }
 
-    public String getSurface() {
+    public int getSurface() {
         return this.surface;
     }
 
-    public String getRoom() {
+    public int getRoom() {
         return this.room;
     }
 

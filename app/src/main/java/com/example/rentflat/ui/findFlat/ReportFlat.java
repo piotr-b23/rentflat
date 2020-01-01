@@ -60,7 +60,7 @@ public class ReportFlat extends AppCompatActivity {
 
                 String id = userId;
                 String reportText = reportDescription.getText().toString();
-                String flatId = reportedFlat.getFlatId();
+                String flatId = Integer.toString(reportedFlat.getFlatId());
                 sendReport(flatId, id, reportText, date);
 
             }

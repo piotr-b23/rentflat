@@ -90,9 +90,9 @@ public class FindFlatDetails extends AppCompatActivity {
         reportFlat = findViewById(R.id.reportFlatClick);
         userRates = findViewById(R.id.viewRates);
 
-        price.setText(selectedFlat.getPrice());
-        surface.setText(selectedFlat.getSurface());
-        room.setText(selectedFlat.getRoom());
+        price.setText(Integer.toString(selectedFlat.getPrice()));
+        surface.setText(Integer.toString(selectedFlat.getSurface()));
+        room.setText(Integer.toString(selectedFlat.getRoom()));
         type.setText(selectedFlat.getType());
         province.setText(selectedFlat.getProvince());
         locality.setText(selectedFlat.getLocality());
@@ -117,7 +117,7 @@ public class FindFlatDetails extends AppCompatActivity {
                         Toast.makeText(FindFlatDetails.this, "Nie możesz ocenić siebie samego.", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        checkIfRated(selectedFlat.getUserId(), id);
+                        checkIfRated(Integer.toString(selectedFlat.getUserId()), id);
                     }
 
                 }
@@ -143,7 +143,7 @@ public class FindFlatDetails extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                callOrText(selectedFlat.getUserId(), "call");
+                callOrText(Integer.toString(selectedFlat.getUserId()), "call");
 
 
             }
@@ -153,7 +153,7 @@ public class FindFlatDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                callOrText(selectedFlat.getUserId(), "text");
+                callOrText(Integer.toString(selectedFlat.getUserId()), "text");
             }
         });
 
@@ -162,7 +162,7 @@ public class FindFlatDetails extends AppCompatActivity {
             public void onClick(View v) {
                 rates = new ArrayList<>();
 
-                getUserRates(selectedFlat.getUserId());
+                getUserRates(Integer.toString(selectedFlat.getUserId()));
 
             }
         });

@@ -34,7 +34,7 @@ public class ChangeDescription extends AppCompatActivity {
 
     private EditText description;
     private Button changeDescription;
-    private String flatId;
+    private int flatId;
     private static String URL_CHANGE_DESCRIPTION = serverIp + "/change_description.php";
 
     @Override
@@ -43,13 +43,13 @@ public class ChangeDescription extends AppCompatActivity {
         setContentView(R.layout.activity_change_description);
 
         Intent intent = getIntent();
-        String oldDescription = (String) intent.getStringExtra("old description");
+        String oldDescription = intent.getStringExtra("old description");
 
         description = findViewById(R.id.newDescription);
         description.setText(oldDescription, TextView.BufferType.EDITABLE);
         changeDescription = findViewById(R.id.confirmDescriptionChange);
 
-        flatId = (String) intent.getStringExtra("flat id");
+        flatId = intent.getIntExtra("flat id",0);
 
         changeDescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +62,7 @@ public class ChangeDescription extends AppCompatActivity {
                         description.setError("Za krótki opis.");
 
                     } else {
-                        UpdateDescription(flatId, upDescription,userId);
+                        UpdateDescription(Integer.toString(flatId), upDescription,userId);
                     }
 
 

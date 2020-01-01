@@ -34,7 +34,7 @@ public class ChangePrice extends AppCompatActivity {
 
     private EditText price;
     private Button changePrice;
-    private String flatId;
+    private int flatId;
     private static String URL_CHANGE_PRICE = serverIp + "/change_price.php";
 
     @Override
@@ -43,11 +43,11 @@ public class ChangePrice extends AppCompatActivity {
         setContentView(R.layout.activity_change_price);
 
         Intent intent = getIntent();
-        String oldPrice = (String) intent.getStringExtra("old price");
-        flatId = (String) intent.getStringExtra("flat id");
+        int oldPrice = intent.getIntExtra("old price",0);
+        flatId = intent.getIntExtra("flat id",0);
 
         price = findViewById(R.id.newPrice);
-        price.setText(oldPrice, TextView.BufferType.EDITABLE);
+        price.setText(Integer.toString(oldPrice), TextView.BufferType.EDITABLE);
 
         changePrice = findViewById(R.id.confirmPriceChange);
 
@@ -62,7 +62,7 @@ public class ChangePrice extends AppCompatActivity {
                         price.setError("Podaj poprawną cenę za wynajem.");
 
                     } else {
-                        UpdatePrice(flatId, upPrice,userId);
+                        UpdatePrice(Integer.toString(flatId), upPrice,userId);
                     }
 
 
@@ -83,8 +83,8 @@ public class ChangePrice extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
                                 Toast.makeText(ChangePrice.this, "Zaktualizowano cenę oferty.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ChangePrice.this, MainActivity.class);
                                 startActivity(intent);
