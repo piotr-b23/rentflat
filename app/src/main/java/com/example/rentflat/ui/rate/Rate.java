@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class Rate implements Parcelable {
 
-    private String rateId, userId, raterId, rateDescription, date;
+    private String rateId, userId, rateDescription, date;
     private Float contactRate, descriptionRate;
 
     @Override
@@ -17,7 +17,6 @@ public class Rate implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(rateId);
         out.writeString(userId);
-        out.writeString(raterId);
         out.writeString(rateDescription);
         out.writeString(date);
         out.writeFloat(contactRate);
@@ -38,17 +37,15 @@ public class Rate implements Parcelable {
     private Rate(Parcel in) {
         this.rateId = in.readString();
         this.userId = in.readString();
-        this.raterId = in.readString();
         this.rateDescription = in.readString();
         this.date = in.readString();
         this.contactRate = in.readFloat();
         this.descriptionRate = in.readFloat();
     }
 
-    public Rate(String rateId, String userId, String raterId, String rateDescription, String date, float contactRate, float descriptionRate) {
+    public Rate(String rateId, String userId, String rateDescription, String date, float contactRate, float descriptionRate) {
         this.rateId = rateId;
         this.userId = userId;
-        this.raterId = raterId;
         this.rateDescription = rateDescription;
         this.date = date;
         this.contactRate = contactRate;
@@ -61,10 +58,6 @@ public class Rate implements Parcelable {
 
     public String getUserId() {
         return this.userId;
-    }
-
-    public String getRaterId() {
-        return this.raterId;
     }
 
     public String getRateDescription() {

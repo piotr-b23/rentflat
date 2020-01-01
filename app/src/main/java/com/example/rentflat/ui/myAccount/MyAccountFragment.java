@@ -152,13 +152,12 @@ public class MyAccountFragment extends Fragment {
 
                                     String strRateId = object.getString("rateId").trim();
                                     String strUserId = object.getString("userId").trim();
-                                    String strRaterId = object.getString("raterId").trim();
                                     String strContactRate = object.getString("contactRate").trim();
                                     String strDescriptionRate = object.getString("descriptionRate");
                                     String strDescription = object.getString("comment");
                                     String strDate = object.getString("date").trim();
 
-                                    rates.add(new Rate(strRateId, strUserId, strRaterId, strDescription, strDate, Float.valueOf(strDescriptionRate), Float.valueOf(strContactRate)));
+                                    rates.add(new Rate(strRateId, strUserId, strDescription, strDate, Float.valueOf(strDescriptionRate), Float.valueOf(strContactRate)));
 
 
                                 }

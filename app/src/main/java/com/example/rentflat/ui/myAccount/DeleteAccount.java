@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.sessionMenager;
 import static com.example.rentflat.MainActivity.userId;
@@ -52,13 +53,13 @@ public class DeleteAccount extends AppCompatActivity {
             public void onClick(View v) {
                 String delUsername = username.getText().toString().trim();
                 String delPass = password.getText().toString().trim();
-                deleteUserAccount(delUsername,delPass);
+                deleteUserAccount(delUsername,delPass,userId);
             }
         });
 
     }
 
-    private void deleteUserAccount(final String username, final String password) {
+    private void deleteUserAccount(final String username, final String password,final String delUserId) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DELETE_USER_ACCOUNT,
                 new Response.Listener<String>() {
                     @Override
@@ -96,8 +97,19 @@ public class DeleteAccount extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username);
                 params.put("password", password);
+                params.put("userId", delUserId);
+
 
                 return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                headers.put("Authorization-token",TOKEN);
+
+                return headers;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
