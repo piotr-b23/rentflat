@@ -51,6 +51,8 @@ public class FindFlatDetails extends AppCompatActivity {
     private static String URL_CHECK_IF_RATED = serverIp + "/check_if_rated.php";
     private Flat selectedFlat;
 
+    private String phone;
+
 
     RecyclerView recyclerView;
     ImageAdapter adapter;
@@ -137,13 +139,15 @@ public class FindFlatDetails extends AppCompatActivity {
             rateUser.setVisibility(View.INVISIBLE);
             reportFlat.setVisibility(View.INVISIBLE);
         }
+        callOrText(userId);
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-                callOrText(Integer.toString(selectedFlat.getUserId()), "call");
+                                                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                                    intent.setData(Uri.parse("tel:" + phone));
+                                    startActivity(intent);
 
 
             }
@@ -153,7 +157,10 @@ public class FindFlatDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                callOrText(Integer.toString(selectedFlat.getUserId()), "text");
+                                                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.setData(Uri.parse("smsto:" + phone));
+                                    startActivity(intent);
             }
         });
 
@@ -170,7 +177,7 @@ public class FindFlatDetails extends AppCompatActivity {
 
     }
 
-    private void callOrText(final String userId, final String callOrText) {
+    private void callOrText(final String userId) {
         String url = String.format(URL_GET_PHONE + "?userId=%s",userId);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -178,19 +185,19 @@ public class FindFlatDetails extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            String phone = jsonObject.getString("phone");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            String phoneResponse = jsonObject.getString("phone");
+                            if (success.equals("1")) {
 
-                                if (callOrText.equals("call")) {
-                                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                                    intent.setData(Uri.parse("tel:" + phone));
-                                    startActivity(intent);
-                                } else if (callOrText.equals("text")) {
-                                    Intent intent = new Intent(Intent.ACTION_SENDTO);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    intent.setData(Uri.parse("smsto:" + phone));
-                                    startActivity(intent);
+                                phone = phoneResponse;
+
+                                if (phone.equals("null")){
+                                    sendSMS.setVisibility(View.INVISIBLE);
+                                    call.setVisibility(View.INVISIBLE);
+                                }
+                                else{
+                                    sendSMS.setVisibility(View.VISIBLE);
+                                    call.setVisibility(View.VISIBLE);
                                 }
 
                             }

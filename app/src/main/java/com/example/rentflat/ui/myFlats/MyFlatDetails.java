@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.rentflat.MainActivity;
 import com.example.rentflat.ui.flat.Flat;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
 import com.example.rentflat.ui.myAccount.ChangeEmail;
@@ -148,8 +149,8 @@ public class MyFlatDetails extends AppCompatActivity {
                             String success = jsonObject.getString("success");
                             if (success.equals("1")) {
                                 Toast.makeText(MyFlatDetails.this, "Zakończono ogłoszenie", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new  Intent(MyFlatDetails.this, MainActivity.class);
-//                                startActivity(intent);
+                                Intent intent = new  Intent(MyFlatDetails.this, MainActivity.class);
+                                startActivity(intent);
                             }
                             else{
                                 Toast.makeText(MyFlatDetails.this, "Wystąpił błąd przy zamykaniu ogłoszenia", Toast.LENGTH_SHORT).show();

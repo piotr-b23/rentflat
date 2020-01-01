@@ -81,9 +81,9 @@ public class MyFlatsFragment extends Fragment {
         return root;
     }
 
-    private void getMyFlats(final String useriD){
+    private void getMyFlats(final String userId){
 
-        String url = String.format(URL_GET_MY_FLATS+"?userId=%s",useriD);
+        String url = String.format(URL_GET_MY_FLATS+"?userId=%s",userId);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
