@@ -30,7 +30,7 @@ import static com.example.rentflat.ui.session.Register.isEmailValid;
 
 
 public class ChangeEmail extends AppCompatActivity {
-    private static String URL_CHANGE_MAIL = serverIp + "/edit_mail.php";
+    private static String URL_CHANGE_MAIL = serverIp + "/change_mail.php";
     private EditText newEmail, password;
     private Button changeMailButton;
 
@@ -45,7 +45,7 @@ public class ChangeEmail extends AppCompatActivity {
         changeMailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String upPassword = password.getText().toString().trim();
+                String upPassword = password.getText().toString();
                 String upEmail = newEmail.getText().toString().trim();
                 String id = userId;
 

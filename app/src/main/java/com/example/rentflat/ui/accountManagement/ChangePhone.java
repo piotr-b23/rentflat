@@ -31,7 +31,7 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class ChangePhone extends AppCompatActivity {
 
-    private static String URL_CHANGE_MAIL = serverIp + "/edit_phone.php";
+    private static String URL_CHANGE_MAIL = serverIp + "/change_phone.php";
     private EditText newPhone;
     private Button changePhoneButton;
 
@@ -45,7 +45,7 @@ public class ChangePhone extends AppCompatActivity {
         changePhoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String upPhone = newPhone.getText().toString().trim();
+                String upPhone = newPhone.getText().toString();
                 String id = userId;
 
                 if (!upPhone.isEmpty()) {

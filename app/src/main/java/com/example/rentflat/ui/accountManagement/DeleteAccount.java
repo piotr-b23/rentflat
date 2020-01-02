@@ -33,7 +33,7 @@ import static com.example.rentflat.MainActivity.userId;
 public class DeleteAccount extends AppCompatActivity {
 
     private static String URL_DELETE_USER_ACCOUNT = serverIp + "/delete_account.php";
-    private Button confimDelete;
+    private Button confirmDelete;
     private EditText username, password;
 
     @Override
@@ -41,23 +41,23 @@ public class DeleteAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_account);
 
-        confimDelete = findViewById(R.id.confirmAccountDelete);
+        confirmDelete = findViewById(R.id.confirmAccountDelete);
         username = findViewById(R.id.deleteUsername);
         password = findViewById(R.id.deletePassword);
 
 
-        confimDelete.setOnClickListener(new View.OnClickListener() {
+        confirmDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String delUsername = username.getText().toString().trim();
                 String delPass = password.getText().toString().trim();
-                deleteUserAccount(delUsername, delPass, userId);
+                DeleteUserAccount(delUsername, delPass, userId);
             }
         });
 
     }
 
-    private void deleteUserAccount(final String username, final String password, final String delUserId) {
+    private void DeleteUserAccount(final String username, final String password, final String delUserId) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DELETE_USER_ACCOUNT,
                 new Response.Listener<String>() {
                     @Override

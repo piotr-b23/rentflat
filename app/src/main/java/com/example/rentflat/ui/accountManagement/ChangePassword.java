@@ -29,7 +29,7 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class ChangePassword extends AppCompatActivity {
 
-    private static String URL_CHANGE_MAIL = serverIp + "/edit_password.php";
+    private static String URL_CHANGE_MAIL = serverIp + "/change_password.php";
     private EditText password, newPassword, newConfPassword;
     private Button changePasswordButton;
 
@@ -45,9 +45,9 @@ public class ChangePassword extends AppCompatActivity {
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String upPassword = password.getText().toString().trim();
-                String upNewPassword = newPassword.getText().toString().trim();
-                String upNewConfPassword = newConfPassword.getText().toString().trim();
+                String upPassword = password.getText().toString();
+                String upNewPassword = newPassword.getText().toString();
+                String upNewConfPassword = newConfPassword.getText().toString();
                 String id = userId;
 
                 if (!upPassword.isEmpty() && !upNewPassword.isEmpty() && !upNewConfPassword.isEmpty()) {
