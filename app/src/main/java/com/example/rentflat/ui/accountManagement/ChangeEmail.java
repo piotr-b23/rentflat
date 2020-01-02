@@ -1,12 +1,12 @@
 package com.example.rentflat.ui.accountManagement;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -30,9 +30,9 @@ import static com.example.rentflat.ui.session.Register.isEmailValid;
 
 
 public class ChangeEmail extends AppCompatActivity {
+    private static String URL_CHANGE_MAIL = serverIp + "/edit_mail.php";
     private EditText newEmail, password;
     private Button changeMailButton;
-    private static String URL_CHANGE_MAIL = serverIp + "/edit_mail.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +82,8 @@ public class ChangeEmail extends AppCompatActivity {
                             if (success.equals("1")) {
                                 Toast.makeText(ChangeEmail.this, "Zaktualizowano email", Toast.LENGTH_SHORT).show();
                                 finish();
-                            }
-                            else{
-                                switch (message){
+                            } else {
+                                switch (message) {
                                     case "error":
                                         Toast.makeText(ChangeEmail.this, "Problem przy zmianie maila", Toast.LENGTH_SHORT).show();
                                         break;
@@ -94,11 +93,10 @@ public class ChangeEmail extends AppCompatActivity {
                                     case "mail":
                                         Toast.makeText(ChangeEmail.this, "Podany mail jest już wykorzystywany", Toast.LENGTH_SHORT).show();
                                         break;
-                                        default:
-                                            Toast.makeText(ChangeEmail.this, "Błąd", Toast.LENGTH_SHORT).show();
-                                            break;
+                                    default:
+                                        Toast.makeText(ChangeEmail.this, "Błąd", Toast.LENGTH_SHORT).show();
+                                        break;
                                 }
-
 
 
                             }
@@ -125,11 +123,12 @@ public class ChangeEmail extends AppCompatActivity {
 
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

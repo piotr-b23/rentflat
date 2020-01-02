@@ -1,12 +1,12 @@
 package com.example.rentflat.ui.findFlat;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,13 +31,11 @@ import static com.example.rentflat.MainActivity.serverIp;
 public class FindFlatResults extends AppCompatActivity {
 
 
-    private FindFlatSearch query;
+    private static String URL_FIND_FLAT = serverIp + "/find_flat.php";
     RecyclerView recyclerView;
     FindFlatAdapter adapter;
     ArrayList<Flat> flats;
-
-
-    private static String URL_FIND_FLAT = serverIp + "/find_flat.php";
+    private FindFlatSearch query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +86,7 @@ public class FindFlatResults extends AppCompatActivity {
                                     String strPhoto = object.getString("photo").trim();
                                     String strDate = object.getString("date").trim();
 
-                                    flats.add(new Flat(strFlatId, strFlatUserId, strPrice, strSurface, strRoom, strProvince, strType, strLocality, strStreet, strDescription, strStudents, strPhoto,strDate));
+                                    flats.add(new Flat(strFlatId, strFlatUserId, strPrice, strSurface, strRoom, strProvince, strType, strLocality, strStreet, strDescription, strStudents, strPhoto, strDate));
 
 
                                 }
@@ -98,8 +96,7 @@ public class FindFlatResults extends AppCompatActivity {
                                 recyclerView.setAdapter(adapter);
 
 
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(FindFlatResults.this, "Wystąpił problem przy wyszukiwaniu ogłoszeń", Toast.LENGTH_SHORT).show();
                             }
 

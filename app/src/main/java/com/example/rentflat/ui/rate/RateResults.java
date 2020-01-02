@@ -1,17 +1,16 @@
 package com.example.rentflat.ui.rate;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RatingBar;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.rentflat.R;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class RateResults extends AppCompatActivity {
 

@@ -1,6 +1,17 @@
 package com.example.rentflat;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -9,24 +20,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.rentflat.ui.session.SessionMenager;
 import com.example.rentflat.ui.home.HomeFragment;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
+import com.example.rentflat.ui.session.SessionMenager;
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,14 +33,13 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
-
-    private TextView name, username;
-    public static SessionMenager sessionMenager;
     private static final String TAG = HomeFragment.class.getSimpleName();
+    public static SessionMenager sessionMenager;
     public static String userId;
     public static String TOKEN;
     public static String serverIp = "http://192.168.1.11/";
+    private AppBarConfiguration mAppBarConfiguration;
+    private TextView name, username;
     private String URL_READ = serverIp + "read_detail.php";
 
     @Override
@@ -76,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         if (sessionMenager.isLogged()) {
-            userId = user.get(sessionMenager.ID);
-            TOKEN = user.get(sessionMenager.TOKEN);
+            userId = user.get(SessionMenager.ID);
+            TOKEN = user.get(SessionMenager.TOKEN);
 
         } else {
             userId = null;

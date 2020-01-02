@@ -2,6 +2,15 @@ package com.example.rentflat.ui.myFlats;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -11,22 +20,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.MainActivity;
+import com.example.rentflat.R;
 import com.example.rentflat.ui.flat.ChangeFlatDescription;
 import com.example.rentflat.ui.flat.ChangeFlatPrice;
 import com.example.rentflat.ui.flat.Flat;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.rentflat.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,22 +40,22 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class MyFlatDetails extends AppCompatActivity {
 
-    private TextView price, surface, room, type, province, locality, street, students, description;
-    private Button editPrice, editDescription, closeOffer;
-    private ArrayList<String> photos;
     private static String URL_CLOSE_OFFER = serverIp + "/close_offer.php";
     RecyclerView recyclerView;
     ImageAdapter adapter;
+    private TextView price, surface, room, type, province, locality, street, students, description;
+    private Button editPrice, editDescription, closeOffer;
+    private ArrayList<String> photos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_flat_details);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
-        final Flat selectedFlat = (Flat) intent.getParcelableExtra("selected flat");
+        final Flat selectedFlat = intent.getParcelableExtra("selected flat");
 
         price = findViewById(R.id.mySelectedFlatPrice);
         surface = findViewById(R.id.mySelectedFlatSurface);
@@ -122,7 +120,7 @@ public class MyFlatDetails extends AppCompatActivity {
             closeOffer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CloseOffer(Integer.toString(selectedFlat.getFlatId()),userId);
+                    CloseOffer(Integer.toString(selectedFlat.getFlatId()), userId);
 
                 }
             });
@@ -143,10 +141,9 @@ public class MyFlatDetails extends AppCompatActivity {
                             String success = jsonObject.getString("success");
                             if (success.equals("1")) {
                                 Toast.makeText(MyFlatDetails.this, "Zakończono ogłoszenie", Toast.LENGTH_SHORT).show();
-                                Intent intent = new  Intent(MyFlatDetails.this, MainActivity.class);
+                                Intent intent = new Intent(MyFlatDetails.this, MainActivity.class);
                                 startActivity(intent);
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(MyFlatDetails.this, "Wystąpił błąd przy zamykaniu ogłoszenia", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -176,7 +173,7 @@ public class MyFlatDetails extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

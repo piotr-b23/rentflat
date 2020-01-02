@@ -41,12 +41,11 @@ import static com.example.rentflat.MainActivity.userId;
 public class MyFlatsFragment extends Fragment {
 
     private static String URL_GET_MY_FLATS = serverIp + "/get_my_flats.php";
-    private TextView myFlatsText;
-    private Button addFlat;
     RecyclerView recyclerView;
     MyFlatsAdapter adapter;
     ArrayList<Flat> flats;
-
+    private TextView myFlatsText;
+    private Button addFlat;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -78,9 +77,9 @@ public class MyFlatsFragment extends Fragment {
         return root;
     }
 
-    private void getMyFlats(final String userId){
+    private void getMyFlats(final String userId) {
 
-        String url = String.format(URL_GET_MY_FLATS+"?userId=%s",userId);
+        String url = String.format(URL_GET_MY_FLATS + "?userId=%s", userId);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -110,7 +109,7 @@ public class MyFlatsFragment extends Fragment {
                                     String strPhoto = object.getString("photo").trim();
                                     String strDate = object.getString("date").trim();
 
-                                    flats.add(new Flat(strFlatId, strFlatUserId, strPrice, strSurface, strRoom, strProvince, strType, strLocality, strStreet, strDescription, strStudents, strPhoto,strDate));
+                                    flats.add(new Flat(strFlatId, strFlatUserId, strPrice, strSurface, strRoom, strProvince, strType, strLocality, strStreet, strDescription, strStudents, strPhoto, strDate));
 
 
                                 }
@@ -118,8 +117,7 @@ public class MyFlatsFragment extends Fragment {
                                 adapter = new MyFlatsAdapter(getActivity(), flats);
                                 recyclerView.setAdapter(adapter);
 
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(getActivity(), "Nie masz żadnych ogłoszeń.", Toast.LENGTH_SHORT).show();
                             }
 
@@ -140,13 +138,13 @@ public class MyFlatsFragment extends Fragment {
                     }
                 }) {
             @Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            HashMap<String, String> headers = new HashMap<String, String>();
-            headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            headers.put("Authorization-token",TOKEN);
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                headers.put("Authorization-token", TOKEN);
 
-            return headers;
-        }
+                return headers;
+            }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);

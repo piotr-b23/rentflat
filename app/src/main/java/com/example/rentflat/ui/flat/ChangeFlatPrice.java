@@ -1,7 +1,5 @@
 package com.example.rentflat.ui.flat;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,10 +32,10 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class ChangeFlatPrice extends AppCompatActivity {
 
+    private static String URL_CHANGE_PRICE = serverIp + "/change_price.php";
     private EditText price;
     private Button changePrice;
     private int flatId;
-    private static String URL_CHANGE_PRICE = serverIp + "/change_price.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class ChangeFlatPrice extends AppCompatActivity {
         setContentView(R.layout.activity_change_price);
 
         Intent intent = getIntent();
-        int oldPrice = intent.getIntExtra("old price",0);
-        flatId = intent.getIntExtra("flat id",0);
+        int oldPrice = intent.getIntExtra("old price", 0);
+        flatId = intent.getIntExtra("flat id", 0);
 
         price = findViewById(R.id.newPrice);
         price.setText(Integer.toString(oldPrice), TextView.BufferType.EDITABLE);
@@ -62,7 +62,7 @@ public class ChangeFlatPrice extends AppCompatActivity {
                         price.setError("Podaj poprawną cenę za wynajem.");
 
                     } else {
-                        UpdatePrice(Integer.toString(flatId), upPrice,userId);
+                        UpdatePrice(Integer.toString(flatId), upPrice, userId);
                     }
 
 
@@ -88,8 +88,7 @@ public class ChangeFlatPrice extends AppCompatActivity {
                                 Toast.makeText(ChangeFlatPrice.this, "Zaktualizowano cenę oferty.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ChangeFlatPrice.this, MainActivity.class);
                                 startActivity(intent);
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(ChangeFlatPrice.this, "Wystąpił błąd w trakcie zmiany ceny oferty.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -115,11 +114,12 @@ public class ChangeFlatPrice extends AppCompatActivity {
 
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

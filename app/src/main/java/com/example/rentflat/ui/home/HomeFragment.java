@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -24,8 +24,8 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
     public TextView name, username;
+    private HomeViewModel homeViewModel;
     private Button registerButton, loginButton, findFlatButton;
 
 
@@ -40,9 +40,9 @@ public class HomeFragment extends Fragment {
 //        username =(TextView)root.findViewById(R.id.navUsername);
 //        name =(TextView)root.findViewById(R.id.navName);
 
-        registerButton = (Button) root.findViewById(R.id.registerButton);
-        loginButton = (Button) root.findViewById(R.id.loginButton);
-        findFlatButton = (Button) root.findViewById(R.id.addFlatButton);
+        registerButton = root.findViewById(R.id.registerButton);
+        loginButton = root.findViewById(R.id.loginButton);
+        findFlatButton = root.findViewById(R.id.addFlatButton);
 
 
         if (sessionMenager.isLogged()) {

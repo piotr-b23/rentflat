@@ -127,7 +127,7 @@ public class AddFlat extends AppCompatActivity {
 
                 if (!crePrice.isEmpty() && !creSurface.isEmpty() && !creRoom.isEmpty() && !creLocality.isEmpty() && !creStreet.isEmpty() && !creDescription.isEmpty() && !bitmaps.isEmpty()) {
 
-                    if (checkIfDataIsCorrect(crePrice, creSurface, creRoom, creDescription,creStreet,creLocality) == false) {
+                    if (checkIfDataIsCorrect(crePrice, creSurface, creRoom, creDescription, creStreet, creLocality) == false) {
                         Toast.makeText(AddFlat.this, "Popraw wprowadzone dane", Toast.LENGTH_SHORT).show();
                     } else {
 
@@ -150,12 +150,14 @@ public class AddFlat extends AppCompatActivity {
 
                 } else {
                     if (crePrice.isEmpty()) price.setError("Wprowadź cenę za wynajem");
-                    if (creSurface.isEmpty()) surface.setError("Wprowadź metraż wynajmowanego obiektu");
+                    if (creSurface.isEmpty())
+                        surface.setError("Wprowadź metraż wynajmowanego obiektu");
                     if (creRoom.isEmpty()) room.setError("Podaj ilość pokoi");
                     if (creLocality.isEmpty()) locality.setError("Podaj miejscowość");
                     if (creStreet.isEmpty()) street.setError("Podaj ulicę");
                     if (creDescription.isEmpty()) description.setError("Napisz krótki opis");
-                    if (bitmaps.isEmpty()) Toast.makeText(AddFlat.this, "Dodaj zdjęcia do ogłoszenia", Toast.LENGTH_SHORT).show();
+                    if (bitmaps.isEmpty())
+                        Toast.makeText(AddFlat.this, "Dodaj zdjęcia do ogłoszenia", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -176,8 +178,7 @@ public class AddFlat extends AppCompatActivity {
                                 Toast.makeText(AddFlat.this, "Utworzono ogłoszenie", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(AddFlat.this, MainActivity.class);
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(AddFlat.this, "Wystąpił problem w trakcie dodawania ogłoszenia.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -217,7 +218,7 @@ public class AddFlat extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }
@@ -390,13 +391,12 @@ public class AddFlat extends AppCompatActivity {
         if (inDescription.length() < 20) {
             description.setError("Za krótki opis.");
             return false;
-        }
-        else if(inDescription.length()>15000) {
+        } else if (inDescription.length() > 15000) {
             description.setError("Za długi opis.");
             return false;
+        } else {
         }
-            else{
-        } return true;
+        return true;
     }
 
     public boolean checkStreet(String inStreet) {

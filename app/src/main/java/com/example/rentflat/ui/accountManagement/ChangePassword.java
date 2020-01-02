@@ -1,12 +1,12 @@
 package com.example.rentflat.ui.accountManagement;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -29,9 +29,9 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class ChangePassword extends AppCompatActivity {
 
+    private static String URL_CHANGE_MAIL = serverIp + "/edit_password.php";
     private EditText password, newPassword, newConfPassword;
     private Button changePasswordButton;
-    private static String URL_CHANGE_MAIL = serverIp + "/edit_password.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +86,8 @@ public class ChangePassword extends AppCompatActivity {
                             if (success.equals("1")) {
                                 Toast.makeText(ChangePassword.this, "Zmieniono hasło", Toast.LENGTH_SHORT).show();
                                 finish();
-                            }
-                            else{
-                                switch (message){
+                            } else {
+                                switch (message) {
                                     case "error":
                                         Toast.makeText(ChangePassword.this, "Problem przy zmianie hasła", Toast.LENGTH_SHORT).show();
                                         break;
@@ -123,11 +122,12 @@ public class ChangePassword extends AppCompatActivity {
 
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

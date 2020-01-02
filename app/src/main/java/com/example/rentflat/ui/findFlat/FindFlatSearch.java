@@ -4,30 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class FindFlatSearch implements Parcelable {
-    String priceMin, priceMax, surfaceMin, surfaceMax, roomMin, roomMax, buildingType, province, locality, street, studentsCheckBox;
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeString(priceMin);
-        out.writeString(priceMax);
-        out.writeString(surfaceMin);
-        out.writeString(surfaceMax);
-        out.writeString(roomMin);
-        out.writeString(roomMax);
-        out.writeString(buildingType);
-        out.writeString(province);
-        out.writeString(locality);
-        out.writeString(street);
-        out.writeString(studentsCheckBox);
-
-    }
-
     public static final Parcelable.Creator<FindFlatSearch> CREATOR = new Parcelable.Creator<FindFlatSearch>() {
         public FindFlatSearch createFromParcel(Parcel in) {
             return new FindFlatSearch(in);
@@ -37,6 +13,7 @@ public class FindFlatSearch implements Parcelable {
             return new FindFlatSearch[size];
         }
     };
+    String priceMin, priceMax, surfaceMin, surfaceMax, roomMin, roomMax, buildingType, province, locality, street, studentsCheckBox;
 
     private FindFlatSearch(Parcel in) {
         this.priceMin = in.readString();
@@ -65,6 +42,27 @@ public class FindFlatSearch implements Parcelable {
         this.locality = locality;
         this.street = street;
         this.studentsCheckBox = studentsCheckBox;
+
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(priceMin);
+        out.writeString(priceMax);
+        out.writeString(surfaceMin);
+        out.writeString(surfaceMax);
+        out.writeString(roomMin);
+        out.writeString(roomMax);
+        out.writeString(buildingType);
+        out.writeString(province);
+        out.writeString(locality);
+        out.writeString(street);
+        out.writeString(studentsCheckBox);
 
     }
 

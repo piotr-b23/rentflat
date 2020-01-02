@@ -44,12 +44,10 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class MyAccountFragment extends Fragment {
 
+    private static String URL_GET_GIVEN_RATES = serverIp + "/get_given_rates.php";
+    ArrayList<Rate> rates;
     private MyAccountViewModel myAccountViewModel;
     private Button updateEmail, updatePhone, changePassword, givenRates, register, deleteAccount;
-
-    private static String URL_GET_GIVEN_RATES = serverIp + "/get_given_rates.php";
-
-    ArrayList<Rate> rates;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -138,7 +136,7 @@ public class MyAccountFragment extends Fragment {
     }
 
     private void getGivenRates(final String raterId) {
-        String url = String.format(URL_GET_GIVEN_RATES + "?raterId=%s",raterId);
+        String url = String.format(URL_GET_GIVEN_RATES + "?raterId=%s", raterId);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -169,8 +167,7 @@ public class MyAccountFragment extends Fragment {
                                 startActivity(intent);
 
 
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(getActivity(), "Nie wystawiłeś żadnych ocen", Toast.LENGTH_SHORT).show();
                             }
 
@@ -187,12 +184,12 @@ public class MyAccountFragment extends Fragment {
                         Toast.makeText(getActivity(), "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                }){
+                }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

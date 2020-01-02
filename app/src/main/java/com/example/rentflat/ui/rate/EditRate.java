@@ -1,7 +1,5 @@
 package com.example.rentflat.ui.rate;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,11 +34,10 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class EditRate extends AppCompatActivity {
 
+    private static String URL_UPDATE_RATE = serverIp + "/update_rate.php";
     private EditText rateDescription;
     private Button confirmRateUpdate;
     private RatingBar contactBar, descriptionBar;
-
-    private static String URL_UPDATE_RATE = serverIp + "/update_rate.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,7 @@ public class EditRate extends AppCompatActivity {
         descriptionBar = findViewById(R.id.ratingBarUpdatedDescription);
 
         Intent intent = getIntent();
-        final Rate editedRate = (Rate) intent.getParcelableExtra("edited rate");
+        final Rate editedRate = intent.getParcelableExtra("edited rate");
 
         rateDescription.setText(editedRate.getRateDescription());
         contactBar.setRating(editedRate.getContactRate());
@@ -70,12 +69,12 @@ public class EditRate extends AppCompatActivity {
                 String date = df.format(Calendar.getInstance().getTime());
 
 
-                UpdateRate(editedRate.getRateId(), contactRateString, descriptionRateString, descriptionRate, date,userId);
+                UpdateRate(editedRate.getRateId(), contactRateString, descriptionRateString, descriptionRate, date, userId);
             }
         });
     }
 
-    private void UpdateRate(final String rateId, final String contactRate, final String descriptionRate, final String comment, final String date,final String userId) {
+    private void UpdateRate(final String rateId, final String contactRate, final String descriptionRate, final String comment, final String date, final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_RATE,
                 new Response.Listener<String>() {
@@ -87,8 +86,7 @@ public class EditRate extends AppCompatActivity {
                             if (success.equals("1")) {
                                 Toast.makeText(EditRate.this, "Zaktualizowano ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(EditRate.this, "Wystąpił problem przy edycji oceny", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -122,7 +120,7 @@ public class EditRate extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

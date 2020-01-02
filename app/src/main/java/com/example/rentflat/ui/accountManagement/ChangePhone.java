@@ -1,12 +1,12 @@
 package com.example.rentflat.ui.accountManagement;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,15 +25,15 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.TOKEN;
+import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.userId;
 
 public class ChangePhone extends AppCompatActivity {
 
+    private static String URL_CHANGE_MAIL = serverIp + "/edit_phone.php";
     private EditText newPhone;
     private Button changePhoneButton;
-    private static String URL_CHANGE_MAIL = serverIp + "/edit_phone.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +79,7 @@ public class ChangePhone extends AppCompatActivity {
                             if (success.equals("1")) {
                                 Toast.makeText(ChangePhone.this, "Zaktualizowano numer telefonu", Toast.LENGTH_SHORT).show();
                                 finish();
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(ChangePhone.this, "Wystąpił problem przy zmianie numeru telefonu", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -105,11 +104,12 @@ public class ChangePhone extends AppCompatActivity {
 
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

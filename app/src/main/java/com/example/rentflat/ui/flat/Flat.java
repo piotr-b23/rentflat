@@ -9,34 +9,6 @@ import java.util.Scanner;
 import static com.example.rentflat.MainActivity.serverIp;
 
 public class Flat implements Parcelable {
-    private int flatId, flatUserId, price, surface, room;
-    private String province, type, locality, street, description,students, photoAddress, date;
-    private String photoLocation = serverIp;
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(flatId);
-        out.writeInt(flatUserId);
-        out.writeInt(price);
-        out.writeInt(surface);
-        out.writeInt(room);
-        out.writeString(province);
-        out.writeString(type);
-        out.writeString(locality);
-        out.writeString(street);
-        out.writeString(description);
-        out.writeString(students);
-        out.writeString(photoAddress);
-        out.writeString(date);
-
-    }
-    
     public static final Parcelable.Creator<Flat> CREATOR = new Parcelable.Creator<Flat>() {
         public Flat createFromParcel(Parcel in) {
             return new Flat(in);
@@ -46,6 +18,10 @@ public class Flat implements Parcelable {
             return new Flat[size];
         }
     };
+    private int flatId, flatUserId, price, surface, room;
+    private String province, type, locality, street, description, students, photoAddress, date;
+    private String photoLocation = serverIp;
+
 
     private Flat(Parcel in) {
         this.flatId = in.readInt();
@@ -63,7 +39,7 @@ public class Flat implements Parcelable {
         this.date = in.readString();
     }
 
-    public Flat(int flatId, int flatUserId, int price, int surface, int room, String province, String type, String locality, String street, String description, String students, String photo,String date) {
+    public Flat(int flatId, int flatUserId, int price, int surface, int room, String province, String type, String locality, String street, String description, String students, String photo, String date) {
 
         this.flatId = flatId;
         this.flatUserId = flatUserId;
@@ -78,6 +54,29 @@ public class Flat implements Parcelable {
         this.students = students;
         this.photoAddress = photo;
         this.date = date;
+
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(flatId);
+        out.writeInt(flatUserId);
+        out.writeInt(price);
+        out.writeInt(surface);
+        out.writeInt(room);
+        out.writeString(province);
+        out.writeString(type);
+        out.writeString(locality);
+        out.writeString(street);
+        out.writeString(description);
+        out.writeString(students);
+        out.writeString(photoAddress);
+        out.writeString(date);
 
     }
 

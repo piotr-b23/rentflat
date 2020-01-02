@@ -1,15 +1,13 @@
 package com.example.rentflat.ui.rate;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import com.example.rentflat.R;
-import com.example.rentflat.ui.rate.Rate;
-import com.example.rentflat.ui.rate.RateGivenAdapter;
 
 import java.util.ArrayList;
 

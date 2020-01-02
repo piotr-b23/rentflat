@@ -1,13 +1,13 @@
 package com.example.rentflat.ui.flat;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -33,10 +33,9 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class ReportFlat extends AppCompatActivity {
 
+    private static String URL_REPORT = serverIp + "/report_flat.php";
     private EditText reportDescription;
     private Button confirmReport;
-
-    private static String URL_REPORT = serverIp + "/report_flat.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class ReportFlat extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        final Flat reportedFlat = (Flat) intent.getParcelableExtra("reported flat");
+        final Flat reportedFlat = intent.getParcelableExtra("reported flat");
 
         confirmReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +78,7 @@ public class ReportFlat extends AppCompatActivity {
                             if (success.equals("1")) {
                                 Toast.makeText(ReportFlat.this, "Zgłoszono ogłoszenie", Toast.LENGTH_SHORT).show();
                                 finish();
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(ReportFlat.this, "Wystąpił problem przy zgłaszaniu", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -112,7 +110,7 @@ public class ReportFlat extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

@@ -5,25 +5,6 @@ import android.os.Parcelable;
 
 public class Rate implements Parcelable {
 
-    private String rateId, userId, rateDescription, date;
-    private Float contactRate, descriptionRate;
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeString(rateId);
-        out.writeString(userId);
-        out.writeString(rateDescription);
-        out.writeString(date);
-        out.writeFloat(contactRate);
-        out.writeFloat(descriptionRate);
-
-    }
-
     public static final Parcelable.Creator<Rate> CREATOR = new Parcelable.Creator<Rate>() {
         public Rate createFromParcel(Parcel in) {
             return new Rate(in);
@@ -33,6 +14,8 @@ public class Rate implements Parcelable {
             return new Rate[size];
         }
     };
+    private String rateId, userId, rateDescription, date;
+    private Float contactRate, descriptionRate;
 
     private Rate(Parcel in) {
         this.rateId = in.readString();
@@ -50,6 +33,22 @@ public class Rate implements Parcelable {
         this.date = date;
         this.contactRate = contactRate;
         this.descriptionRate = descriptionRate;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(rateId);
+        out.writeString(userId);
+        out.writeString(rateDescription);
+        out.writeString(date);
+        out.writeFloat(contactRate);
+        out.writeFloat(descriptionRate);
+
     }
 
     public String getRateId() {

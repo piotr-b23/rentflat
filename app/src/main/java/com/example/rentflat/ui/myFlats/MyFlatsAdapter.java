@@ -57,7 +57,7 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView myFlatTitle, myFlatDescription,myFlatDate;
+        TextView myFlatTitle, myFlatDescription, myFlatDate;
         ImageView myFlatImage;
 
         public ViewHolder(@NonNull View itemView) {

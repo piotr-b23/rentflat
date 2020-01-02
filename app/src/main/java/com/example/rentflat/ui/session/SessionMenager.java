@@ -10,16 +10,15 @@ import java.util.HashMap;
 
 public class SessionMenager {
 
-    SharedPreferences sharedPreferences;
-    public SharedPreferences.Editor editor;
-    public Context context;
-    int PRIVATE_MODE = 0;
-
-    private static final String PREF_NAME = "LOGIN";
-    private static final String LOGIN = "IS_LOGGED";
     public static final String NAME = "NAME";
     public static final String TOKEN = "TOKEN";
     public static final String ID = "ID";
+    private static final String PREF_NAME = "LOGIN";
+    private static final String LOGIN = "IS_LOGGED";
+    public SharedPreferences.Editor editor;
+    public Context context;
+    SharedPreferences sharedPreferences;
+    int PRIVATE_MODE = 0;
 
     public SessionMenager(Context context) {
         this.context = context;

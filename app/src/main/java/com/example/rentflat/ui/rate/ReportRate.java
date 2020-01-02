@@ -1,13 +1,13 @@
 package com.example.rentflat.ui.rate;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -33,11 +33,9 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class ReportRate extends AppCompatActivity {
 
+    private static String URL_REPORT_RATE = serverIp + "/report_rate.php";
     private EditText reportRateText;
     private Button confirmReport;
-
-
-    private static String URL_REPORT_RATE = serverIp + "/report_rate.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,7 @@ public class ReportRate extends AppCompatActivity {
         confirmReport = findViewById(R.id.confirmRateReportButton);
 
         Intent intent = getIntent();
-        final Rate editedRate = (Rate) intent.getParcelableExtra("reported rate");
+        final Rate editedRate = intent.getParcelableExtra("reported rate");
 
 
         confirmReport.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +77,7 @@ public class ReportRate extends AppCompatActivity {
                             if (success.equals("1")) {
                                 Toast.makeText(ReportRate.this, "Zgłoszono ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(ReportRate.this, "Wystąpił problem przy zgłaszaniu", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -112,7 +109,7 @@ public class ReportRate extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

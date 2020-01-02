@@ -1,7 +1,5 @@
 package com.example.rentflat.ui.rate;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,11 +34,10 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class RateUser extends AppCompatActivity {
 
+    private static String URL_REPORT = serverIp + "/add_rate.php";
     private EditText rateDescription;
     private Button confirmRate;
     private RatingBar contactBar, descriptionBar;
-
-    private static String URL_REPORT = serverIp + "/add_rate.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,7 @@ public class RateUser extends AppCompatActivity {
         descriptionBar = findViewById(R.id.ratingBarDescription);
 
         Intent intent = getIntent();
-        final String ratedUserId = (String) intent.getStringExtra("rated user");
+        final String ratedUserId = intent.getStringExtra("rated user");
 
         confirmRate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,12 +85,10 @@ public class RateUser extends AppCompatActivity {
                             if (success.equals("1")) {
                                 Toast.makeText(RateUser.this, "Wystawiono ocenę", Toast.LENGTH_SHORT).show();
                                 finish();
-                            }
-                            else{
-                                if(message.equals("same user")){
+                            } else {
+                                if (message.equals("same user")) {
                                     Toast.makeText(RateUser.this, "Nie możesz ocenić siebie samego", Toast.LENGTH_SHORT).show();
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(RateUser.this, "Wystąpił problem w trakcie dodawania oceny", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -122,11 +119,12 @@ public class RateUser extends AppCompatActivity {
 
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

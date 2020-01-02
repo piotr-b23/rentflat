@@ -1,13 +1,13 @@
 package com.example.rentflat.ui.accountManagement;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,10 +32,9 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class DeleteAccount extends AppCompatActivity {
 
+    private static String URL_DELETE_USER_ACCOUNT = serverIp + "/delete_account.php";
     private Button confimDelete;
     private EditText username, password;
-
-    private static String URL_DELETE_USER_ACCOUNT = serverIp + "/delete_account.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +51,13 @@ public class DeleteAccount extends AppCompatActivity {
             public void onClick(View v) {
                 String delUsername = username.getText().toString().trim();
                 String delPass = password.getText().toString().trim();
-                deleteUserAccount(delUsername,delPass,userId);
+                deleteUserAccount(delUsername, delPass, userId);
             }
         });
 
     }
 
-    private void deleteUserAccount(final String username, final String password,final String delUserId) {
+    private void deleteUserAccount(final String username, final String password, final String delUserId) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DELETE_USER_ACCOUNT,
                 new Response.Listener<String>() {
                     @Override
@@ -73,8 +72,7 @@ public class DeleteAccount extends AppCompatActivity {
                                 Intent intent = new Intent(DeleteAccount.this, MainActivity.class);
                                 startActivity(intent);
 
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(DeleteAccount.this, "Podany login lub hasło jest nieprawidłowe.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -106,7 +104,7 @@ public class DeleteAccount extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }

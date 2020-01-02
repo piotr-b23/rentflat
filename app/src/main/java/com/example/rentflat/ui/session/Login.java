@@ -1,12 +1,12 @@
 package com.example.rentflat.ui.session;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -28,10 +28,10 @@ import static com.example.rentflat.MainActivity.serverIp;
 
 public class Login extends AppCompatActivity {
 
-    private EditText username, password;
-    private Button loginButton;
     private static String URL_LOGIN = serverIp + "/login.php";
     SessionMenager sessionMenager;
+    private EditText username, password;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +83,7 @@ public class Login extends AppCompatActivity {
                                 }
                                 sessionMenager.checkIfLogged();
 
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(Login.this, "Podany login lub hasło jest nieprawidłowe.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {

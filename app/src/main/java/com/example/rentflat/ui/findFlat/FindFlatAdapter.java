@@ -57,7 +57,7 @@ public class FindFlatAdapter extends RecyclerView.Adapter<FindFlatAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView findFlatTitle, findFlatDescription,findFlatDate;
+        TextView findFlatTitle, findFlatDescription, findFlatDate;
         ImageView findFlatImage;
 
         public ViewHolder(@NonNull View itemView) {

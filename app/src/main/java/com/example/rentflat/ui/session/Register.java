@@ -1,13 +1,13 @@
 package com.example.rentflat.ui.session;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -29,10 +29,14 @@ import static com.example.rentflat.MainActivity.serverIp;
 
 public class Register extends AppCompatActivity {
 
+    private static String URL_REGIST = serverIp + "/register.php";
     private EditText name, username, email, password, confirmedPassword;
     private Button registerButton;
-    private static String URL_REGIST = serverIp + "/register.php";
 
+    public static boolean isEmailValid(String email) {
+        String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        return email.matches(emailRegex);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +98,7 @@ public class Register extends AppCompatActivity {
                                 Toast.makeText(Register.this, "Zarejestrowano", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Register.this, MainActivity.class);
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(Register.this, "Wystąpił problem z rejestracją", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -128,13 +131,5 @@ public class Register extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
 
-    }
-
-    public static boolean isEmailValid(String email) {
-        String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-        if (email.matches(emailRegex)) {
-            return true;
-        }
-        return false;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.rentflat.ui.myRates;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +8,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,8 +20,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.flat.Flat;
-import com.example.rentflat.ui.myFlats.MyFlatsAdapter;
 import com.example.rentflat.ui.rate.Rate;
 
 import org.json.JSONArray;
@@ -34,8 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.sessionMenager;
@@ -44,11 +35,11 @@ import static com.example.rentflat.MainActivity.userId;
 public class MyRatesFragment extends Fragment {
 
     private static String URL_GET_MY_RATES = serverIp + "/get_rates.php";
-    private RatingBar contactRateAVG, descriptionRateAVG;
-    private TextView contact, description, myRatesText;
     RecyclerView recyclerView;
     MyRatesAdapter adapter;
     ArrayList<Rate> rates;
+    private RatingBar contactRateAVG, descriptionRateAVG;
+    private TextView contact, description, myRatesText;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -85,7 +76,7 @@ public class MyRatesFragment extends Fragment {
     }
 
     private void getMyRates(final String userId) {
-        String url = String.format(URL_GET_MY_RATES + "?userId=%s",userId);
+        String url = String.format(URL_GET_MY_RATES + "?userId=%s", userId);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

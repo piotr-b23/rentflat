@@ -1,7 +1,5 @@
 package com.example.rentflat.ui.flat;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,10 +32,10 @@ import static com.example.rentflat.MainActivity.userId;
 
 public class ChangeFlatDescription extends AppCompatActivity {
 
+    private static String URL_CHANGE_DESCRIPTION = serverIp + "/change_description.php";
     private EditText description;
     private Button changeDescription;
     private int flatId;
-    private static String URL_CHANGE_DESCRIPTION = serverIp + "/change_description.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class ChangeFlatDescription extends AppCompatActivity {
         description.setText(oldDescription, TextView.BufferType.EDITABLE);
         changeDescription = findViewById(R.id.confirmDescriptionChange);
 
-        flatId = intent.getIntExtra("flat id",0);
+        flatId = intent.getIntExtra("flat id", 0);
 
         changeDescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +62,7 @@ public class ChangeFlatDescription extends AppCompatActivity {
                         description.setError("Za krótki opis.");
 
                     } else {
-                        UpdateDescription(Integer.toString(flatId), upDescription,userId);
+                        UpdateDescription(Integer.toString(flatId), upDescription, userId);
                     }
 
 
@@ -75,7 +75,7 @@ public class ChangeFlatDescription extends AppCompatActivity {
 
     }
 
-    private void UpdateDescription(final String flatId, final String updatedDescription,final String userId) {
+    private void UpdateDescription(final String flatId, final String updatedDescription, final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_DESCRIPTION,
                 new Response.Listener<String>() {
@@ -88,8 +88,7 @@ public class ChangeFlatDescription extends AppCompatActivity {
                                 Toast.makeText(ChangeFlatDescription.this, "Zaktualizowano opis oferty.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ChangeFlatDescription.this, MainActivity.class);
                                 startActivity(intent);
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(ChangeFlatDescription.this, "Wystąpił błąd w trakcie zmiany opisu oferty.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -116,11 +115,12 @@ public class ChangeFlatDescription extends AppCompatActivity {
 
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                headers.put("Authorization-token",TOKEN);
+                headers.put("Authorization-token", TOKEN);
 
                 return headers;
             }
