@@ -26,7 +26,13 @@
     <fragment
         android:id="@+id/nav_my_rates"
         android:name="com.example.rentflat.ui.myRates.MyRatesFragment"
-        android:label="@string/menu_tools"
+        android:label="@string/menu_rates"
         tools:layout="@layout/fragment_my_rates" />
+
+    <fragment
+        android:id="@+id/nav_messages"
+        android:name="com.example.rentflat.ui.message.MessageFragment"
+        android:label="@string/menu_rates"
+        tools:layout="@layout/fragment_message" />
 
 </navigation>

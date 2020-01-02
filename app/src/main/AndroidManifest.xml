@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.accountManagement.DeleteAccount"></activity>
+        <activity android:name=".ui.message.MessageDetails"></activity>
+        <activity android:name=".ui.accountManagement.DeleteAccount" />
         <activity android:name=".ui.rate.ReportRate" />
         <activity android:name=".ui.rate.EditRate" />
         <activity android:name=".ui.rate.GetGivenRates" />
