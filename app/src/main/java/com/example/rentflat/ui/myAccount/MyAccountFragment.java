@@ -9,10 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.AuthFailureError;
@@ -23,8 +21,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
+import com.example.rentflat.ui.accountManagement.ChangeEmail;
+import com.example.rentflat.ui.accountManagement.ChangePassword;
+import com.example.rentflat.ui.accountManagement.ChangePhone;
+import com.example.rentflat.ui.accountManagement.DeleteAccount;
+import com.example.rentflat.ui.rate.GetGivenRates;
 import com.example.rentflat.ui.rate.Rate;
-import com.example.rentflat.ui.register.Register;
+import com.example.rentflat.ui.session.Register;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -161,7 +164,7 @@ public class MyAccountFragment extends Fragment {
 
 
                                 }
-                                Intent intent = new Intent(getActivity(), GivenRates.class);
+                                Intent intent = new Intent(getActivity(), GetGivenRates.class);
                                 intent.putParcelableArrayListExtra("given rates", rates);
                                 startActivity(intent);
 

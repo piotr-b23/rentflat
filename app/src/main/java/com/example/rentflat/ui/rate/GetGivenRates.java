@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.myAccount;
+package com.example.rentflat.ui.rate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +13,7 @@ import com.example.rentflat.ui.rate.RateGivenAdapter;
 
 import java.util.ArrayList;
 
-public class GivenRates extends AppCompatActivity {
+public class GetGivenRates extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RateGivenAdapter adapter;

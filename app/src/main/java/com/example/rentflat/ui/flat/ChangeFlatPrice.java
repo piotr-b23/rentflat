@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.myFlats;
+package com.example.rentflat.ui.flat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,44 +30,44 @@ import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.userId;
 
-public class ChangeDescription extends AppCompatActivity {
+public class ChangeFlatPrice extends AppCompatActivity {
 
-    private EditText description;
-    private Button changeDescription;
+    private EditText price;
+    private Button changePrice;
     private int flatId;
-    private static String URL_CHANGE_DESCRIPTION = serverIp + "/change_description.php";
+    private static String URL_CHANGE_PRICE = serverIp + "/change_price.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_description);
+        setContentView(R.layout.activity_change_price);
 
         Intent intent = getIntent();
-        String oldDescription = intent.getStringExtra("old description");
-
-        description = findViewById(R.id.newDescription);
-        description.setText(oldDescription, TextView.BufferType.EDITABLE);
-        changeDescription = findViewById(R.id.confirmDescriptionChange);
-
+        int oldPrice = intent.getIntExtra("old price",0);
         flatId = intent.getIntExtra("flat id",0);
 
-        changeDescription.setOnClickListener(new View.OnClickListener() {
+        price = findViewById(R.id.newPrice);
+        price.setText(Integer.toString(oldPrice), TextView.BufferType.EDITABLE);
+
+        changePrice = findViewById(R.id.confirmPriceChange);
+
+        changePrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String upDescription = description.getText().toString().trim();
+                String upPrice = price.getText().toString().trim();
 
-                if (!upDescription.isEmpty()) {
-                    if (upDescription.length() < 20) {
+                if (!upPrice.isEmpty()) {
+                    if (Integer.parseInt(upPrice) > 500000 || Integer.parseInt(upPrice) < 50) {
 
-                        description.setError("Za krótki opis.");
+                        price.setError("Podaj poprawną cenę za wynajem.");
 
                     } else {
-                        UpdateDescription(Integer.toString(flatId), upDescription,userId);
+                        UpdatePrice(Integer.toString(flatId), upPrice,userId);
                     }
 
 
                 } else {
-                    if (upDescription.isEmpty()) description.setError("Podaj poprawny opis.");
+                    if (upPrice.isEmpty()) price.setError("Podaj poprawną cenę za wynajem.");
                 }
 
             }
@@ -75,9 +75,9 @@ public class ChangeDescription extends AppCompatActivity {
 
     }
 
-    private void UpdateDescription(final String flatId, final String updatedDescription,final String userId) {
+    private void UpdatePrice(final String flatId, final String updatedPrice, final String userId) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_DESCRIPTION,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_PRICE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -85,16 +85,16 @@ public class ChangeDescription extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
                             if (success.equals("1")) {
-                                Toast.makeText(ChangeDescription.this, "Zaktualizowano opis oferty.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(ChangeDescription.this, MainActivity.class);
+                                Toast.makeText(ChangeFlatPrice.this, "Zaktualizowano cenę oferty.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ChangeFlatPrice.this, MainActivity.class);
                                 startActivity(intent);
                             }
                             else{
-                                Toast.makeText(ChangeDescription.this, "Wystąpił błąd w trakcie zmiany opisu oferty.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChangeFlatPrice.this, "Wystąpił błąd w trakcie zmiany ceny oferty.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ChangeDescription.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangeFlatPrice.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -102,16 +102,15 @@ public class ChangeDescription extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChangeDescription.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangeFlatPrice.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
-
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("flatId", flatId);
-                params.put("description", updatedDescription);
+                params.put("price", updatedPrice);
                 params.put("userId", userId);
 
                 return params;

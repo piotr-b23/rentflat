@@ -1,8 +1,7 @@
-package com.example.rentflat.ui.myAccount;
+package com.example.rentflat.ui.accountManagement;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,9 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.rentflat.MainActivity;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.register.Register;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,41 +26,45 @@ import java.util.Map;
 import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
 import static com.example.rentflat.MainActivity.userId;
-import static com.example.rentflat.ui.register.Register.isEmailValid;
 
+public class ChangePassword extends AppCompatActivity {
 
-public class ChangeEmail extends AppCompatActivity {
-    private EditText newEmail, password;
-    private Button changeMailButton;
-    private static String URL_CHANGE_MAIL = serverIp + "/edit_mail.php";
+    private EditText password, newPassword, newConfPassword;
+    private Button changePasswordButton;
+    private static String URL_CHANGE_MAIL = serverIp + "/edit_password.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_email);
-        newEmail = findViewById(R.id.newUserEmail);
+        setContentView(R.layout.activity_change_password);
         password = findViewById(R.id.oldPassword);
-        changeMailButton = findViewById(R.id.confirmEmailChange);
+        newPassword = findViewById(R.id.newPassword);
+        newConfPassword = findViewById(R.id.confirmedNewPassword);
+        changePasswordButton = findViewById(R.id.confirmPassChangeButton);
 
-        changeMailButton.setOnClickListener(new View.OnClickListener() {
+        changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String upPassword = password.getText().toString().trim();
-                String upEmail = newEmail.getText().toString().trim();
+                String upNewPassword = newPassword.getText().toString().trim();
+                String upNewConfPassword = newConfPassword.getText().toString().trim();
                 String id = userId;
 
-                if (!upPassword.isEmpty() && !upEmail.isEmpty()) {
-                    if (isEmailValid(upEmail)) {
-                        UpdateMail(upPassword, upEmail, id);
+                if (!upPassword.isEmpty() && !upNewPassword.isEmpty() && !upNewConfPassword.isEmpty()) {
+                    if (upNewPassword.equals(upNewConfPassword)) {
+
+                        ChangePass(upPassword, upNewPassword, id);
+
 
                     } else {
-                        newEmail.setError("Podaj poprawny email");
+                        newConfPassword.setError("Podane hasła różnią się");
                     }
 
-
                 } else {
-                    if (upPassword.isEmpty()) password.setError("Podaj hasło");
-                    if (upEmail.isEmpty()) newEmail.setError("Podaj email użytkownika");
+                    if (upPassword.isEmpty()) password.setError("Podaj hasło użytkownika");
+                    if (upNewPassword.isEmpty()) newPassword.setError("Podaj nowe hasło");
+                    if (upNewConfPassword.isEmpty())
+                        newConfPassword.setError("Potwierdź nowe hasło");
                 }
 
             }
@@ -72,7 +73,7 @@ public class ChangeEmail extends AppCompatActivity {
 
     }
 
-    private void UpdateMail(final String password, final String email, final String userId) {
+    private void ChangePass(final String password, final String newPassword, final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CHANGE_MAIL,
                 new Response.Listener<String>() {
@@ -83,31 +84,25 @@ public class ChangeEmail extends AppCompatActivity {
                             String success = jsonObject.getString("success");
                             String message = jsonObject.getString("message");
                             if (success.equals("1")) {
-                                Toast.makeText(ChangeEmail.this, "Zaktualizowano email", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChangePassword.this, "Zmieniono hasło", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                             else{
                                 switch (message){
                                     case "error":
-                                        Toast.makeText(ChangeEmail.this, "Problem przy zmianie maila", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ChangePassword.this, "Problem przy zmianie hasła", Toast.LENGTH_SHORT).show();
                                         break;
                                     case "password":
-                                        Toast.makeText(ChangeEmail.this, "Niepoprawne hasło", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ChangePassword.this, "Niepoprawne hasło", Toast.LENGTH_SHORT).show();
                                         break;
-                                    case "mail":
-                                        Toast.makeText(ChangeEmail.this, "Podany mail jest już wykorzystywany", Toast.LENGTH_SHORT).show();
+                                    default:
+                                        Toast.makeText(ChangePassword.this, "Błąd", Toast.LENGTH_SHORT).show();
                                         break;
-                                        default:
-                                            Toast.makeText(ChangeEmail.this, "Błąd", Toast.LENGTH_SHORT).show();
-                                            break;
                                 }
-
-
-
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ChangeEmail.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangePassword.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -115,7 +110,7 @@ public class ChangeEmail extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChangeEmail.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePassword.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -124,7 +119,7 @@ public class ChangeEmail extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("userId", userId);
                 params.put("password", password);
-                params.put("email", email);
+                params.put("newpassword", newPassword);
 
                 return params;
             }

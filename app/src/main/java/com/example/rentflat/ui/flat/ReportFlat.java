@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.myAccount;
+package com.example.rentflat.ui.flat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,51 +16,60 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.rentflat.MainActivity;
 import com.example.rentflat.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionMenager;
 import static com.example.rentflat.MainActivity.userId;
 
-public class DeleteAccount extends AppCompatActivity {
+public class ReportFlat extends AppCompatActivity {
 
-    private Button confimDelete;
-    private EditText username, password;
+    private EditText reportDescription;
+    private Button confirmReport;
 
-    private static String URL_DELETE_USER_ACCOUNT = serverIp + "/delete_account.php";
+    private static String URL_REPORT = serverIp + "/report_flat.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delete_account);
+        setContentView(R.layout.activity_report_flat);
 
-        confimDelete = findViewById(R.id.confirmAccountDelete);
-        username = findViewById(R.id.deleteUsername);
-        password = findViewById(R.id.deletePassword);
+        reportDescription = findViewById(R.id.reportDescription);
+        confirmReport = findViewById(R.id.confirmReportButton);
 
 
-        confimDelete.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+        final Flat reportedFlat = (Flat) intent.getParcelableExtra("reported flat");
+
+        confirmReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String delUsername = username.getText().toString().trim();
-                String delPass = password.getText().toString().trim();
-                deleteUserAccount(delUsername,delPass,userId);
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String date = df.format(Calendar.getInstance().getTime());
+
+
+                String id = userId;
+                String reportText = reportDescription.getText().toString();
+                String flatId = Integer.toString(reportedFlat.getFlatId());
+                sendReport(flatId, id, reportText, date);
+
             }
         });
 
     }
 
-    private void deleteUserAccount(final String username, final String password,final String delUserId) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DELETE_USER_ACCOUNT,
+    private void sendReport(final String flatId, final String reportingUserId, final String reportDescription, final String dateTime) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -68,19 +77,15 @@ public class DeleteAccount extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
                             if (success.equals("1")) {
-
-                                sessionMenager.logout();
-                                userId = null;
-                                Intent intent = new Intent(DeleteAccount.this, MainActivity.class);
-                                startActivity(intent);
-
+                                Toast.makeText(ReportFlat.this, "Zgłoszono ogłoszenie", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                             else {
-                                Toast.makeText(DeleteAccount.this, "Podany login lub hasło jest nieprawidłowe.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ReportFlat.this, "Wystąpił problem przy zgłaszaniu", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(DeleteAccount.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ReportFlat.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -88,17 +93,17 @@ public class DeleteAccount extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(DeleteAccount.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReportFlat.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("username", username);
-                params.put("password", password);
-                params.put("userId", delUserId);
-
+                params.put("flatId", flatId);
+                params.put("reportUserId", reportingUserId);
+                params.put("comment", reportDescription);
+                params.put("date", dateTime);
 
                 return params;
             }
@@ -112,6 +117,7 @@ public class DeleteAccount extends AppCompatActivity {
                 return headers;
             }
         };
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 

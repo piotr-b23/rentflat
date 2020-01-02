@@ -1,11 +1,10 @@
-package com.example.rentflat.ui;
+package com.example.rentflat.ui.session;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.rentflat.MainActivity;
-import com.example.rentflat.ui.login.Login;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.myRates;
+package com.example.rentflat.ui.accountManagement;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -17,61 +16,50 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.rentflat.MainActivity;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.rate.Rate;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.MainActivity.sessionMenager;
 import static com.example.rentflat.MainActivity.userId;
 
-public class ReportRate extends AppCompatActivity {
+public class DeleteAccount extends AppCompatActivity {
 
-    private EditText reportRateText;
-    private Button confirmReport;
+    private Button confimDelete;
+    private EditText username, password;
 
-
-    private static String URL_REPORT_RATE = serverIp + "/report_rate.php";
+    private static String URL_DELETE_USER_ACCOUNT = serverIp + "/delete_account.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report_rate);
+        setContentView(R.layout.activity_delete_account);
+
+        confimDelete = findViewById(R.id.confirmAccountDelete);
+        username = findViewById(R.id.deleteUsername);
+        password = findViewById(R.id.deletePassword);
 
 
-        reportRateText = findViewById(R.id.reportRateDescription);
-        confirmReport = findViewById(R.id.confirmRateReportButton);
-
-        Intent intent = getIntent();
-        final Rate editedRate = (Rate) intent.getParcelableExtra("reported rate");
-
-
-        confirmReport.setOnClickListener(new View.OnClickListener() {
+        confimDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String reportRateComment = reportRateText.getText().toString().trim();
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String date = df.format(Calendar.getInstance().getTime());
-                String id = userId;
-
-
-                reportRate(editedRate.getRateId(), id, reportRateComment, date);
+                String delUsername = username.getText().toString().trim();
+                String delPass = password.getText().toString().trim();
+                deleteUserAccount(delUsername,delPass,userId);
             }
         });
+
     }
 
-    private void reportRate(final String rateId, final String reportingUserId, final String comment, final String dateTime) {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT_RATE,
+    private void deleteUserAccount(final String username, final String password,final String delUserId) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DELETE_USER_ACCOUNT,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -79,15 +67,19 @@ public class ReportRate extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
                             if (success.equals("1")) {
-                                Toast.makeText(ReportRate.this, "Zgłoszono ocenę", Toast.LENGTH_SHORT).show();
-                                finish();
+
+                                sessionMenager.logout();
+                                userId = null;
+                                Intent intent = new Intent(DeleteAccount.this, MainActivity.class);
+                                startActivity(intent);
+
                             }
-                            else{
-                                Toast.makeText(ReportRate.this, "Wystąpił problem przy zgłaszaniu", Toast.LENGTH_SHORT).show();
+                            else {
+                                Toast.makeText(DeleteAccount.this, "Podany login lub hasło jest nieprawidłowe.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ReportRate.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DeleteAccount.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -95,17 +87,17 @@ public class ReportRate extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ReportRate.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DeleteAccount.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("rateId", rateId);
-                params.put("reportingUserId", reportingUserId);
-                params.put("comment", comment);
-                params.put("date", dateTime);
+                params.put("username", username);
+                params.put("password", password);
+                params.put("userId", delUserId);
+
 
                 return params;
             }
@@ -119,7 +111,6 @@ public class ReportRate extends AppCompatActivity {
                 return headers;
             }
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 

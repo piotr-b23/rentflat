@@ -9,7 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.rentflat.ui.SessionMenager;
+import com.example.rentflat.ui.session.SessionMenager;
 import com.example.rentflat.ui.home.HomeFragment;
 
 import androidx.navigation.NavController;

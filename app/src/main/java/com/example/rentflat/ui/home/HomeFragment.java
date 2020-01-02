@@ -14,12 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.rentflat.MainActivity;
 import com.example.rentflat.R;
 import com.example.rentflat.ui.findFlat.FindFlat;
-import com.example.rentflat.ui.login.Login;
-import com.example.rentflat.ui.register.Register;
-import com.google.android.material.navigation.NavigationView;
+import com.example.rentflat.ui.session.Login;
+import com.example.rentflat.ui.session.Register;
 
 import static com.example.rentflat.MainActivity.sessionMenager;
 import static com.example.rentflat.MainActivity.userId;

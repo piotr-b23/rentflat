@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.register;
+package com.example.rentflat.ui.session;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +18,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.MainActivity;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.login.Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;

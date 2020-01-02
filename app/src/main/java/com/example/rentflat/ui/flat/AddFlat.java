@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.addFlat;
+package com.example.rentflat.ui.flat;
 
 import android.content.ClipData;
 import android.content.Intent;

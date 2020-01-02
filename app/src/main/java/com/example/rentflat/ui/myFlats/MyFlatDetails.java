@@ -11,13 +11,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.MainActivity;
+import com.example.rentflat.ui.flat.ChangeFlatDescription;
+import com.example.rentflat.ui.flat.ChangeFlatPrice;
 import com.example.rentflat.ui.flat.Flat;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
-import com.example.rentflat.ui.myAccount.ChangeEmail;
-import com.example.rentflat.ui.myAccount.ChangePassword;
-import com.example.rentflat.ui.myAccount.ChangePhone;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,13 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rentflat.R;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,7 +102,7 @@ public class MyFlatDetails extends AppCompatActivity {
             editPrice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), ChangePrice.class);
+                    Intent intent = new Intent(v.getContext(), ChangeFlatPrice.class);
                     intent.putExtra("old price", selectedFlat.getPrice());
                     intent.putExtra("flat id", selectedFlat.getFlatId());
                     startActivity(intent);
@@ -118,7 +112,7 @@ public class MyFlatDetails extends AppCompatActivity {
             editDescription.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), ChangeDescription.class);
+                    Intent intent = new Intent(v.getContext(), ChangeFlatDescription.class);
                     intent.putExtra("old description", selectedFlat.getDescription());
                     intent.putExtra("flat id", selectedFlat.getFlatId());
                     startActivity(intent);

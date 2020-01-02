@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentflat.R;
-import com.example.rentflat.ui.myRates.ReportRate;
+import com.example.rentflat.ui.rate.ReportRate;
 import com.example.rentflat.ui.rate.Rate;
 
 import java.util.List;
