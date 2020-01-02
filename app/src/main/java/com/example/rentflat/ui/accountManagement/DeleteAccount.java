@@ -27,7 +27,7 @@ import java.util.Map;
 
 import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.sessionManager;
 import static com.example.rentflat.MainActivity.userId;
 
 public class DeleteAccount extends AppCompatActivity {
@@ -67,7 +67,7 @@ public class DeleteAccount extends AppCompatActivity {
                             String success = jsonObject.getString("success");
                             if (success.equals("1")) {
 
-                                sessionMenager.logout();
+                                sessionManager.logout();
                                 userId = null;
                                 Intent intent = new Intent(DeleteAccount.this, MainActivity.class);
                                 startActivity(intent);

@@ -34,7 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.sessionManager;
 import static com.example.rentflat.MainActivity.userId;
 
 public class FindFlatDetails extends AppCompatActivity {
@@ -99,7 +99,7 @@ public class FindFlatDetails extends AppCompatActivity {
         else students.setText("nie");
 
 
-        if (sessionMenager.isLogged()) {
+        if (sessionManager.isLogged()) {
 
             rateUser.setVisibility(View.VISIBLE);
             reportFlat.setVisibility(View.VISIBLE);

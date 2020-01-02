@@ -35,7 +35,7 @@ import java.util.Map;
 
 import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.sessionManager;
 import static com.example.rentflat.MainActivity.userId;
 
 public class MyFlatDetails extends AppCompatActivity {
@@ -95,7 +95,7 @@ public class MyFlatDetails extends AppCompatActivity {
         adapter = new ImageAdapter(this, photos);
         recyclerView.setAdapter(adapter);
 
-        if (sessionMenager.isLogged()) {
+        if (sessionManager.isLogged()) {
 
             editPrice.setOnClickListener(new View.OnClickListener() {
                 @Override

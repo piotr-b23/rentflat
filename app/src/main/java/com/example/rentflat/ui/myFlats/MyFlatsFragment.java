@@ -35,7 +35,7 @@ import java.util.Map;
 
 import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.sessionManager;
 import static com.example.rentflat.MainActivity.userId;
 
 public class MyFlatsFragment extends Fragment {
@@ -57,7 +57,7 @@ public class MyFlatsFragment extends Fragment {
         myFlatsText = root.findViewById(R.id.text_my_flat);
         addFlat = root.findViewById(R.id.addFlatButton);
 
-        if (sessionMenager.isLogged()) {
+        if (sessionManager.isLogged()) {
             myFlatsText.setText("Przeglądaj swoje ogłoszenia");
             addFlat.setVisibility(View.VISIBLE);
             getMyFlats(id);

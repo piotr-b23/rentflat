@@ -29,7 +29,7 @@ import static com.example.rentflat.MainActivity.serverIp;
 
 public class Register extends AppCompatActivity {
 
-    private static String URL_REGIST = serverIp + "/register.php";
+    private static String URL_REGISTER = serverIp + "/register.php";
     private EditText name, username, email, password, confirmedPassword;
     private Button registerButton;
 
@@ -87,7 +87,7 @@ public class Register extends AppCompatActivity {
 
     private void Regist(final String name, final String username, final String password, final String email) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

@@ -29,7 +29,7 @@ import static com.example.rentflat.MainActivity.serverIp;
 public class Login extends AppCompatActivity {
 
     private static String URL_LOGIN = serverIp + "/login.php";
-    SessionMenager sessionMenager;
+    SessionManager sessionManager;
     private EditText username, password;
     private Button loginButton;
 
@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        sessionMenager = new SessionMenager(this);
+        sessionManager = new SessionManager(this);
 
         username = findViewById(R.id.nickname);
         password = findViewById(R.id.password);
@@ -79,9 +79,9 @@ public class Login extends AppCompatActivity {
                                     String id = object.getString("id").trim();
                                     Toast.makeText(Login.this, "Zalogowano. \nWitaj " + name, Toast.LENGTH_SHORT).show();
 
-                                    sessionMenager.createSession(name, token, id);
+                                    sessionManager.createSession(name, token, id);
                                 }
-                                sessionMenager.checkIfLogged();
+                                sessionManager.checkIfLogged();
 
                             } else {
                                 Toast.makeText(Login.this, "Podany login lub hasło jest nieprawidłowe.", Toast.LENGTH_SHORT).show();

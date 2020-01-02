@@ -8,7 +8,7 @@ import com.example.rentflat.MainActivity;
 
 import java.util.HashMap;
 
-public class SessionMenager {
+public class SessionManager {
 
     public static final String NAME = "NAME";
     public static final String TOKEN = "TOKEN";
@@ -20,7 +20,7 @@ public class SessionMenager {
     SharedPreferences sharedPreferences;
     int PRIVATE_MODE = 0;
 
-    public SessionMenager(Context context) {
+    public SessionManager(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = sharedPreferences.edit();

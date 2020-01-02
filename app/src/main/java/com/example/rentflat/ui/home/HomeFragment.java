@@ -19,12 +19,12 @@ import com.example.rentflat.ui.findFlat.FindFlat;
 import com.example.rentflat.ui.session.Login;
 import com.example.rentflat.ui.session.Register;
 
-import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.sessionManager;
 import static com.example.rentflat.MainActivity.userId;
 
 public class HomeFragment extends Fragment {
 
-    public TextView name, username;
+    public TextView name;
     private HomeViewModel homeViewModel;
     private Button registerButton, loginButton, findFlatButton;
 
@@ -36,28 +36,14 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
 
-
-//        username =(TextView)root.findViewById(R.id.navUsername);
-//        name =(TextView)root.findViewById(R.id.navName);
-
         registerButton = root.findViewById(R.id.registerButton);
         loginButton = root.findViewById(R.id.loginButton);
         findFlatButton = root.findViewById(R.id.addFlatButton);
 
 
-        if (sessionMenager.isLogged()) {
-            boolean test = sessionMenager.isLogged();
-//            String uName = user.get(sessionMenager.NAME);
-//            String uUsername = user.get(sessionMenager.USERNAME);
-
-
+        if (sessionManager.isLogged()) {
             registerButton.setVisibility(View.INVISIBLE);
             loginButton.setText("wyloguj");
-
-
-//            username.setText(uUsername);
-//            name.setText(uName);
-//            name.setVisibility(View.VISIBLE);
         }
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -70,8 +56,8 @@ public class HomeFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sessionMenager.isLogged()) {
-                    sessionMenager.logout();
+                if (sessionManager.isLogged()) {
+                    sessionManager.logout();
                     loginButton.setText("zaloguj");
                     registerButton.setVisibility(View.VISIBLE);
                     userId = null;

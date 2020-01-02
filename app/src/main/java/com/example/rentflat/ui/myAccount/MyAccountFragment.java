@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,7 +38,7 @@ import java.util.Map;
 
 import static com.example.rentflat.MainActivity.TOKEN;
 import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.sessionManager;
 import static com.example.rentflat.MainActivity.userId;
 
 public class MyAccountFragment extends Fragment {
@@ -54,7 +53,6 @@ public class MyAccountFragment extends Fragment {
         myAccountViewModel =
                 ViewModelProviders.of(this).get(MyAccountViewModel.class);
         View root = inflater.inflate(R.layout.fragment_my_account, container, false);
-        final TextView textView = root.findViewById(R.id.text_my_account);
 
         updateEmail = root.findViewById(R.id.updateEmail);
         updatePhone = root.findViewById(R.id.updatePhone);
@@ -63,7 +61,7 @@ public class MyAccountFragment extends Fragment {
         register = root.findViewById(R.id.registerMyAccount);
         deleteAccount = root.findViewById(R.id.deleteAccount);
 
-        if (sessionMenager.isLogged()) {
+        if (sessionManager.isLogged()) {
 
             updateEmail.setVisibility(View.VISIBLE);
             updatePhone.setVisibility(View.VISIBLE);

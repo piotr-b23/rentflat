@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionMenager;
+import static com.example.rentflat.MainActivity.sessionManager;
 import static com.example.rentflat.MainActivity.userId;
 
 public class MyRatesFragment extends Fragment {
@@ -58,7 +58,7 @@ public class MyRatesFragment extends Fragment {
         myRatesText = root.findViewById(R.id.text_my_rates);
 
 
-        if (sessionMenager.isLogged()) {
+        if (sessionManager.isLogged()) {
             contactRateAVG.setVisibility(View.VISIBLE);
             descriptionRateAVG.setVisibility(View.VISIBLE);
             contact.setVisibility(View.VISIBLE);
