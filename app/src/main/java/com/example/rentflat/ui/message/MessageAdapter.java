@@ -36,8 +36,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String title = data.get(position).getTitle();
         holder.messageTitle.setText(title);
-        String description = data.get(position).getDescription();
-        holder.messageDescription.setText(description);
+        String userName = data.get(position).getUserName();
+        holder.messageDescription.setText("Nadawca: "+ userName);
         String date = data.get(position).getDate();
         holder.messageDate.setText(date);
 

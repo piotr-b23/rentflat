@@ -16,21 +16,23 @@ public class Message implements Parcelable {
     };
 
     private int messageId, senderId, recipientId;
-    private String title, description,date;
+    private String userName, title, description,date;
 
     private Message(Parcel in) {
         this.messageId = in.readInt();
         this.senderId = in.readInt();
         this.recipientId = in.readInt();
+        this.userName = in.readString();
         this.title = in.readString();
         this.description = in.readString();
         this.date = in.readString();
     }
 
-    public Message(int messageId, int senderId, int recipientId, String title, String description, String date) {
+    public Message(int messageId, int senderId, int recipientId,String userName, String title, String description, String date) {
         this.messageId = messageId;
         this.senderId = senderId;
         this.recipientId = recipientId;
+        this.userName = userName;
         this.title = title;
         this.description = description;
         this.date = date;
@@ -46,6 +48,7 @@ public class Message implements Parcelable {
         out.writeInt(messageId);
         out.writeInt(senderId);
         out.writeInt(recipientId);
+        out.writeString(userName);
         out.writeString(title);
         out.writeString(description);
         out.writeString(date);
@@ -64,6 +67,10 @@ public class Message implements Parcelable {
         return this.recipientId;
     }
 
+    public String getUserName(){
+        return this.userName;
+    }
+
     public String getTitle() {
         return this.title;
     }
@@ -75,5 +82,6 @@ public class Message implements Parcelable {
     public String getDate() {
         return this.date;
     }
+
 
 }

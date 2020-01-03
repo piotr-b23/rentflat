@@ -23,6 +23,7 @@ import com.example.rentflat.R;
 import com.example.rentflat.ui.flat.Flat;
 import com.example.rentflat.ui.flat.ReportFlat;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
+import com.example.rentflat.ui.message.SendMessage;
 import com.example.rentflat.ui.rate.Rate;
 import com.example.rentflat.ui.rate.RateResults;
 import com.example.rentflat.ui.rate.RateUser;
@@ -47,7 +48,7 @@ public class FindFlatDetails extends AppCompatActivity {
     ArrayList<Rate> rates;
     private TextView price, surface, room, type, province, locality, street, students, description;
     private TextView reportFlat, userRates;
-    private Button call, sendSMS, rateUser;
+    private Button call, sendSMS, rateUser, sendMessage;
     private Flat selectedFlat;
     private String phone;
 
@@ -81,6 +82,7 @@ public class FindFlatDetails extends AppCompatActivity {
         call = findViewById(R.id.callButton);
         sendSMS = findViewById(R.id.smsButton);
         rateUser = findViewById(R.id.rateButton);
+        sendMessage = findViewById(R.id.sendMessageButton);
 
         reportFlat = findViewById(R.id.reportFlatClick);
         userRates = findViewById(R.id.viewRates);
@@ -131,7 +133,7 @@ public class FindFlatDetails extends AppCompatActivity {
             rateUser.setVisibility(View.INVISIBLE);
             reportFlat.setVisibility(View.INVISIBLE);
         }
-        callOrText(userId);
+        getPhone(userId);
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,10 +168,19 @@ public class FindFlatDetails extends AppCompatActivity {
             }
         });
 
+        sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FindFlatDetails.this, SendMessage.class);
+                intent.putExtra("recipientId", selectedFlat.getUserId());
+                startActivity(intent);
+            }
+        });
+
 
     }
 
-    private void callOrText(final String userId) {
+    private void getPhone(final String userId) {
         String url = String.format(URL_GET_PHONE + "?userId=%s", userId);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

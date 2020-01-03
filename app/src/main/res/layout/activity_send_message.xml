@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/text_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Wyślij wiadomość"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/recipientName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/sendMessageTitle"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:ems="10"
+        android:hint="Tytuł wiadomości"
+        android:padding="5dp" />
+
+
+    <EditText
+        android:id="@+id/sendMessageText"
+        android:layout_width="match_parent"
+        android:layout_height="273dp"
+        android:ems="10"
+        android:padding="5dp"
+        android:hint="Wiadomość" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical" >
+
+
+
+
+        <Button
+            android:id="@+id/confirmSendMessage"
+            android:layout_width="301dp"
+            android:layout_height="76dp"
+            android:text="Wyślij" />
+
+
+    </LinearLayout>
+</LinearLayout>
