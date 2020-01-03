@@ -40,6 +40,7 @@ public class SendMessage extends AppCompatActivity {
     private Button sendMessage;
     private static String URL_SEND_MESSAGE = serverIp + "/send_message.php";
     private static String URL_GET_USER_NAME = serverIp + "/get_name.php";
+    private  Message message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,10 @@ public class SendMessage extends AppCompatActivity {
         setContentView(R.layout.activity_send_message);
 
 
+
         Intent intent = getIntent();
         final String recipientId = Integer.toString(intent.getIntExtra("recipientId",0));
+        final String isReplay = intent.getStringExtra("is replay");
 
         getName(recipientId);
 
@@ -56,6 +59,14 @@ public class SendMessage extends AppCompatActivity {
         body = findViewById(R.id.sendMessageText);
         recipientName = findViewById(R.id.recipientName);
         sendMessage = findViewById(R.id.confirmSendMessage);
+
+        if(isReplay.equals("1")){
+            message = intent.getParcelableExtra("replay message");
+            title.setText("RE: " +  message.getTitle());
+            title.setFocusable(false);
+        }
+
+
 
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +76,11 @@ public class SendMessage extends AppCompatActivity {
                 String recipientUserId = recipientId;
                 String messageTitle = title.getText().toString();
                 String text = body.getText().toString();
+
+                if(isReplay.equals("1")){
+
+                    text += message.generateMessage();
+                }
 
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String date = df.format(Calendar.getInstance().getTime());

@@ -103,6 +103,8 @@ public class FindFlatDetails extends AppCompatActivity {
 
         if (sessionManager.isLogged()) {
 
+
+            sendMessage.setVisibility(View.VISIBLE);
             rateUser.setVisibility(View.VISIBLE);
             reportFlat.setVisibility(View.VISIBLE);
             rateUser.setOnClickListener(new View.OnClickListener() {
@@ -128,10 +130,21 @@ public class FindFlatDetails extends AppCompatActivity {
                 }
             });
 
+            sendMessage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(FindFlatDetails.this, SendMessage.class);
+                    intent.putExtra("recipientId", selectedFlat.getUserId());
+                    intent.putExtra("is replay", "0");
+                    startActivity(intent);
+                }
+            });
+
 
         } else {
             rateUser.setVisibility(View.INVISIBLE);
             reportFlat.setVisibility(View.INVISIBLE);
+            sendMessage.setVisibility(View.INVISIBLE);
         }
         getPhone(userId);
 
@@ -165,15 +178,6 @@ public class FindFlatDetails extends AppCompatActivity {
 
                 getUserRates(Integer.toString(selectedFlat.getUserId()));
 
-            }
-        });
-
-        sendMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FindFlatDetails.this, SendMessage.class);
-                intent.putExtra("recipientId", selectedFlat.getUserId());
-                startActivity(intent);
             }
         });
 

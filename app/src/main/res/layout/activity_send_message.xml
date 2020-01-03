@@ -25,7 +25,7 @@
     <EditText
         android:id="@+id/sendMessageTitle"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Tytuł wiadomości"
         android:padding="5dp" />
@@ -34,10 +34,12 @@
     <EditText
         android:id="@+id/sendMessageText"
         android:layout_width="match_parent"
-        android:layout_height="273dp"
+        android:layout_height="495dp"
         android:ems="10"
-        android:padding="5dp"
-        android:hint="Wiadomość" />
+        android:gravity="top"
+        android:hint="Wiadomość"
+        android:inputType="textMultiLine"
+        android:padding="5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

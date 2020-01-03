@@ -55,6 +55,13 @@ public class Message implements Parcelable {
 
     }
 
+    public String generateMessage(){
+        String generatedMessage;
+        generatedMessage = "\n\nOdpowiedź do wiadomości wysłanej\ndnia " + this.getDate() + "\nużytkownik " + this.getUserName() + " napisał:\n" + this.getDescription();
+
+        return generatedMessage;
+    }
+
     public int getMessageId() {
         return this.messageId;
     }
