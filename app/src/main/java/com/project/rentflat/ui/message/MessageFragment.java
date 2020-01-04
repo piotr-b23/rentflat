@@ -90,15 +90,13 @@ private void getMyFlats(final String userId) {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
 
-                                int messageId = Integer.parseInt(object.getString("messageId").trim());
                                 int senderId = Integer.parseInt(object.getString("senderId").trim());
-                                int recipientId = Integer.parseInt(object.getString("recipientId").trim());
                                 String senderName = object.getString("senderName").trim();
                                 String title = object.getString("title").trim();
                                 String text = object.getString("text").trim();
                                 String date = object.getString("date").trim();
 
-                                messages.add(new Message(messageId, senderId, recipientId,senderName, title, text, date));
+                                messages.add(new Message(senderId, senderName, title, text, date));
 
 
                             }
