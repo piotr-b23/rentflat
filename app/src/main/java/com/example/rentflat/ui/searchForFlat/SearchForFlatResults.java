@@ -16,7 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
-import com.example.rentflat.models.FindFlatSearch;
+import com.example.rentflat.models.FlatSearch;
 import com.example.rentflat.models.Flat;
 
 import org.json.JSONArray;
@@ -36,7 +36,7 @@ public class SearchForFlatResults extends AppCompatActivity {
     RecyclerView recyclerView;
     SearchForFlatAdapter adapter;
     ArrayList<Flat> flats;
-    private FindFlatSearch query;
+    private FlatSearch query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

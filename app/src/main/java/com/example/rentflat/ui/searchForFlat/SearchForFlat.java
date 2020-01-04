@@ -13,14 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentflat.R;
-import com.example.rentflat.models.FindFlatSearch;
+import com.example.rentflat.models.FlatSearch;
 
 public class SearchForFlat extends AppCompatActivity {
 
     private EditText priceMin, priceMax, surfaceMin, surfaceMax, roomMin, roomMax, locality, street;
     private Button findFlatButton;
     private CheckBox studentsCheckBox;
-    private FindFlatSearch query;
+    private FlatSearch query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class SearchForFlat extends AppCompatActivity {
                 String seBuildingType = buildingType.getSelectedItem().toString();
                 String seProvince = province.getSelectedItem().toString();
 
-                query = new FindFlatSearch(sePriceMin, sePriceMax, seSurfaceMin, seSurfaceMax, seRoomMin, seRoomMax, seBuildingType, seProvince, seLocality, seStreet, seStudentsCheckBox);
+                query = new FlatSearch(sePriceMin, sePriceMax, seSurfaceMin, seSurfaceMax, seRoomMin, seRoomMax, seBuildingType, seProvince, seLocality, seStreet, seStudentsCheckBox);
 
                 Intent intent = new Intent(SearchForFlat.this, SearchForFlatResults.class);
                 intent.putExtra("query", query);

@@ -3,19 +3,19 @@ package com.example.rentflat.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class FindFlatSearch implements Parcelable {
-    public static final Parcelable.Creator<FindFlatSearch> CREATOR = new Parcelable.Creator<FindFlatSearch>() {
-        public FindFlatSearch createFromParcel(Parcel in) {
-            return new FindFlatSearch(in);
+public class FlatSearch implements Parcelable {
+    public static final Parcelable.Creator<FlatSearch> CREATOR = new Parcelable.Creator<FlatSearch>() {
+        public FlatSearch createFromParcel(Parcel in) {
+            return new FlatSearch(in);
         }
 
-        public FindFlatSearch[] newArray(int size) {
-            return new FindFlatSearch[size];
+        public FlatSearch[] newArray(int size) {
+            return new FlatSearch[size];
         }
     };
     String priceMin, priceMax, surfaceMin, surfaceMax, roomMin, roomMax, buildingType, province, locality, street, studentsCheckBox;
 
-    private FindFlatSearch(Parcel in) {
+    private FlatSearch(Parcel in) {
         this.priceMin = in.readString();
         this.priceMax = in.readString();
         this.surfaceMin = in.readString();
@@ -29,7 +29,7 @@ public class FindFlatSearch implements Parcelable {
         this.studentsCheckBox = in.readString();
     }
 
-    public FindFlatSearch(String priceMin, String priceMax, String surfaceMin, String surfaceMax, String roomMin, String roomMax, String buildingType, String province, String locality, String street, String studentsCheckBox) {
+    public FlatSearch(String priceMin, String priceMax, String surfaceMin, String surfaceMax, String roomMin, String roomMax, String buildingType, String province, String locality, String street, String studentsCheckBox) {
 
         this.priceMin = priceMin;
         this.priceMax = priceMax;
