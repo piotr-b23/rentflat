@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.findFlat.FindFlat"
+    tools:context=".ui.searchForFlat.SearchForFlat"
     tools:showIn="@layout/activity_find_flat">
 
 

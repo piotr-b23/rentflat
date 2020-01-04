@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.findFlat;
+package com.example.rentflat.ui.searchForFlat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.flat.Flat;
+import com.example.rentflat.models.FindFlatSearch;
+import com.example.rentflat.models.Flat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,14 +27,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.serverIp;
 
-public class FindFlatResults extends AppCompatActivity {
+public class SearchForFlatResults extends AppCompatActivity {
 
 
     private static String URL_FIND_FLAT = serverIp + "/find_flat.php";
     RecyclerView recyclerView;
-    FindFlatAdapter adapter;
+    SearchForFlatAdapter adapter;
     ArrayList<Flat> flats;
     private FindFlatSearch query;
 
@@ -91,18 +92,18 @@ public class FindFlatResults extends AppCompatActivity {
 
                                 }
 
-                                recyclerView.setLayoutManager(new LinearLayoutManager(FindFlatResults.this));
-                                adapter = new FindFlatAdapter(FindFlatResults.this, flats);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(SearchForFlatResults.this));
+                                adapter = new SearchForFlatAdapter(SearchForFlatResults.this, flats);
                                 recyclerView.setAdapter(adapter);
 
 
                             } else {
-                                Toast.makeText(FindFlatResults.this, "Wystąpił problem przy wyszukiwaniu ogłoszeń", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SearchForFlatResults.this, "Wystąpił problem przy wyszukiwaniu ogłoszeń", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(FindFlatResults.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SearchForFlatResults.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -112,7 +113,7 @@ public class FindFlatResults extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(FindFlatResults.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SearchForFlatResults.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

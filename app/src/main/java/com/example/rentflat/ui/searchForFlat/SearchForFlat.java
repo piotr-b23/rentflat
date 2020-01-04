@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.findFlat;
+package com.example.rentflat.ui.searchForFlat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentflat.R;
+import com.example.rentflat.models.FindFlatSearch;
 
-public class FindFlat extends AppCompatActivity {
+public class SearchForFlat extends AppCompatActivity {
 
     private EditText priceMin, priceMax, surfaceMin, surfaceMax, roomMin, roomMax, locality, street;
     private Button findFlatButton;
@@ -73,7 +74,7 @@ public class FindFlat extends AppCompatActivity {
 
                 query = new FindFlatSearch(sePriceMin, sePriceMax, seSurfaceMin, seSurfaceMax, seRoomMin, seRoomMax, seBuildingType, seProvince, seLocality, seStreet, seStudentsCheckBox);
 
-                Intent intent = new Intent(FindFlat.this, FindFlatResults.class);
+                Intent intent = new Intent(SearchForFlat.this, SearchForFlatResults.class);
                 intent.putExtra("query", query);
                 startActivity(intent);
 

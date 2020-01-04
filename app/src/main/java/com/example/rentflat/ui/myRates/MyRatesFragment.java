@@ -20,7 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.rate.Rate;
+import com.example.rentflat.models.Rate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,9 +28,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionManager;
-import static com.example.rentflat.MainActivity.userId;
+import static com.example.rentflat.ui.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.sessionManager;
+import static com.example.rentflat.ui.MainActivity.userId;
 
 public class MyRatesFragment extends Fragment {
 

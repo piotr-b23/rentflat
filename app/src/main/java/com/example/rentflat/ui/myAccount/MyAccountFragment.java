@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,12 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.accountManagement.ChangeEmail;
-import com.example.rentflat.ui.accountManagement.ChangePassword;
-import com.example.rentflat.ui.accountManagement.ChangePhone;
-import com.example.rentflat.ui.accountManagement.DeleteAccount;
+import com.example.rentflat.models.Rate;
 import com.example.rentflat.ui.rate.GetGivenRates;
-import com.example.rentflat.ui.rate.Rate;
 import com.example.rentflat.ui.session.Register;
 
 import org.json.JSONArray;
@@ -36,22 +31,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.rentflat.MainActivity.TOKEN;
-import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionManager;
-import static com.example.rentflat.MainActivity.userId;
+import static com.example.rentflat.ui.MainActivity.TOKEN;
+import static com.example.rentflat.ui.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.sessionManager;
+import static com.example.rentflat.ui.MainActivity.userId;
 
 public class MyAccountFragment extends Fragment {
 
     private static String URL_GET_GIVEN_RATES = serverIp + "/get_given_rates.php";
     ArrayList<Rate> rates;
-    private MyAccountViewModel myAccountViewModel;
+//    private MyAccountViewModel myAccountViewModel;
     private Button updateEmail, updatePhone, changePassword, givenRates, register, deleteAccount;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        myAccountViewModel =
-                ViewModelProviders.of(this).get(MyAccountViewModel.class);
+//        myAccountViewModel =
+//                ViewModelProviders.of(this).get(MyAccountViewModel.class);
         View root = inflater.inflate(R.layout.fragment_my_account, container, false);
 
         updateEmail = root.findViewById(R.id.updateEmail);

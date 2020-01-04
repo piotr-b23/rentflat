@@ -19,11 +19,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.rentflat.MainActivity;
+import com.example.rentflat.ui.MainActivity;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.flat.ChangeFlatDescription;
-import com.example.rentflat.ui.flat.ChangeFlatPrice;
-import com.example.rentflat.ui.flat.Flat;
+import com.example.rentflat.models.Flat;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
 
 import org.json.JSONException;
@@ -33,12 +31,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.rentflat.MainActivity.TOKEN;
-import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionManager;
-import static com.example.rentflat.MainActivity.userId;
+import static com.example.rentflat.ui.MainActivity.TOKEN;
+import static com.example.rentflat.ui.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.sessionManager;
+import static com.example.rentflat.ui.MainActivity.userId;
 
-public class MyFlatDetails extends AppCompatActivity {
+public class SelectedMyFlatDetails extends AppCompatActivity {
 
     private static String URL_CLOSE_OFFER = serverIp + "/close_offer.php";
     RecyclerView recyclerView;
@@ -140,15 +138,15 @@ public class MyFlatDetails extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
                             if (success.equals("1")) {
-                                Toast.makeText(MyFlatDetails.this, "Zakończono ogłoszenie", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MyFlatDetails.this, MainActivity.class);
+                                Toast.makeText(SelectedMyFlatDetails.this, "Zakończono ogłoszenie", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SelectedMyFlatDetails.this, MainActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(MyFlatDetails.this, "Wystąpił błąd przy zamykaniu ogłoszenia", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SelectedMyFlatDetails.this, "Wystąpił błąd przy zamykaniu ogłoszenia", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MyFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SelectedMyFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -156,7 +154,7 @@ public class MyFlatDetails extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MyFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SelectedMyFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

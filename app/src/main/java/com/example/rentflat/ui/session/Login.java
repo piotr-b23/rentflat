@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
+import com.example.rentflat.session.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +25,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.serverIp;
 
 public class Login extends AppCompatActivity {
 

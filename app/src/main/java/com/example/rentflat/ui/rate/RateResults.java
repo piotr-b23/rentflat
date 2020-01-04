@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentflat.R;
+import com.example.rentflat.models.Rate;
 
 import java.util.ArrayList;
 

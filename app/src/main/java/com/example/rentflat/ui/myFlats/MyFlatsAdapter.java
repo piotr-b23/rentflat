@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentflat.R;
-import com.example.rentflat.ui.flat.Flat;
+import com.example.rentflat.models.Flat;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), MyFlatDetails.class);
+                    Intent intent = new Intent(v.getContext(), SelectedMyFlatDetails.class);
                     intent.putExtra("selected flat", data.get(getAdapterPosition()));
                     v.getContext().startActivity(intent);
                 }

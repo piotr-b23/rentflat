@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.findFlat;
+package com.example.rentflat.ui.searchForFlat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,18 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentflat.R;
-import com.example.rentflat.ui.flat.Flat;
+import com.example.rentflat.models.Flat;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindFlatAdapter extends RecyclerView.Adapter<FindFlatAdapter.ViewHolder> {
+public class SearchForFlatAdapter extends RecyclerView.Adapter<SearchForFlatAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
     private List<Flat> data;
 
-    FindFlatAdapter(Context context, List<Flat> data) {
+    SearchForFlatAdapter(Context context, List<Flat> data) {
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data;
 
@@ -66,7 +66,7 @@ public class FindFlatAdapter extends RecyclerView.Adapter<FindFlatAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), FindFlatDetails.class);
+                    Intent intent = new Intent(v.getContext(), SpecificFlatDetails.class);
                     intent.putExtra("selected flat", data.get(getAdapterPosition()));
                     v.getContext().startActivity(intent);
                 }

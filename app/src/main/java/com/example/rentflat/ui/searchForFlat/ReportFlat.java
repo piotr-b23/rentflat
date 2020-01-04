@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.flat;
+package com.example.rentflat.ui.searchForFlat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
+import com.example.rentflat.models.Flat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,9 +28,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.rentflat.MainActivity.TOKEN;
-import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.userId;
+import static com.example.rentflat.ui.MainActivity.TOKEN;
+import static com.example.rentflat.ui.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.userId;
 
 public class ReportFlat extends AppCompatActivity {
 

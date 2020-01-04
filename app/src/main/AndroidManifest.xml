@@ -13,41 +13,41 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.message.SendMessage"></activity>
-        <activity android:name=".ui.message.MessageDetails" />
-        <activity android:name=".ui.accountManagement.DeleteAccount" />
+        <activity android:name=".ui.message.SelectedMessageDetails" />
+        <activity android:name=".ui.myAccount.DeleteAccount" />
         <activity android:name=".ui.rate.ReportRate" />
         <activity android:name=".ui.rate.EditRate" />
         <activity android:name=".ui.rate.GetGivenRates" />
         <activity android:name=".ui.rate.RateResults" />
-        <activity android:name=".ui.flat.ReportFlat" />
+        <activity android:name=".ui.searchForFlat.ReportFlat" />
         <activity android:name=".ui.rate.RateUser" />
         <activity
-            android:name=".ui.findFlat.FindFlatDetails"
+            android:name=".ui.searchForFlat.SpecificFlatDetails"
             android:label="@string/title_activity_find_flat_details"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.findFlat.FindFlatResults" />
-        <activity android:name=".ui.flat.ChangeFlatDescription" />
-        <activity android:name=".ui.flat.ChangeFlatPrice" />
+        <activity android:name=".ui.searchForFlat.SearchForFlatResults" />
+        <activity android:name=".ui.myFlats.ChangeFlatDescription" />
+        <activity android:name=".ui.myFlats.ChangeFlatPrice" />
         <activity
-            android:name=".ui.myFlats.MyFlatDetails"
+            android:name=".ui.myFlats.SelectedMyFlatDetails"
             android:label="@string/title_activity_my_flat_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.findFlat.FindFlat"
+            android:name=".ui.searchForFlat.SearchForFlat"
             android:label="@string/title_activity_find_flat"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.flat.AddFlat"
+            android:name=".ui.myFlats.AddFlat"
             android:label="@string/title_activity_add_flat"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.accountManagement.ChangePhone" />
-        <activity android:name=".ui.accountManagement.ChangePassword" />
-        <activity android:name=".ui.accountManagement.ChangeEmail" />
+        <activity android:name=".ui.myAccount.ChangePhone" />
+        <activity android:name=".ui.myAccount.ChangePassword" />
+        <activity android:name=".ui.myAccount.ChangeEmail" />
         <activity android:name=".ui.session.Login" />
         <activity android:name=".ui.session.Register" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

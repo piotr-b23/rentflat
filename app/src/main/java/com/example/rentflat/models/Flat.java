@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.flat;
+package com.example.rentflat.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.example.rentflat.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.serverIp;
 
 public class Flat implements Parcelable {
     public static final Parcelable.Creator<Flat> CREATOR = new Parcelable.Creator<Flat>() {

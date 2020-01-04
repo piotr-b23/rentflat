@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.findFlat;
+package com.example.rentflat.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

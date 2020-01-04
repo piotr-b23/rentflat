@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.flat;
+package com.example.rentflat.ui.myFlats;
 
 import android.content.ClipData;
 import android.content.Intent;
@@ -28,7 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.rentflat.MainActivity;
+import com.example.rentflat.ui.MainActivity;
 import com.example.rentflat.R;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
 
@@ -47,9 +47,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.example.rentflat.MainActivity.TOKEN;
-import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.userId;
+import static com.example.rentflat.ui.MainActivity.TOKEN;
+import static com.example.rentflat.ui.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.userId;
 
 public class AddFlat extends AppCompatActivity {
 

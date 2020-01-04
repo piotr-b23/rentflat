@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentflat.R;
+import com.example.rentflat.models.Message;
 
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), MessageDetails.class);
+                    Intent intent = new Intent(v.getContext(), SelectedMessageDetails.class);
                     intent.putExtra("selected message", data.get(getAdapterPosition()));
                     v.getContext().startActivity(intent);
                 }

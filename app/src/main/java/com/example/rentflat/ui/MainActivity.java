@@ -1,4 +1,4 @@
-package com.example.rentflat;
+package com.example.rentflat.ui;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,8 +11,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.rentflat.R;
 import com.example.rentflat.ui.home.HomeFragment;
-import com.example.rentflat.ui.session.SessionManager;
+import com.example.rentflat.session.SessionManager;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.HashMap;

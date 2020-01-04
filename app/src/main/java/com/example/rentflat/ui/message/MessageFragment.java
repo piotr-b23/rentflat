@@ -1,8 +1,5 @@
 package com.example.rentflat.ui.message;
 
-import androidx.lifecycle.ViewModelProviders;
-
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,7 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.myFlats.MyFlatsAdapter;
+import com.example.rentflat.models.Message;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,10 +32,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.rentflat.MainActivity.TOKEN;
-import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionManager;
-import static com.example.rentflat.MainActivity.userId;
+import static com.example.rentflat.ui.MainActivity.TOKEN;
+import static com.example.rentflat.ui.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.sessionManager;
+import static com.example.rentflat.ui.MainActivity.userId;
 
 public class MessageFragment extends Fragment {
 

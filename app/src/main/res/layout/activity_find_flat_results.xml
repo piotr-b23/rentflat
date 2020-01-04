@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.findFlat.FindFlatResults"
+    tools:context=".ui.searchForFlat.SearchForFlatResults"
     android:orientation="vertical">
 
     <TextView

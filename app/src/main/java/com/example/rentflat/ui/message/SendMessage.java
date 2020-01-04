@@ -18,20 +18,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
+import com.example.rentflat.models.Message;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.rentflat.MainActivity.TOKEN;
-import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.userId;
+import static com.example.rentflat.ui.MainActivity.TOKEN;
+import static com.example.rentflat.ui.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.userId;
 
 public class SendMessage extends AppCompatActivity {
 
@@ -40,7 +40,7 @@ public class SendMessage extends AppCompatActivity {
     private Button sendMessage;
     private static String URL_SEND_MESSAGE = serverIp + "/send_message.php";
     private static String URL_GET_USER_NAME = serverIp + "/get_name.php";
-    private  Message message;
+    private Message message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

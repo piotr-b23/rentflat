@@ -9,8 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.rentflat.R;
+import com.example.rentflat.models.Message;
 
-public class MessageDetails extends AppCompatActivity {
+public class SelectedMessageDetails extends AppCompatActivity {
 
     private TextView title, sender, date, body;
     private Button replayButton;
@@ -38,7 +39,7 @@ public class MessageDetails extends AppCompatActivity {
         replayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MessageDetails.this, SendMessage.class);
+                Intent intent = new Intent(SelectedMessageDetails.this, SendMessage.class);
                 intent.putExtra("recipientId", selectedMessage.getSenderId());
                 intent.putExtra("is replay", "1");
                 intent.putExtra("replay message", selectedMessage);

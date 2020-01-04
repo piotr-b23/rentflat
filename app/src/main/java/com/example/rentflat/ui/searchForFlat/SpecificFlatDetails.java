@@ -1,4 +1,4 @@
-package com.example.rentflat.ui.findFlat;
+package com.example.rentflat.ui.searchForFlat;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -20,11 +20,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rentflat.R;
-import com.example.rentflat.ui.flat.Flat;
-import com.example.rentflat.ui.flat.ReportFlat;
+import com.example.rentflat.models.Flat;
 import com.example.rentflat.ui.imageDisplay.ImageAdapter;
 import com.example.rentflat.ui.message.SendMessage;
-import com.example.rentflat.ui.rate.Rate;
+import com.example.rentflat.models.Rate;
 import com.example.rentflat.ui.rate.RateResults;
 import com.example.rentflat.ui.rate.RateUser;
 
@@ -34,11 +33,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.example.rentflat.MainActivity.serverIp;
-import static com.example.rentflat.MainActivity.sessionManager;
-import static com.example.rentflat.MainActivity.userId;
+import static com.example.rentflat.ui.MainActivity.serverIp;
+import static com.example.rentflat.ui.MainActivity.sessionManager;
+import static com.example.rentflat.ui.MainActivity.userId;
 
-public class FindFlatDetails extends AppCompatActivity {
+public class SpecificFlatDetails extends AppCompatActivity {
 
     private static String URL_GET_PHONE = serverIp + "/get_phone.php";
     private static String URL_GET_RATES = serverIp + "/get_rates.php";
@@ -113,7 +112,7 @@ public class FindFlatDetails extends AppCompatActivity {
 
                     String id = userId;
                     if (id.equals(selectedFlat.getUserId())) {
-                        Toast.makeText(FindFlatDetails.this, "Nie możesz ocenić siebie samego.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SpecificFlatDetails.this, "Nie możesz ocenić siebie samego.", Toast.LENGTH_SHORT).show();
                     } else {
                         checkIfRated(Integer.toString(selectedFlat.getUserId()), id);
                     }
@@ -124,7 +123,7 @@ public class FindFlatDetails extends AppCompatActivity {
             reportFlat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(FindFlatDetails.this, ReportFlat.class);
+                    Intent intent = new Intent(SpecificFlatDetails.this, ReportFlat.class);
                     intent.putExtra("reported flat", selectedFlat);
                     startActivity(intent);
                 }
@@ -133,7 +132,7 @@ public class FindFlatDetails extends AppCompatActivity {
             sendMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(FindFlatDetails.this, SendMessage.class);
+                    Intent intent = new Intent(SpecificFlatDetails.this, SendMessage.class);
                     intent.putExtra("recipientId", selectedFlat.getUserId());
                     intent.putExtra("is replay", "0");
                     startActivity(intent);
@@ -207,11 +206,11 @@ public class FindFlatDetails extends AppCompatActivity {
                                 }
 
                             } else {
-                                Toast.makeText(FindFlatDetails.this, "Wystąpił problem w trakcie próby kontaktu", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SpecificFlatDetails.this, "Wystąpił problem w trakcie próby kontaktu", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(FindFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SpecificFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -219,7 +218,7 @@ public class FindFlatDetails extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(FindFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SpecificFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -256,18 +255,18 @@ public class FindFlatDetails extends AppCompatActivity {
 
 
                                 }
-                                Intent intent = new Intent(FindFlatDetails.this, RateResults.class);
+                                Intent intent = new Intent(SpecificFlatDetails.this, RateResults.class);
                                 intent.putParcelableArrayListExtra("found rates", rates);
                                 startActivity(intent);
 
 
                             } else {
-                                Toast.makeText(FindFlatDetails.this, "Użytkownik nie otrzymał ocen", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SpecificFlatDetails.this, "Użytkownik nie otrzymał ocen", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(FindFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SpecificFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -275,7 +274,7 @@ public class FindFlatDetails extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(FindFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SpecificFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -296,20 +295,20 @@ public class FindFlatDetails extends AppCompatActivity {
                             String success = jsonObject.getString("success");
                             String message = jsonObject.getString("message");
                             if (success.equals("1")) {
-                                Intent intent = new Intent(FindFlatDetails.this, RateUser.class);
+                                Intent intent = new Intent(SpecificFlatDetails.this, RateUser.class);
                                 intent.putExtra("rated user", selectedFlat.getUserId());
                                 startActivity(intent);
 
                             } else {
                                 if (message.equals("same user")) {
-                                    Toast.makeText(FindFlatDetails.this, "Nie możesz ocenić siebie samego.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SpecificFlatDetails.this, "Nie możesz ocenić siebie samego.", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(FindFlatDetails.this, "Już oceniłeś tego użytkownika.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SpecificFlatDetails.this, "Już oceniłeś tego użytkownika.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(FindFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SpecificFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -317,7 +316,7 @@ public class FindFlatDetails extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(FindFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SpecificFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
