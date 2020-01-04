@@ -41,6 +41,7 @@ public class SendMessage extends AppCompatActivity {
     private static String URL_SEND_MESSAGE = serverIp + "/send_message.php";
     private static String URL_GET_USER_NAME = serverIp + "/get_name.php";
     private Message message;
+    private boolean replay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,10 @@ public class SendMessage extends AppCompatActivity {
             message = intent.getParcelableExtra("replay message");
             title.setText("RE: " +  message.getTitle());
             title.setFocusable(false);
+            replay = true;
+        }
+        else{
+            replay = false;
         }
 
 
@@ -77,18 +82,19 @@ public class SendMessage extends AppCompatActivity {
                 String recipientUserId = recipientId;
                 String messageTitle = title.getText().toString();
                 String text = body.getText().toString();
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String date = df.format(Calendar.getInstance().getTime());
 
-                if (checkIfMassegeCorrect(messageTitle, text)) {
+                if (checkIfMessageCorrect(messageTitle, text,replay)) {
 
                     if (isReplay.equals("1")) {
 
                         text += message.generateMessage();
+
                     }
-
-                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String date = df.format(Calendar.getInstance().getTime());
-
                     SendMessageToUser(senderId, recipientUserId, messageTitle, text, date);
+
+
                 }
             }
         });
@@ -188,18 +194,18 @@ public class SendMessage extends AppCompatActivity {
 
     }
 
-    public boolean checkIfMassegeCorrect(String title, String text) {
+    public boolean checkIfMessageCorrect(String title, String text, boolean isReplay) {
 
         boolean isCorrect = true;
 
-        if (checkTitle(title) == false) isCorrect = false;
+        if (checkTitle(title,isReplay) == false) isCorrect = false;
         if (checkText(text) == false) isCorrect = false;
 
         return isCorrect;
     }
 
-    public boolean checkTitle(String inTitle) {
-        if (inTitle.length()>30){
+    public boolean checkTitle(String inTitle, boolean isReplay) {
+        if (inTitle.length()>30 && !isReplay){
             title.setError("Za długi tytuł.");
             return false;
         } else if ( inTitle.length()<5) {
