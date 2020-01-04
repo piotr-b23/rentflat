@@ -56,12 +56,12 @@ public class SearchForFlat extends AppCompatActivity {
         findFlatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sePriceMin = priceMin.getText().toString().trim();
-                String sePriceMax = priceMax.getText().toString().trim();
-                String seSurfaceMin = surfaceMin.getText().toString().trim();
-                String seSurfaceMax = surfaceMax.getText().toString().trim();
-                String seRoomMin = roomMin.getText().toString().trim();
-                String seRoomMax = roomMax.getText().toString().trim();
+                int sePriceMin = Integer.parseInt(priceMin.getText().toString().trim());
+                int sePriceMax = Integer.parseInt(priceMax.getText().toString().trim());
+                int seSurfaceMin = Integer.parseInt(surfaceMin.getText().toString().trim());
+                int seSurfaceMax = Integer.parseInt(surfaceMax.getText().toString().trim());
+                int seRoomMin = Integer.parseInt(roomMin.getText().toString().trim());
+                int seRoomMax = Integer.parseInt(roomMax.getText().toString().trim());
                 String seLocality = locality.getText().toString().trim();
                 String seStreet = street.getText().toString().trim();
                 String seStudentsCheckBox;

@@ -61,7 +61,7 @@ public class ReportRate extends AppCompatActivity {
                 String id = userId;
 
 
-                reportRate(editedRate.getRateId(), id, reportRateComment, date);
+                reportRate(Integer.toString(editedRate.getRateId()), id, reportRateComment, date);
             }
         });
     }

@@ -70,7 +70,7 @@ public class EditRate extends AppCompatActivity {
                 String date = df.format(Calendar.getInstance().getTime());
 
 
-                UpdateRate(editedRate.getRateId(), contactRateString, descriptionRateString, descriptionRate, date, userId);
+                UpdateRate(Integer.toString(editedRate.getRateId()), contactRateString, descriptionRateString, descriptionRate, date, userId);
             }
         });
     }

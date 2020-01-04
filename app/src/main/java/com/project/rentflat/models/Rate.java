@@ -14,19 +14,20 @@ public class Rate implements Parcelable {
             return new Rate[size];
         }
     };
-    private String rateId, userId, rateDescription, date;
+    private int rateId, userId;
+    private String rateDescription, date;
     private Float contactRate, descriptionRate;
 
     private Rate(Parcel in) {
-        this.rateId = in.readString();
-        this.userId = in.readString();
+        this.rateId = in.readInt();
+        this.userId = in.readInt();
         this.rateDescription = in.readString();
         this.date = in.readString();
         this.contactRate = in.readFloat();
         this.descriptionRate = in.readFloat();
     }
 
-    public Rate(String rateId, String userId, String rateDescription, String date, float contactRate, float descriptionRate) {
+    public Rate(int rateId, int userId, String rateDescription, String date, float contactRate, float descriptionRate) {
         this.rateId = rateId;
         this.userId = userId;
         this.rateDescription = rateDescription;
@@ -42,8 +43,8 @@ public class Rate implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(rateId);
-        out.writeString(userId);
+        out.writeInt(rateId);
+        out.writeInt(userId);
         out.writeString(rateDescription);
         out.writeString(date);
         out.writeFloat(contactRate);
@@ -51,11 +52,11 @@ public class Rate implements Parcelable {
 
     }
 
-    public String getRateId() {
+    public int getRateId() {
         return this.rateId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return this.userId;
     }
 

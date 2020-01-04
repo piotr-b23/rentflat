@@ -50,7 +50,9 @@ public class SearchForFlatResults extends AppCompatActivity {
         recyclerView = findViewById(R.id.findFlatsRecycler);
 
 
-        getFlats(query.getPriceMin(), query.getPriceMax(), query.getSurfaceMin(), query.getSurfaceMax(), query.getRoomMin(), query.getRoomMax(), query.getBuildingType(), query.getProvince(), query.getLocality(), query.getStreet(), query.getStudentsCheckBox());
+        getFlats(Integer.toString(query.getPriceMin()), Integer.toString(query.getPriceMax()), Integer.toString(query.getSurfaceMin()),
+                Integer.toString(query.getSurfaceMax()), Integer.toString(query.getRoomMin()), Integer.toString(query.getRoomMax()),
+                query.getBuildingType(), query.getProvince(), query.getLocality(), query.getStreet(), query.getStudentsCheckBox());
 
 
     }

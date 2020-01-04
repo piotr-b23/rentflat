@@ -13,15 +13,16 @@ public class FlatSearch implements Parcelable {
             return new FlatSearch[size];
         }
     };
-    String priceMin, priceMax, surfaceMin, surfaceMax, roomMin, roomMax, buildingType, province, locality, street, studentsCheckBox;
+    int priceMin, priceMax, surfaceMin, surfaceMax, roomMin, roomMax;
+    String buildingType, province, locality, street, studentsCheckBox;
 
     private FlatSearch(Parcel in) {
-        this.priceMin = in.readString();
-        this.priceMax = in.readString();
-        this.surfaceMin = in.readString();
-        this.surfaceMax = in.readString();
-        this.roomMin = in.readString();
-        this.roomMax = in.readString();
+        this.priceMin = in.readInt();
+        this.priceMax = in.readInt();
+        this.surfaceMin = in.readInt();
+        this.surfaceMax = in.readInt();
+        this.roomMin = in.readInt();
+        this.roomMax = in.readInt();
         this.buildingType = in.readString();
         this.province = in.readString();
         this.locality = in.readString();
@@ -29,7 +30,7 @@ public class FlatSearch implements Parcelable {
         this.studentsCheckBox = in.readString();
     }
 
-    public FlatSearch(String priceMin, String priceMax, String surfaceMin, String surfaceMax, String roomMin, String roomMax, String buildingType, String province, String locality, String street, String studentsCheckBox) {
+    public FlatSearch(int priceMin, int priceMax, int surfaceMin, int surfaceMax, int roomMin, int roomMax, String buildingType, String province, String locality, String street, String studentsCheckBox) {
 
         this.priceMin = priceMin;
         this.priceMax = priceMax;
@@ -52,12 +53,12 @@ public class FlatSearch implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(priceMin);
-        out.writeString(priceMax);
-        out.writeString(surfaceMin);
-        out.writeString(surfaceMax);
-        out.writeString(roomMin);
-        out.writeString(roomMax);
+        out.writeInt(priceMin);
+        out.writeInt(priceMax);
+        out.writeInt(surfaceMin);
+        out.writeInt(surfaceMax);
+        out.writeInt(roomMin);
+        out.writeInt(roomMax);
         out.writeString(buildingType);
         out.writeString(province);
         out.writeString(locality);
@@ -66,27 +67,27 @@ public class FlatSearch implements Parcelable {
 
     }
 
-    public String getPriceMin() {
+    public int getPriceMin() {
         return this.priceMin;
     }
 
-    public String getPriceMax() {
+    public int getPriceMax() {
         return this.priceMax;
     }
 
-    public String getSurfaceMin() {
+    public int getSurfaceMin() {
         return this.surfaceMin;
     }
 
-    public String getSurfaceMax() {
+    public int getSurfaceMax() {
         return this.surfaceMax;
     }
 
-    public String getRoomMin() {
+    public int getRoomMin() {
         return this.roomMin;
     }
 
-    public String getRoomMax() {
+    public int getRoomMax() {
         return this.roomMax;
     }
 
