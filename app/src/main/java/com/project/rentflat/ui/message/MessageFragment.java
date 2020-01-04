@@ -61,7 +61,7 @@ public class MessageFragment extends Fragment {
         myMessagesText = root.findViewById(R.id.myMessagesText);
 
         if (sessionManager.isLogged()) {
-            getMyFlats(id);
+            getMessages(id);
             myMessagesText.setText("Otrzymane wiadomości");
         } else {
             myMessagesText.setText("Zaloguj się by móc otrzymywać i wysyłać wiadomości");
@@ -72,7 +72,7 @@ public class MessageFragment extends Fragment {
     }
 
 
-private void getMyFlats(final String userId) {
+private void getMessages(final String userId) {
 
     String url = String.format(URL_GET_MESSAGES + "?userId=%s", userId);
 

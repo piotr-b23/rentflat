@@ -72,20 +72,24 @@ public class SendMessage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 String senderId = userId;
                 String recipientUserId = recipientId;
                 String messageTitle = title.getText().toString();
                 String text = body.getText().toString();
 
-                if(isReplay.equals("1")){
+                if (checkIfMassegeCorrect(messageTitle, text)) {
 
-                    text += message.generateMessage();
+                    if (isReplay.equals("1")) {
+
+                        text += message.generateMessage();
+                    }
+
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String date = df.format(Calendar.getInstance().getTime());
+
+                    SendMessageToUser(senderId, recipientUserId, messageTitle, text, date);
                 }
-
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String date = df.format(Calendar.getInstance().getTime());
-
-                SendMessageToUser(senderId,recipientUserId,messageTitle,text,date);
             }
         });
 
@@ -183,6 +187,39 @@ public class SendMessage extends AppCompatActivity {
 
 
     }
+
+    public boolean checkIfMassegeCorrect(String title, String text) {
+
+        boolean isCorrect = true;
+
+        if (checkTitle(title) == false) isCorrect = false;
+        if (checkText(text) == false) isCorrect = false;
+
+        return isCorrect;
+    }
+
+    public boolean checkTitle(String inTitle) {
+        if (inTitle.length()>30){
+            title.setError("Za długi tytuł.");
+            return false;
+        } else if ( inTitle.length()<5) {
+            title.setError("Za krótki tytuł.");
+            return false;
+        }
+        else return true;
+    }
+
+    public boolean checkText(String inText) {
+        if (inText.length()>300){
+            body.setError("Za długi tekst.");
+            return false;
+        } else if ( inText.length()<30) {
+            body.setError("Za krótki tekst.");
+            return false;
+        }
+        else return true;
+    }
+
 
 
 }

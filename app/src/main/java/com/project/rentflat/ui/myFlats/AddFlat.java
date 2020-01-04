@@ -173,8 +173,8 @@ public class AddFlat extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
                                 Toast.makeText(AddFlat.this, "Utworzono ogłoszenie", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(AddFlat.this, MainActivity.class);
                                 startActivity(intent);
