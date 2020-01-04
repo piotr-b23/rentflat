@@ -22,16 +22,13 @@ import static com.project.rentflat.ui.MainActivity.userId;
 public class HomeFragment extends Fragment {
 
     public TextView name;
-//    private HomeViewModel homeViewModel;
     private Button registerButton, loginButton, findFlatButton;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        homeViewModel =
-//                ViewModelProviders.of(this).get(HomeViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
 
         registerButton = root.findViewById(R.id.registerButton);
         loginButton = root.findViewById(R.id.loginButton);
@@ -74,12 +71,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        homeViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
         return root;
     }
 
