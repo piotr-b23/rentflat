@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.rentflat.ui.home.HomeFragment"
+        android:name="com.project.rentflat.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_my_flats"
-        android:name="com.example.rentflat.ui.myFlats.MyFlatsFragment"
+        android:name="com.project.rentflat.ui.myFlats.MyFlatsFragment"
         android:label="@string/menu_my_flats"
         tools:layout="@layout/fragment_my_flats" />
 
     <fragment
         android:id="@+id/nav_my_account"
-        android:name="com.example.rentflat.ui.myAccount.MyAccountFragment"
+        android:name="com.project.rentflat.ui.myAccount.MyAccountFragment"
         android:label="@string/menu_my_account"
         tools:layout="@layout/fragment_my_account" />
 
     <fragment
         android:id="@+id/nav_my_rates"
-        android:name="com.example.rentflat.ui.myRates.MyRatesFragment"
+        android:name="com.project.rentflat.ui.myRates.MyRatesFragment"
         android:label="@string/menu_rates"
         tools:layout="@layout/fragment_my_rates" />
 
     <fragment
         android:id="@+id/nav_messages"
-        android:name="com.example.rentflat.ui.message.MessageFragment"
+        android:name="com.project.rentflat.ui.message.MessageFragment"
         android:label="@string/menu_message"
         tools:layout="@layout/fragment_message" />
 

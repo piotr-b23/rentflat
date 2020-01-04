@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rentflat">
+    package="com.project.rentflat">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,42 +12,42 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.message.SendMessage"></activity>
-        <activity android:name=".ui.message.SelectedMessageDetails" />
-        <activity android:name=".ui.myAccount.DeleteAccount" />
-        <activity android:name=".ui.rate.ReportRate" />
-        <activity android:name=".ui.rate.EditRate" />
-        <activity android:name=".ui.rate.GetGivenRates" />
-        <activity android:name=".ui.rate.RateResults" />
-        <activity android:name=".ui.searchForFlat.ReportFlat" />
-        <activity android:name=".ui.rate.RateUser" />
+        <activity android:name="com.project.rentflat.ui.message.SendMessage"></activity>
+        <activity android:name="com.project.rentflat.ui.message.SelectedMessageDetails" />
+        <activity android:name="com.project.rentflat.ui.myAccount.DeleteAccount" />
+        <activity android:name="com.project.rentflat.ui.rate.ReportRate" />
+        <activity android:name="com.project.rentflat.ui.rate.EditRate" />
+        <activity android:name="com.project.rentflat.ui.rate.GetGivenRates" />
+        <activity android:name="com.project.rentflat.ui.rate.RateResults" />
+        <activity android:name="com.project.rentflat.ui.searchForFlat.ReportFlat" />
+        <activity android:name="com.project.rentflat.ui.rate.RateUser" />
         <activity
-            android:name=".ui.searchForFlat.SpecificFlatDetails"
+            android:name="com.project.rentflat.ui.searchForFlat.SpecificFlatDetails"
             android:label="@string/title_activity_find_flat_details"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.searchForFlat.SearchForFlatResults" />
-        <activity android:name=".ui.myFlats.ChangeFlatDescription" />
-        <activity android:name=".ui.myFlats.ChangeFlatPrice" />
+        <activity android:name="com.project.rentflat.ui.searchForFlat.SearchForFlatResults" />
+        <activity android:name="com.project.rentflat.ui.myFlats.ChangeFlatDescription" />
+        <activity android:name="com.project.rentflat.ui.myFlats.ChangeFlatPrice" />
         <activity
-            android:name=".ui.myFlats.SelectedMyFlatDetails"
+            android:name="com.project.rentflat.ui.myFlats.SelectedMyFlatDetails"
             android:label="@string/title_activity_my_flat_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.searchForFlat.SearchForFlat"
+            android:name="com.project.rentflat.ui.searchForFlat.SearchForFlat"
             android:label="@string/title_activity_find_flat"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.myFlats.AddFlat"
+            android:name="com.project.rentflat.ui.myFlats.AddFlat"
             android:label="@string/title_activity_add_flat"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.myAccount.ChangePhone" />
-        <activity android:name=".ui.myAccount.ChangePassword" />
-        <activity android:name=".ui.myAccount.ChangeEmail" />
-        <activity android:name=".ui.session.Login" />
-        <activity android:name=".ui.session.Register" />
+        <activity android:name="com.project.rentflat.ui.myAccount.ChangePhone" />
+        <activity android:name="com.project.rentflat.ui.myAccount.ChangePassword" />
+        <activity android:name="com.project.rentflat.ui.myAccount.ChangeEmail" />
+        <activity android:name="com.project.rentflat.ui.session.Login" />
+        <activity android:name="com.project.rentflat.ui.session.Register" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.project.rentflat.ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
