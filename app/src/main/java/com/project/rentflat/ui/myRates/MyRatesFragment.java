@@ -92,7 +92,7 @@ public class MyRatesFragment extends Fragment {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     int strRateId =  Integer.parseInt(object.getString("rateId").trim());
-                                    int strUserId =  Integer.parseInt(object.getString("userId").trim());
+                                    String strUserId = object.getString("userId").trim();
                                     String strContactRate = object.getString("contactRate").trim();
                                     String strDescriptionRate = object.getString("descriptionRate");
                                     String strDescription = object.getString("comment");

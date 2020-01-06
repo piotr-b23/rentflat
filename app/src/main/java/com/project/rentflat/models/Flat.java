@@ -18,17 +18,17 @@ public class Flat implements Parcelable {
             return new Flat[size];
         }
     };
-    private int flatId, flatUserId, price, surface, room;
-    private String province, type, locality, street, description, students, photoAddress, date;
+    private int flatId, price, surface, room;
+    private String  flatUserId, province, type, locality, street, description, students, photoAddress, date;
     private String photoLocation = serverIp;
 
 
     private Flat(Parcel in) {
         this.flatId = in.readInt();
-        this.flatUserId = in.readInt();
         this.price = in.readInt();
         this.surface = in.readInt();
         this.room = in.readInt();
+        this.flatUserId = in.readString();
         this.province = in.readString();
         this.type = in.readString();
         this.locality = in.readString();
@@ -39,13 +39,13 @@ public class Flat implements Parcelable {
         this.date = in.readString();
     }
 
-    public Flat(int flatId, int flatUserId, int price, int surface, int room, String province, String type, String locality, String street, String description, String students, String photo, String date) {
+    public Flat(int flatId, int price, int surface, int room,String flatUserId, String province, String type, String locality, String street, String description, String students, String photo, String date) {
 
         this.flatId = flatId;
-        this.flatUserId = flatUserId;
         this.price = price;
         this.surface = surface;
         this.room = room;
+        this.flatUserId = flatUserId;
         this.province = province;
         this.type = type;
         this.locality = locality;
@@ -65,10 +65,10 @@ public class Flat implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeInt(flatId);
-        out.writeInt(flatUserId);
         out.writeInt(price);
         out.writeInt(surface);
         out.writeInt(room);
+        out.writeString(flatUserId);
         out.writeString(province);
         out.writeString(type);
         out.writeString(locality);
@@ -133,10 +133,6 @@ public class Flat implements Parcelable {
         return this.flatId;
     }
 
-    public int getUserId() {
-        return this.flatUserId;
-    }
-
     public int getPrice() {
         return this.price;
     }
@@ -151,6 +147,10 @@ public class Flat implements Parcelable {
 
     public String getType() {
         return this.type;
+    }
+
+    public String getUserId() {
+        return this.flatUserId;
     }
 
     public String getProvince() {

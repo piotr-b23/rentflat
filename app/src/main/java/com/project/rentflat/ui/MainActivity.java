@@ -20,7 +20,6 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = HomeFragment.class.getSimpleName();
     public static SessionManager sessionManager;
     public static String userId;
     public static String TOKEN;

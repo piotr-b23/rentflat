@@ -95,7 +95,7 @@ public class MyFlatsFragment extends Fragment {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     int strFlatId = Integer.parseInt(object.getString("id").trim());
-                                    int strFlatUserId = Integer.parseInt(object.getString("userid").trim());
+                                    String strFlatUserId = object.getString("userid").trim();
                                     int strPrice = Integer.parseInt(object.getString("price").trim());
                                     int strSurface = Integer.parseInt(object.getString("surface").trim());
                                     int strRoom = Integer.parseInt(object.getString("room").trim());
@@ -108,7 +108,7 @@ public class MyFlatsFragment extends Fragment {
                                     String strPhoto = object.getString("photo").trim();
                                     String strDate = object.getString("date").trim();
 
-                                    flats.add(new Flat(strFlatId, strFlatUserId, strPrice, strSurface, strRoom, strProvince, strType, strLocality, strStreet, strDescription, strStudents, strPhoto, strDate));
+                                    flats.add(new Flat(strFlatId, strPrice, strSurface, strRoom, strFlatUserId, strProvince, strType, strLocality, strStreet, strDescription, strStudents, strPhoto, strDate));
 
 
                                 }

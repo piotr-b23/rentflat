@@ -40,13 +40,10 @@ public class MyAccountFragment extends Fragment {
 
     private static String URL_GET_GIVEN_RATES = serverIp + "/get_given_rates.php";
     ArrayList<Rate> rates;
-//    private MyAccountViewModel myAccountViewModel;
     private Button updateEmail, updatePhone, changePassword, givenRates, register, deleteAccount;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        myAccountViewModel =
-//                ViewModelProviders.of(this).get(MyAccountViewModel.class);
         View root = inflater.inflate(R.layout.fragment_my_account, container, false);
 
         updateEmail = root.findViewById(R.id.updateEmail);
@@ -145,7 +142,7 @@ public class MyAccountFragment extends Fragment {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     int strRateId = Integer.parseInt(object.getString("rateId").trim());
-                                    int strUserId =  Integer.parseInt(object.getString("userId").trim());
+                                    String strUserId =  object.getString("userId").trim();
                                     String strContactRate = object.getString("contactRate").trim();
                                     String strDescriptionRate = object.getString("descriptionRate");
                                     String strDescription = object.getString("comment");

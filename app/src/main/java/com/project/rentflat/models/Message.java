@@ -15,18 +15,17 @@ public class Message implements Parcelable {
         }
     };
 
-    private int senderId;
-    private String userName, title, description,date;
+    private String senderId, userName, title, description,date;
 
     private Message(Parcel in) {
-        this.senderId = in.readInt();
+        this.senderId = in.readString();
         this.userName = in.readString();
         this.title = in.readString();
         this.description = in.readString();
         this.date = in.readString();
     }
 
-    public Message(int senderId, String userName, String title, String description, String date) {
+    public Message(String senderId, String userName, String title, String description, String date) {
         this.senderId = senderId;
         this.userName = userName;
         this.title = title;
@@ -41,7 +40,7 @@ public class Message implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(senderId);
+        out.writeString(senderId);
         out.writeString(userName);
         out.writeString(title);
         out.writeString(description);
@@ -57,7 +56,7 @@ public class Message implements Parcelable {
     }
 
 
-    public int getSenderId() {
+    public String getSenderId() {
         return this.senderId;
     }
 

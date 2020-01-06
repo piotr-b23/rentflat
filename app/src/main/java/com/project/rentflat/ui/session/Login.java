@@ -70,9 +70,9 @@ public class Login extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
-                            JSONArray jsonArray = jsonObject.getJSONArray("login");
-                            if (success.equals("1")) {
 
+                            if (success.equals("1")) {
+                                JSONArray jsonArray = jsonObject.getJSONArray("login");
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
                                     String name = object.getString("name").trim();

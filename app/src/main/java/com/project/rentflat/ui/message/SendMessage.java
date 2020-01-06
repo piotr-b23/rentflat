@@ -51,7 +51,7 @@ public class SendMessage extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        final String recipientId = Integer.toString(intent.getIntExtra("recipientId",0));
+        final String recipientId = intent.getStringExtra("recipientId");
         final String isReplay = intent.getStringExtra("is replay");
 
         getName(recipientId);
@@ -114,7 +114,7 @@ public class SendMessage extends AppCompatActivity {
                                 Toast.makeText(SendMessage.this, "Wysłano wiadomość", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
-                                Toast.makeText(SendMessage.this, "Wystąpił problem przy edycji oceny", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SendMessage.this, "Wystąpił problem przy wysyłaniu wiadomości", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -169,7 +169,6 @@ public class SendMessage extends AppCompatActivity {
                             String userName = jsonObject.getString("name");
                             if (success.equals("1")) {
                                 recipientName.setText("Odbiorca: "+userName);
-
 
                             } else {
                                 Toast.makeText(SendMessage.this, "Wystąpił problem", Toast.LENGTH_SHORT).show();

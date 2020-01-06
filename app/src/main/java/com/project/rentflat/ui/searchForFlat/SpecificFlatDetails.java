@@ -114,7 +114,7 @@ public class SpecificFlatDetails extends AppCompatActivity {
                     if (id.equals(selectedFlat.getUserId())) {
                         Toast.makeText(SpecificFlatDetails.this, "Nie możesz ocenić siebie samego.", Toast.LENGTH_SHORT).show();
                     } else {
-                        checkIfRated(Integer.toString(selectedFlat.getUserId()), id);
+                        checkIfRated(selectedFlat.getUserId(), id);
                     }
 
                 }
@@ -145,7 +145,7 @@ public class SpecificFlatDetails extends AppCompatActivity {
             reportFlat.setVisibility(View.INVISIBLE);
             sendMessage.setVisibility(View.INVISIBLE);
         }
-        getPhone(userId);
+        getPhone(selectedFlat.getUserId());
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,7 +175,7 @@ public class SpecificFlatDetails extends AppCompatActivity {
             public void onClick(View v) {
                 rates = new ArrayList<>();
 
-                getUserRates(Integer.toString(selectedFlat.getUserId()));
+                getUserRates(selectedFlat.getUserId());
 
             }
         });
@@ -245,7 +245,7 @@ public class SpecificFlatDetails extends AppCompatActivity {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     int strRateId =  Integer.parseInt(object.getString("rateId").trim());
-                                    int strUserId =  Integer.parseInt(object.getString("userId").trim());
+                                    String strUserId =  object.getString("userId").trim();
                                     String strContactRate = object.getString("contactRate").trim();
                                     String strDescriptionRate = object.getString("descriptionRate");
                                     String strDescription = object.getString("comment");

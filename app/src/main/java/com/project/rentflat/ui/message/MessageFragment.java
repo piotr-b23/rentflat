@@ -90,7 +90,7 @@ private void getMessages(final String userId) {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
 
-                                int senderId = Integer.parseInt(object.getString("senderId").trim());
+                                String senderId =object.getString("senderId").trim();
                                 String senderName = object.getString("senderName").trim();
                                 String title = object.getString("title").trim();
                                 String text = object.getString("text").trim();
