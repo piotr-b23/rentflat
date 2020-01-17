@@ -43,9 +43,11 @@ public class MyFlatsAdapter extends RecyclerView.Adapter<MyFlatsAdapter.ViewHold
         holder.myFlatTitle.setText(title);
         String description = data.get(position).generateDescription();
         holder.myFlatDescription.setText(description);
+
         ArrayList<String> photos = new ArrayList<>();
         photos = data.get(position).generatePhotos();
         Picasso.get().load(photos.get(0)).into(holder.myFlatImage);
+
         String date = data.get(position).getDate();
         holder.myFlatDate.setText(date);
 

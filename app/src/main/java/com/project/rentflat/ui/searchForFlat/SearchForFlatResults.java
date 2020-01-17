@@ -100,7 +100,7 @@ public class SearchForFlatResults extends AppCompatActivity {
 
 
                             } else {
-                                Toast.makeText(SearchForFlatResults.this, "Wystąpił problem przy wyszukiwaniu ogłoszeń", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SearchForFlatResults.this, "Nie znaleziono ogłoszeń spełniających wymagań", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

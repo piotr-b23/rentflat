@@ -34,7 +34,7 @@ import static com.project.rentflat.ui.MainActivity.userId;
 
 public class RateUser extends AppCompatActivity {
 
-    private static String URL_REPORT = serverIp + "/add_rate.php";
+    private static String URL_RATE = serverIp + "/add_rate.php";
     private EditText rateDescription;
     private Button confirmRate;
     private RatingBar contactBar, descriptionBar;
@@ -74,7 +74,7 @@ public class RateUser extends AppCompatActivity {
 
     private void GiveRate(final String userId, final String raterId, final String contactRate, final String descriptionRate, final String comment, final String date) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_RATE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

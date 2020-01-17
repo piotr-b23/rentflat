@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.rentflat.R;
 import com.project.rentflat.models.Rate;
+import com.project.rentflat.ui.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,7 +87,8 @@ public class EditRate extends AppCompatActivity {
                             String success = jsonObject.getString("success");
                             if (success.equals("1")) {
                                 Toast.makeText(EditRate.this, "Zaktualizowano ocenę", Toast.LENGTH_SHORT).show();
-                                finish();
+                                Intent intent = new Intent(EditRate.this, MainActivity.class);
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(EditRate.this, "Wystąpił problem przy edycji oceny", Toast.LENGTH_SHORT).show();
                             }

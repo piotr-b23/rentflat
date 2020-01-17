@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,12 +36,14 @@ import static com.project.rentflat.ui.MainActivity.TOKEN;
 import static com.project.rentflat.ui.MainActivity.serverIp;
 import static com.project.rentflat.ui.MainActivity.sessionManager;
 import static com.project.rentflat.ui.MainActivity.userId;
+import static com.project.rentflat.ui.MainActivity.userName;
 
 public class MyAccountFragment extends Fragment {
 
     private static String URL_GET_GIVEN_RATES = serverIp + "/get_given_rates.php";
     ArrayList<Rate> rates;
     private Button updateEmail, updatePhone, changePassword, givenRates, register, deleteAccount;
+    private TextView greetUser;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class MyAccountFragment extends Fragment {
         givenRates = root.findViewById(R.id.givenRatesButton);
         register = root.findViewById(R.id.registerMyAccount);
         deleteAccount = root.findViewById(R.id.deleteAccount);
+        greetUser = root.findViewById(R.id.greetingText);
 
         if (sessionManager.isLogged()) {
 
@@ -60,7 +64,10 @@ public class MyAccountFragment extends Fragment {
             changePassword.setVisibility(View.VISIBLE);
             givenRates.setVisibility(View.VISIBLE);
             deleteAccount.setVisibility(View.VISIBLE);
+            greetUser.setVisibility(View.VISIBLE);
             register.setVisibility(View.GONE);
+
+            greetUser.setText("Witaj "+userName+".");
 
             updateEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -110,6 +117,7 @@ public class MyAccountFragment extends Fragment {
             changePassword.setVisibility(View.GONE);
             givenRates.setVisibility(View.GONE);
             deleteAccount.setVisibility(View.GONE);
+            greetUser.setVisibility(View.GONE);
             register.setVisibility(View.VISIBLE);
 
             register.setOnClickListener(new View.OnClickListener() {

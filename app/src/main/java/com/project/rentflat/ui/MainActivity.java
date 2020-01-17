@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public static SessionManager sessionManager;
     public static String userId;
     public static String TOKEN;
+    public static String userName;
     public static String serverIp = "http://192.168.1.11/";
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         if (sessionManager.isLogged()) {
             userId = user.get(SessionManager.ID);
             TOKEN = user.get(SessionManager.TOKEN);
+            userName = user.get(SessionManager.NAME);
 
         } else {
             userId = null;
