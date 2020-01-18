@@ -67,19 +67,16 @@ public class FlatSearch implements Parcelable {
 
     }
 
-    public boolean checkPrice(){
-        if (this.priceMin>this.priceMax) return false;
-        else return true;
+    public boolean checkPrice() {
+        return this.priceMin <= this.priceMax;
     }
 
-    public boolean checkSurface(){
-        if (this.surfaceMin>this.surfaceMax) return false;
-        else return true;
+    public boolean checkSurface() {
+        return this.surfaceMin <= this.surfaceMax;
     }
 
-    public boolean checkRoom(){
-        if (this.roomMin>this.roomMax) return false;
-        else return true;
+    public boolean checkRoom() {
+        return this.roomMin <= this.roomMax;
     }
 
     public int getPriceMin() {

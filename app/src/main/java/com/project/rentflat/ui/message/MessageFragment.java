@@ -1,18 +1,17 @@
 package com.project.rentflat.ui.message;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -39,12 +38,12 @@ import static com.project.rentflat.ui.MainActivity.userId;
 
 public class MessageFragment extends Fragment {
 
-//    private MessageViewModel mViewModel;
+    private static String URL_GET_MESSAGES = serverIp + "/get_messages.php";
+    //    private MessageViewModel mViewModel;
     RecyclerView recyclerView;
     MessageAdapter adapter;
     ArrayList<Message> messages;
     private TextView myMessagesText;
-    private static String URL_GET_MESSAGES = serverIp + "/get_messages.php";
 
     public static MessageFragment newInstance() {
         return new MessageFragment();
@@ -72,69 +71,69 @@ public class MessageFragment extends Fragment {
     }
 
 
-private void getMessages(final String userId) {
+    private void getMessages(final String userId) {
 
-    String url = String.format(URL_GET_MESSAGES + "?userId=%s", userId);
+        String url = String.format(URL_GET_MESSAGES + "?userId=%s", userId);
 
-    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        String success = jsonObject.getString("success");
-                        JSONArray jsonArray = jsonObject.getJSONArray("message");
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("message");
 
-                        if (success.equals("1")) {
+                            if (success.equals("1")) {
 
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject object = jsonArray.getJSONObject(i);
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject object = jsonArray.getJSONObject(i);
 
-                                String senderId =object.getString("senderId").trim();
-                                String senderName = object.getString("senderName").trim();
-                                String title = object.getString("title").trim();
-                                String text = object.getString("text").trim();
-                                String date = object.getString("date").trim();
+                                    String senderId = object.getString("senderId").trim();
+                                    String senderName = object.getString("senderName").trim();
+                                    String title = object.getString("title").trim();
+                                    String text = object.getString("text").trim();
+                                    String date = object.getString("date").trim();
 
-                                messages.add(new Message(senderId, senderName, title, text, date));
+                                    messages.add(new Message(senderId, senderName, title, text, date));
 
 
+                                }
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                adapter = new MessageAdapter(getActivity(), messages);
+                                recyclerView.setAdapter(adapter);
+
+                            } else {
+                                Toast.makeText(getActivity(), "Nie masz żadnych wiadomości.", Toast.LENGTH_SHORT).show();
                             }
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            adapter = new MessageAdapter(getActivity(), messages);
-                            recyclerView.setAdapter(adapter);
 
-                        } else {
-                            Toast.makeText(getActivity(), "Nie masz żadnych wiadomości.", Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(getActivity(), "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+
                     }
+                },
 
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
-                }
-            },
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                headers.put("Authorization-token", TOKEN);
 
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getActivity(), "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
-
-                }
-            }) {
-        @Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            HashMap<String, String> headers = new HashMap<String, String>();
-            headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            headers.put("Authorization-token", TOKEN);
-
-            return headers;
-        }
-    };
-    RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-    requestQueue.add(stringRequest);
-}
+                return headers;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
 
 }

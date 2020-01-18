@@ -67,38 +67,35 @@ public class SearchForFlat extends AppCompatActivity {
                     int seRoomMin = Integer.parseInt(roomMin.getText().toString().trim());
                     int seRoomMax = Integer.parseInt(roomMax.getText().toString().trim());
 
-                String seLocality = locality.getText().toString().trim();
-                String seStreet = street.getText().toString().trim();
-                String seStudentsCheckBox;
-                if (studentsCheckBox.isChecked()) {
-                    seStudentsCheckBox = "1";
-                } else seStudentsCheckBox = "0";
+                    String seLocality = locality.getText().toString().trim();
+                    String seStreet = street.getText().toString().trim();
+                    String seStudentsCheckBox;
+                    if (studentsCheckBox.isChecked()) {
+                        seStudentsCheckBox = "1";
+                    } else seStudentsCheckBox = "0";
 
 
+                    String seBuildingType = buildingType.getSelectedItem().toString();
+                    String seProvince = province.getSelectedItem().toString();
 
-                String seBuildingType = buildingType.getSelectedItem().toString();
-                String seProvince = province.getSelectedItem().toString();
+                    query = new FlatSearch(sePriceMin, sePriceMax, seSurfaceMin, seSurfaceMax, seRoomMin, seRoomMax, seBuildingType, seProvince, seLocality, seStreet, seStudentsCheckBox);
 
-                query = new FlatSearch(sePriceMin, sePriceMax, seSurfaceMin, seSurfaceMax, seRoomMin, seRoomMax, seBuildingType, seProvince, seLocality, seStreet, seStudentsCheckBox);
-
-                if (query.checkPrice() && query.checkRoom() && query.checkSurface()) {
-                    Intent intent = new Intent(SearchForFlat.this, SearchForFlatResults.class);
-                    intent.putExtra("query", query);
-                    startActivity(intent);
-                }
-                else {
-                    if (!query.checkPrice()) {
-                        priceMax.setError("Cena mininimalna nie może być większa od maksymalnej");
+                    if (query.checkPrice() && query.checkRoom() && query.checkSurface()) {
+                        Intent intent = new Intent(SearchForFlat.this, SearchForFlatResults.class);
+                        intent.putExtra("query", query);
+                        startActivity(intent);
+                    } else {
+                        if (!query.checkPrice()) {
+                            priceMax.setError("Cena mininimalna nie może być większa od maksymalnej");
+                        }
+                        if (!query.checkRoom()) {
+                            roomMax.setError("Mininimalna ilość pokoi nie może być większa od maksymalnej");
+                        }
+                        if (!query.checkSurface()) {
+                            surfaceMax.setError("Powierzchnia mininimalna nie może być większa od maksymalnej");
+                        }
                     }
-                    if (!query.checkRoom()) {
-                        roomMax.setError("Mininimalna ilość pokoi nie może być większa od maksymalnej");
-                    }
-                    if (!query.checkSurface()) {
-                        surfaceMax.setError("Powierzchnia mininimalna nie może być większa od maksymalnej");
-                    }
-                }
-                }
-                catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     Toast.makeText(SearchForFlat.this, "Wprowadź zakresy wyszkiwanych ogłoszeń", Toast.LENGTH_SHORT).show();
 
                 }

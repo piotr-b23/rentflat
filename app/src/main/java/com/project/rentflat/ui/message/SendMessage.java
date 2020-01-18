@@ -1,7 +1,5 @@
 package com.project.rentflat.ui.message;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,11 +35,11 @@ import static com.project.rentflat.ui.MainActivity.userId;
 
 public class SendMessage extends AppCompatActivity {
 
+    private static String URL_SEND_MESSAGE = serverIp + "/send_message.php";
+    private static String URL_GET_USER_NAME = serverIp + "/get_name.php";
     private EditText title, body;
     private TextView recipientName;
     private Button sendMessage;
-    private static String URL_SEND_MESSAGE = serverIp + "/send_message.php";
-    private static String URL_GET_USER_NAME = serverIp + "/get_name.php";
     private Message message;
     private boolean replay;
 
@@ -47,7 +47,6 @@ public class SendMessage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_message);
-
 
 
         Intent intent = getIntent();
@@ -61,16 +60,14 @@ public class SendMessage extends AppCompatActivity {
         recipientName = findViewById(R.id.recipientName);
         sendMessage = findViewById(R.id.confirmSendMessage);
 
-        if(isReplay.equals("1")){
+        if (isReplay.equals("1")) {
             message = intent.getParcelableExtra("replay message");
-            title.setText("RE: " +  message.getTitle());
+            title.setText("RE: " + message.getTitle());
             title.setFocusable(false);
             replay = true;
-        }
-        else{
+        } else {
             replay = false;
         }
-
 
 
         sendMessage.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +82,7 @@ public class SendMessage extends AppCompatActivity {
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String date = df.format(Calendar.getInstance().getTime());
 
-                if (checkIfMessageCorrect(messageTitle, text,replay)) {
+                if (checkIfMessageCorrect(messageTitle, text, replay)) {
 
                     if (isReplay.equals("1")) {
 
@@ -157,6 +154,7 @@ public class SendMessage extends AppCompatActivity {
 
 
     }
+
     private void getName(final String userId) {
         String url = String.format(URL_GET_USER_NAME + "?userId=%s", userId);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -168,7 +166,7 @@ public class SendMessage extends AppCompatActivity {
                             String success = jsonObject.getString("success");
                             String userName = jsonObject.getString("name");
                             if (success.equals("1")) {
-                                recipientName.setText("Odbiorca: "+userName);
+                                recipientName.setText("Odbiorca: " + userName);
 
                             } else {
                                 Toast.makeText(SendMessage.this, "Wystąpił problem", Toast.LENGTH_SHORT).show();
@@ -197,34 +195,31 @@ public class SendMessage extends AppCompatActivity {
 
         boolean isCorrect = true;
 
-        if (checkTitle(title,isReplay) == false) isCorrect = false;
+        if (checkTitle(title, isReplay) == false) isCorrect = false;
         if (checkText(text) == false) isCorrect = false;
 
         return isCorrect;
     }
 
     public boolean checkTitle(String inTitle, boolean isReplay) {
-        if (inTitle.length()>30 && !isReplay){
+        if (inTitle.length() > 30 && !isReplay) {
             title.setError("Za długi tytuł.");
             return false;
-        } else if ( inTitle.length()<5) {
+        } else if (inTitle.length() < 5) {
             title.setError("Za krótki tytuł.");
             return false;
-        }
-        else return true;
+        } else return true;
     }
 
     public boolean checkText(String inText) {
-        if (inText.length()>300){
+        if (inText.length() > 300) {
             body.setError("Za długi tekst.");
             return false;
-        } else if ( inText.length()<30) {
+        } else if (inText.length() < 30) {
             body.setError("Za krótki tekst.");
             return false;
-        }
-        else return true;
+        } else return true;
     }
-
 
 
 }

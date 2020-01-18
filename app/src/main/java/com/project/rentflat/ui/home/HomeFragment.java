@@ -20,7 +20,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.rentflat.R;
-import com.project.rentflat.ui.MainActivity;
 import com.project.rentflat.ui.searchForFlat.SearchForFlat;
 import com.project.rentflat.ui.session.Login;
 import com.project.rentflat.ui.session.Register;
@@ -31,18 +30,17 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.project.rentflat.ui.MainActivity.TOKEN;
 import static com.project.rentflat.ui.MainActivity.serverIp;
 import static com.project.rentflat.ui.MainActivity.sessionManager;
 import static com.project.rentflat.ui.MainActivity.userId;
 import static com.project.rentflat.ui.MainActivity.userName;
-import static com.project.rentflat.ui.MainActivity.TOKEN;
 
 public class HomeFragment extends Fragment {
 
+    private static String URL_CHECK_IF_TOKEN_VALID = serverIp + "/check_if_token_valid.php";
     public TextView name;
     private Button registerButton, loginButton, findFlatButton;
-    private static String URL_CHECK_IF_TOKEN_VALID = serverIp + "/check_if_token_valid.php";
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

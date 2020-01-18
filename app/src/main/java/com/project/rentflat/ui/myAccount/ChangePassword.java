@@ -51,13 +51,17 @@ public class ChangePassword extends AppCompatActivity {
                 String id = userId;
 
                 if (!upPassword.isEmpty() && !upNewPassword.isEmpty() && !upNewConfPassword.isEmpty()) {
-                    if (upNewPassword.equals(upNewConfPassword)) {
+                    if (upNewPassword.length() >= 3 && upNewPassword.length() <= 24) {
+                        if (upNewPassword.equals(upNewConfPassword)) {
 
-                        ChangePass(upPassword, upNewPassword, id);
+                            ChangePass(upPassword, upNewPassword, id);
 
 
+                        } else {
+                            newConfPassword.setError("Podane hasła różnią się");
+                        }
                     } else {
-                        newConfPassword.setError("Podane hasła różnią się");
+                        newPassword.setError("Hasło powinno składać się z od 3 - 24 znaków");
                     }
 
                 } else {

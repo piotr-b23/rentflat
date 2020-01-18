@@ -16,8 +16,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.rentflat.R;
-import com.project.rentflat.models.FlatSearch;
 import com.project.rentflat.models.Flat;
+import com.project.rentflat.models.FlatSearch;
 
 import org.json.JSONArray;
 import org.json.JSONException;

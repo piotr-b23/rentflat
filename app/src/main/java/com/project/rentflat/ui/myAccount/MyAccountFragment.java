@@ -67,7 +67,7 @@ public class MyAccountFragment extends Fragment {
             greetUser.setVisibility(View.VISIBLE);
             register.setVisibility(View.GONE);
 
-            greetUser.setText("Witaj "+userName+".");
+            greetUser.setText("Witaj " + userName + ".");
 
             updateEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -150,7 +150,7 @@ public class MyAccountFragment extends Fragment {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     int strRateId = Integer.parseInt(object.getString("rateId").trim());
-                                    String strUserId =  object.getString("userId").trim();
+                                    String strUserId = object.getString("userId").trim();
                                     String strContactRate = object.getString("contactRate").trim();
                                     String strDescriptionRate = object.getString("descriptionRate");
                                     String strDescription = object.getString("comment");

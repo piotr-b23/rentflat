@@ -16,8 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.project.rentflat.ui.MainActivity;
 import com.project.rentflat.R;
+import com.project.rentflat.ui.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,18 +71,18 @@ public class Register extends AppCompatActivity {
 
                 if (!regName.isEmpty() && !regUsername.isEmpty() && !regPassword.isEmpty() && !regConfirmedPassword.isEmpty() && !regEmail.isEmpty()) {
                     if (regPassword.equals(regConfirmedPassword)) {
-                        if(regPassword.length()>=3 && regPassword.length()<=24) {
+                        if (regPassword.length() >= 3 && regPassword.length() <= 24) {
                             if (isEmailValid(regEmail) && isNameValid(regName) && isUsernameValid(regUsername)) {
                                 Register(regName, regUsername, regPassword, regEmail);
 
                             } else {
-                                if (!isEmailValid(regEmail)){
+                                if (!isEmailValid(regEmail)) {
                                     email.setError("Podaj poprawny email");
                                 }
-                                if (!isNameValid(regName)){
+                                if (!isNameValid(regName)) {
                                     name.setError("Imię powinno składać się z od 3 - 16 znaków, oraz powinno zawierać tylko litery");
                                 }
-                                if (!isUsernameValid(regUsername)){
+                                if (!isUsernameValid(regUsername)) {
                                     username.setError("Nazwa użytkownika powinna składać się z od 3 - 16 znaków, oraz powinna zawierać tylko litery i liczby");
                                 }
 

@@ -1,12 +1,12 @@
 package com.project.rentflat.ui.message;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.rentflat.R;
 import com.project.rentflat.models.Message;
@@ -32,8 +32,8 @@ public class SelectedMessageDetails extends AppCompatActivity {
         replayButton = findViewById(R.id.replayMessageButton);
 
         title.setText("Tytuł: " + selectedMessage.getTitle());
-        sender.setText("Nadawca: "+ selectedMessage.getUserName());
-        date.setText("wysłano: "+ selectedMessage.getDate());
+        sender.setText("Nadawca: " + selectedMessage.getUserName());
+        date.setText("wysłano: " + selectedMessage.getDate());
         body.setText(selectedMessage.getDescription());
 
         replayButton.setOnClickListener(new View.OnClickListener() {

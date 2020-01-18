@@ -19,7 +19,7 @@ public class Flat implements Parcelable {
         }
     };
     private int flatId, price, surface, room;
-    private String  flatUserId, province, type, locality, street, description, students, photoAddress, date;
+    private String flatUserId, province, type, locality, street, description, students, photoAddress, date;
     private String photoLocation = serverIp;
 
 
@@ -39,7 +39,7 @@ public class Flat implements Parcelable {
         this.date = in.readString();
     }
 
-    public Flat(int flatId, int price, int surface, int room,String flatUserId, String province, String type, String locality, String street, String description, String students, String photo, String date) {
+    public Flat(int flatId, int price, int surface, int room, String flatUserId, String province, String type, String locality, String street, String description, String students, String photo, String date) {
 
         this.flatId = flatId;
         this.price = price;

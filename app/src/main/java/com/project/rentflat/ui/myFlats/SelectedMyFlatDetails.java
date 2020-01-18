@@ -19,9 +19,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.project.rentflat.ui.MainActivity;
 import com.project.rentflat.R;
 import com.project.rentflat.models.Flat;
+import com.project.rentflat.ui.MainActivity;
 import com.project.rentflat.ui.imageDisplay.ImageAdapter;
 
 import org.json.JSONException;

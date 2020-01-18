@@ -15,7 +15,7 @@ import com.project.rentflat.models.Message;
 
 import java.util.List;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>{
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
     private List<Message> data;
@@ -38,7 +38,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         String title = data.get(position).getTitle();
         holder.messageTitle.setText(title);
         String userName = data.get(position).getUserName();
-        holder.messageDescription.setText("Nadawca: "+ userName);
+        holder.messageDescription.setText("Nadawca: " + userName);
         String date = data.get(position).getDate();
         holder.messageDate.setText(date);
 
@@ -48,6 +48,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public int getItemCount() {
         return data.size();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView messageTitle, messageDescription, messageDate;
 

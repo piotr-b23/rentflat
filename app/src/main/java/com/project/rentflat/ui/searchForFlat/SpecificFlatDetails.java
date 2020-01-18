@@ -21,9 +21,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.rentflat.R;
 import com.project.rentflat.models.Flat;
+import com.project.rentflat.models.Rate;
 import com.project.rentflat.ui.imageDisplay.ImageAdapter;
 import com.project.rentflat.ui.message.SendMessage;
-import com.project.rentflat.models.Rate;
 import com.project.rentflat.ui.rate.RateResults;
 import com.project.rentflat.ui.rate.RateUser;
 
@@ -244,8 +244,8 @@ public class SpecificFlatDetails extends AppCompatActivity {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
-                                    int strRateId =  Integer.parseInt(object.getString("rateId").trim());
-                                    String strUserId =  object.getString("userId").trim();
+                                    int strRateId = Integer.parseInt(object.getString("rateId").trim());
+                                    String strUserId = object.getString("userId").trim();
                                     String strContactRate = object.getString("contactRate").trim();
                                     String strDescriptionRate = object.getString("descriptionRate");
                                     String strDescription = object.getString("comment");

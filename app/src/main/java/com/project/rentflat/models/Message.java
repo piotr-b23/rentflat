@@ -15,7 +15,7 @@ public class Message implements Parcelable {
         }
     };
 
-    private String senderId, userName, title, description,date;
+    private String senderId, userName, title, description, date;
 
     private Message(Parcel in) {
         this.senderId = in.readString();
@@ -48,7 +48,7 @@ public class Message implements Parcelable {
 
     }
 
-    public String generateMessage(){
+    public String generateMessage() {
         String generatedMessage;
         generatedMessage = "\n\nOdpowiedź do wiadomości wysłanej\ndnia " + this.getDate() + "\nużytkownik " + this.getUserName() + " napisał:\n" + this.getDescription();
 
@@ -60,7 +60,7 @@ public class Message implements Parcelable {
         return this.senderId;
     }
 
-    public String getUserName(){
+    public String getUserName() {
         return this.userName;
     }
 
