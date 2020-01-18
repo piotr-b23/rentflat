@@ -38,6 +38,16 @@ public class Register extends AppCompatActivity {
         return email.matches(emailRegex);
     }
 
+    public static boolean isUsernameValid(String username) {
+        String usernameRegex = "^[a-zA-Z0-9]{3,16}$";
+        return username.matches(usernameRegex);
+    }
+
+    public static boolean isNameValid(String name) {
+        String nameRegex = "^[a-zA-Z]{3,16}$";
+        return name.matches(nameRegex);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +71,25 @@ public class Register extends AppCompatActivity {
 
                 if (!regName.isEmpty() && !regUsername.isEmpty() && !regPassword.isEmpty() && !regConfirmedPassword.isEmpty() && !regEmail.isEmpty()) {
                     if (regPassword.equals(regConfirmedPassword)) {
-                        if (isEmailValid(regEmail)) {
-                            Regist(regName, regUsername, regPassword, regEmail);
+                        if(regPassword.length()>=3 && regPassword.length()<=24) {
+                            if (isEmailValid(regEmail) && isNameValid(regName) && isUsernameValid(regUsername)) {
+                                Register(regName, regUsername, regPassword, regEmail);
 
+                            } else {
+                                if (!isEmailValid(regEmail)){
+                                    email.setError("Podaj poprawny email");
+                                }
+                                if (!isNameValid(regName)){
+                                    name.setError("Imię powinno składać się z od 3 - 16 znaków, oraz powinno zawierać tylko litery");
+                                }
+                                if (!isUsernameValid(regUsername)){
+                                    username.setError("Nazwa użytkownika powinna składać się z od 3 - 16 znaków, oraz powinna zawierać tylko litery i liczby");
+                                }
+
+                            }
                         } else {
-                            email.setError("Podaj poprawny email");
+                            password.setError("Hasło powinno składać się z od 3 - 24 znaków");
+                            confirmedPassword.setError("Hasło powinno składać się z od 3 - 24 znaków");
                         }
 
                     } else {
@@ -85,7 +109,7 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    private void Regist(final String name, final String username, final String password, final String email) {
+    private void Register(final String name, final String username, final String password, final String email) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
                 new Response.Listener<String>() {
