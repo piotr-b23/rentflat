@@ -132,10 +132,17 @@ public class SpecificFlatDetails extends AppCompatActivity {
             sendMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(SpecificFlatDetails.this, SendMessage.class);
-                    intent.putExtra("recipientId", selectedFlat.getUserId());
-                    intent.putExtra("is replay", "0");
-                    startActivity(intent);
+                    String id = userId;
+                    if (id.equals(selectedFlat.getUserId())) {
+                        Toast.makeText(SpecificFlatDetails.this, "Nie możesz wysłać wiadomości do siebie samego.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(SpecificFlatDetails.this, SendMessage.class);
+                        intent.putExtra("recipientId", selectedFlat.getUserId());
+                        intent.putExtra("is replay", "0");
+                        startActivity(intent);
+                    }
+
+
                 }
             });
 
