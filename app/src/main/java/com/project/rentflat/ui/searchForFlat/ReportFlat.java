@@ -53,21 +53,20 @@ public class ReportFlat extends AppCompatActivity {
         confirmReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String date = df.format(Calendar.getInstance().getTime());
+
 
 
                 String id = userId;
                 String reportText = reportDescription.getText().toString();
                 String flatId = Integer.toString(reportedFlat.getFlatId());
-                sendReport(flatId, id, reportText, date);
+                sendReport(flatId, id, reportText);
 
             }
         });
 
     }
 
-    private void sendReport(final String flatId, final String reportingUserId, final String reportDescription, final String dateTime) {
+    private void sendReport(final String flatId, final String reportingUserId, final String reportDescription) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT,
                 new Response.Listener<String>() {
@@ -102,7 +101,6 @@ public class ReportFlat extends AppCompatActivity {
                 params.put("flatId", flatId);
                 params.put("reportUserId", reportingUserId);
                 params.put("comment", reportDescription);
-                params.put("date", dateTime);
 
                 return params;
             }

@@ -142,9 +142,8 @@ public class AddFlat extends AppCompatActivity {
                         }
 
 
-                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        String date = df.format(Calendar.getInstance().getTime());
-                        CreateFlat(id, crePrice, creSurface, creRoom, creLocality, creStreet, creDescription, creStudentsCheckBox, creBuildingType, creProvince, crePhoto, date);
+
+                        CreateFlat(id, crePrice, creSurface, creRoom, creLocality, creStreet, creDescription, creStudentsCheckBox, creBuildingType, creProvince, crePhoto);
                     }
 
 
@@ -165,7 +164,7 @@ public class AddFlat extends AppCompatActivity {
         });
     }
 
-    private void CreateFlat(final String id, final String price, final String surface, final String room, final String locality, final String street, final String description, final String students, final String buildingType, final String province, final String photo, final String date) {
+    private void CreateFlat(final String id, final String price, final String surface, final String room, final String locality, final String street, final String description, final String students, final String buildingType, final String province, final String photo) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_FLAT,
                 new Response.Listener<String>() {
@@ -209,7 +208,6 @@ public class AddFlat extends AppCompatActivity {
                 params.put("type", buildingType);
                 params.put("province", province);
                 params.put("photo", photo);
-                params.put("date", date);
 
                 return params;
             }

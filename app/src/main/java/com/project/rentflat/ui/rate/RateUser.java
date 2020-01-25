@@ -62,17 +62,14 @@ public class RateUser extends AppCompatActivity {
                 String contactRateString = Float.toString(contactBar.getRating());
                 String descriptionRateString = Float.toString(descriptionBar.getRating());
 
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                String date = df.format(Calendar.getInstance().getTime());
 
-
-                GiveRate(ratedUserId, raterId, contactRateString, descriptionRateString, descriptionRate, date);
+                GiveRate(ratedUserId, raterId, contactRateString, descriptionRateString, descriptionRate);
             }
         });
 
     }
 
-    private void GiveRate(final String userId, final String raterId, final String contactRate, final String descriptionRate, final String comment, final String date) {
+    private void GiveRate(final String userId, final String raterId, final String contactRate, final String descriptionRate, final String comment) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_RATE,
                 new Response.Listener<String>() {
@@ -115,7 +112,6 @@ public class RateUser extends AppCompatActivity {
                 params.put("contactRate", contactRate);
                 params.put("descriptionRate", descriptionRate);
                 params.put("comment", comment);
-                params.put("date", date);
 
                 return params;
             }

@@ -67,16 +67,14 @@ public class EditRate extends AppCompatActivity {
                 String contactRateString = Float.toString(contactBar.getRating());
                 String descriptionRateString = Float.toString(descriptionBar.getRating());
 
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                String date = df.format(Calendar.getInstance().getTime());
 
 
-                UpdateRate(Integer.toString(editedRate.getRateId()), contactRateString, descriptionRateString, descriptionRate, date, userId);
+                UpdateRate(Integer.toString(editedRate.getRateId()), contactRateString, descriptionRateString, descriptionRate, userId);
             }
         });
     }
 
-    private void UpdateRate(final String rateId, final String contactRate, final String descriptionRate, final String comment, final String date, final String userId) {
+    private void UpdateRate(final String rateId, final String contactRate, final String descriptionRate, final String comment, final String userId) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_RATE,
                 new Response.Listener<String>() {
@@ -113,7 +111,6 @@ public class EditRate extends AppCompatActivity {
                 params.put("contactRate", contactRate);
                 params.put("descriptionRate", descriptionRate);
                 params.put("comment", comment);
-                params.put("date", date);
                 params.put("userId", userId);
 
                 return params;

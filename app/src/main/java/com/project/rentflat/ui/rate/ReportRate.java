@@ -56,17 +56,15 @@ public class ReportRate extends AppCompatActivity {
             public void onClick(View v) {
 
                 String reportRateComment = reportRateText.getText().toString().trim();
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String date = df.format(Calendar.getInstance().getTime());
                 String id = userId;
 
 
-                reportRate(Integer.toString(editedRate.getRateId()), id, reportRateComment, date);
+                reportRate(Integer.toString(editedRate.getRateId()), id, reportRateComment);
             }
         });
     }
 
-    private void reportRate(final String rateId, final String reportingUserId, final String comment, final String dateTime) {
+    private void reportRate(final String rateId, final String reportingUserId, final String comment) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORT_RATE,
                 new Response.Listener<String>() {
@@ -101,7 +99,6 @@ public class ReportRate extends AppCompatActivity {
                 params.put("rateId", rateId);
                 params.put("reportingUserId", reportingUserId);
                 params.put("comment", comment);
-                params.put("date", dateTime);
 
                 return params;
             }

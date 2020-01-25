@@ -79,8 +79,6 @@ public class SendMessage extends AppCompatActivity {
                 String recipientUserId = recipientId;
                 String messageTitle = title.getText().toString();
                 String text = body.getText().toString();
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String date = df.format(Calendar.getInstance().getTime());
 
                 if (checkIfMessageCorrect(messageTitle, text, replay)) {
 
@@ -89,7 +87,7 @@ public class SendMessage extends AppCompatActivity {
                         text += message.generateMessage();
 
                     }
-                    SendMessageToUser(senderId, recipientUserId, messageTitle, text, date);
+                    SendMessageToUser(senderId, recipientUserId, messageTitle, text);
 
 
                 }
@@ -98,7 +96,7 @@ public class SendMessage extends AppCompatActivity {
 
     }
 
-    private void SendMessageToUser(final String senderId, final String recipientId, final String title, final String text, final String date) {
+    private void SendMessageToUser(final String senderId, final String recipientId, final String title, final String text) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SEND_MESSAGE,
                 new Response.Listener<String>() {
@@ -134,7 +132,6 @@ public class SendMessage extends AppCompatActivity {
                 params.put("recipientId", recipientId);
                 params.put("title", title);
                 params.put("text", text);
-                params.put("date", date);
 
                 return params;
             }
@@ -215,7 +212,7 @@ public class SendMessage extends AppCompatActivity {
         if (inText.length() > 300) {
             body.setError("Za długi tekst.");
             return false;
-        } else if (inText.length() < 30) {
+        } else if (inText.length() < 2) {
             body.setError("Za krótki tekst.");
             return false;
         } else return true;
