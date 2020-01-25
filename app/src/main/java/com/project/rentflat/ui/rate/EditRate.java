@@ -24,9 +24,6 @@ import com.project.rentflat.ui.MainActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,7 +63,6 @@ public class EditRate extends AppCompatActivity {
                 String descriptionRate = rateDescription.getText().toString();
                 String contactRateString = Float.toString(contactBar.getRating());
                 String descriptionRateString = Float.toString(descriptionBar.getRating());
-
 
 
                 UpdateRate(Integer.toString(editedRate.getRateId()), contactRateString, descriptionRateString, descriptionRate, userId);

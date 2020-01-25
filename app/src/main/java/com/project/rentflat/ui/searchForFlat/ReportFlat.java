@@ -22,9 +22,6 @@ import com.project.rentflat.models.Flat;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +50,6 @@ public class ReportFlat extends AppCompatActivity {
         confirmReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
 
                 String id = userId;

@@ -38,10 +38,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,7 +137,6 @@ public class AddFlat extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-
 
 
                         CreateFlat(id, crePrice, creSurface, creRoom, creLocality, creStreet, creDescription, creStudentsCheckBox, creBuildingType, creProvince, crePhoto);
