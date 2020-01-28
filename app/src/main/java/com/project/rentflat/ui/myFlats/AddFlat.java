@@ -130,7 +130,7 @@ public class AddFlat extends AppCompatActivity {
 
                         for (Bitmap b : bitmaps) {
                             try {
-                                String filename = createTransactionID() + ".jpeg";
+                                String filename = createFileId() + ".jpeg";
                                 UploadPhoto(getStringImage(b), "user_data/" + filename);
                                 crePhoto = crePhoto + "user_data/" + filename + " ";
                             } catch (Exception e) {
@@ -178,7 +178,7 @@ public class AddFlat extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(AddFlat.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddFlat.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -186,7 +186,8 @@ public class AddFlat extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(AddFlat.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(AddFlat.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -235,7 +236,7 @@ public class AddFlat extends AppCompatActivity {
                             String succes = jsonObject.getString("success");
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(AddFlat.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddFlat.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -243,7 +244,8 @@ public class AddFlat extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(AddFlat.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(AddFlat.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -342,7 +344,7 @@ public class AddFlat extends AppCompatActivity {
         return encodedImage;
     }
 
-    public String createTransactionID() throws Exception {
+    public String createFileId() throws Exception {
         return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
     }
 

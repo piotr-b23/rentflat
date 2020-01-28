@@ -110,7 +110,7 @@ public class SendMessage extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(SendMessage.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SendMessage.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -118,7 +118,8 @@ public class SendMessage extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SendMessage.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(SendMessage.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -167,7 +168,7 @@ public class SendMessage extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(SendMessage.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SendMessage.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -175,7 +176,8 @@ public class SendMessage extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SendMessage.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(SendMessage.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 });

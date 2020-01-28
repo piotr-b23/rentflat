@@ -89,7 +89,7 @@ public class RateUser extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(RateUser.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RateUser.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -97,7 +97,8 @@ public class RateUser extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RateUser.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(RateUser.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

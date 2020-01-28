@@ -146,7 +146,7 @@ public class SelectedMyFlatDetails extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(SelectedMyFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SelectedMyFlatDetails.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -154,7 +154,8 @@ public class SelectedMyFlatDetails extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SelectedMyFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(SelectedMyFlatDetails.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

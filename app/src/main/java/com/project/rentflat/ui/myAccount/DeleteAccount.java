@@ -77,7 +77,7 @@ public class DeleteAccount extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(DeleteAccount.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DeleteAccount.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -85,7 +85,8 @@ public class DeleteAccount extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(DeleteAccount.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(DeleteAccount.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

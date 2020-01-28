@@ -105,7 +105,7 @@ public class SearchForFlatResults extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(SearchForFlatResults.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SearchForFlatResults.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -115,7 +115,8 @@ public class SearchForFlatResults extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SearchForFlatResults.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(SearchForFlatResults.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

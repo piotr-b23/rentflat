@@ -93,7 +93,7 @@ public class ChangeFlatPrice extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ChangeFlatPrice.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangeFlatPrice.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -101,7 +101,8 @@ public class ChangeFlatPrice extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChangeFlatPrice.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(ChangeFlatPrice.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

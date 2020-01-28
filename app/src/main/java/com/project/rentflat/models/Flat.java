@@ -82,9 +82,7 @@ public class Flat implements Parcelable {
 
     public String generateTitle() {
         String title;
-
         title = this.price + "zł " + this.surface + "m2 ";
-
         return title;
     }
 

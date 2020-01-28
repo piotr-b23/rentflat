@@ -217,7 +217,7 @@ public class SpecificFlatDetails extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(SpecificFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SpecificFlatDetails.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -225,7 +225,8 @@ public class SpecificFlatDetails extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SpecificFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(SpecificFlatDetails.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -273,7 +274,7 @@ public class SpecificFlatDetails extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(SpecificFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SpecificFlatDetails.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -281,7 +282,8 @@ public class SpecificFlatDetails extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SpecificFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(SpecificFlatDetails.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -315,7 +317,7 @@ public class SpecificFlatDetails extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(SpecificFlatDetails.this, "Błąd" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SpecificFlatDetails.this, "Wystąpił problem. Sprawdź połączenie z internetem.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -323,7 +325,8 @@ public class SpecificFlatDetails extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SpecificFlatDetails.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Toast.makeText(SpecificFlatDetails.this, "Wystąpił problem.", Toast.LENGTH_SHORT).show();
 
                     }
                 });
