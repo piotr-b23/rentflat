@@ -34,7 +34,7 @@ public class Register extends AppCompatActivity {
     private Button registerButton;
 
     public static boolean isEmailValid(String email) {
-        String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        String emailRegex = "^[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)+$";
         return email.matches(emailRegex);
     }
 
